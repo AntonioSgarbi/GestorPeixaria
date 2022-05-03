@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gestor-peixaria
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
