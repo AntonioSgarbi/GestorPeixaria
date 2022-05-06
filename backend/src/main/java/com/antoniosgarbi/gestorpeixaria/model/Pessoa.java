@@ -28,6 +28,8 @@ public class Pessoa {
     private List<String> telefones;
     private String email;
     private Boolean excluido;
+    @OneToMany
+    private Venda compra;
 
     public Pessoa(PessoaDTO dto) {
         this.id = dto.getId();

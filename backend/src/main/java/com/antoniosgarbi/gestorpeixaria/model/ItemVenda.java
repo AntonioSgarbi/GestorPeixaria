@@ -1,28 +1,24 @@
 package com.antoniosgarbi.gestorpeixaria.model;
 
-import com.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lote {
+public class ItemVenda {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    private QuantidadeTipo quantidadeTipo;
-    private double quantidade;
-    private LocalDate validade;
-    private LocalDateTime registroEntrada;
+    private Double quantidade;
     @ManyToOne
     private Produto produto;
+
 }

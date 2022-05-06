@@ -11,9 +11,12 @@ public class Produto {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String nome;
-
     @OneToMany
     private Set<Lote> lotes;
+    @OneToMany
+    private Set<ItemVenda> registroVenda;
+
+
+
 }
