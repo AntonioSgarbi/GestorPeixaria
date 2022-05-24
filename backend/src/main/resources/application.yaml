@@ -1,9 +1,11 @@
 spring:
-  profiles:
-    active: dev
   application:
     name: gestor-peixaria
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  config:
+    activate:
+      on-profile: dev
