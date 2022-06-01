@@ -1,10 +1,10 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import tech.antoniosgarbi.gestorpeixaria.model.enums.PagamentoTipo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.PagamentoTipo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

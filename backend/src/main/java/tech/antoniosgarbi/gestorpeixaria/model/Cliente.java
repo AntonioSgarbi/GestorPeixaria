@@ -6,7 +6,6 @@ import lombok.Setter;
 import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Getter

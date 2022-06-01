@@ -1,12 +1,15 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

@@ -2,7 +2,6 @@ package tech.antoniosgarbi.gestorpeixaria.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
 
 @Data

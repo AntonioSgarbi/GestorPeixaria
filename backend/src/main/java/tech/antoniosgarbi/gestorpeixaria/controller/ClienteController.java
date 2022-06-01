@@ -1,11 +1,11 @@
 package tech.antoniosgarbi.gestorpeixaria.controller;
 
-import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
-import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -22,7 +22,7 @@ public class ClienteController {
     }
 
     @PutMapping
-    public @ResponseBody ResponseEntity<Void> atualizarCadastro(@RequestBody ClienteDTO cadastroBody){
+    public ResponseEntity<Void> atualizarCadastro(@RequestBody ClienteDTO cadastroBody){
         this.pessoaService.atualizarCadastro(cadastroBody);
         return ResponseEntity.accepted().body(null);
     }

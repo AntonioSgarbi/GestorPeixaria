@@ -1,14 +1,14 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
 import tech.antoniosgarbi.gestorpeixaria.exception.ClienteException;
 import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
 import tech.antoniosgarbi.gestorpeixaria.repository.ClienteRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
 
 import java.util.Optional;
 

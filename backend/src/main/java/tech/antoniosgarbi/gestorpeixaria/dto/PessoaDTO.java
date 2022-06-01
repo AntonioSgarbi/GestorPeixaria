@@ -1,10 +1,10 @@
 package tech.antoniosgarbi.gestorpeixaria.dto;
 
-import tech.antoniosgarbi.gestorpeixaria.model.Pessoa;
-import tech.antoniosgarbi.gestorpeixaria.model.enums.PessoaTipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.antoniosgarbi.gestorpeixaria.model.Pessoa;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.PessoaTipo;
 
 import java.util.Set;
 
