@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: gestor-peixaria
@@ -6,6 +7,15 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  config:
-    activate:
-      on-profile: dev
+  profiles:
+    active: test
+
+personal:
+  security:
+    jwtSecret: aa713c1f-8025-4ce4-bfe8-0a8ea6110eea
+    jwtExpirationMs: 360 000 000
+    jwtRefreshExpirationMs: 60000000
+    nova-senha: teste123
+    url-cors: https://antoniosgarbi.tech/example
+  mock:
+    token: tok3n

@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -5,5 +6,7 @@ spring:
     password:
   h2:
     console:
-    enabled: true
-    path: /h2-console
+      enabled: true
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect

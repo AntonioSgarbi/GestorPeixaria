@@ -12,12 +12,21 @@ Atividade prática de Visão e análise de projeto
 # Calculadora com CI.
 Utiliza 3 ambientes:
 - dev - Desenvolvimento
+<<<<<<< Updated upstream
 - test - Homologação
 - prod - Produção
 Pipeline
 - dev - Compilação
 - test - Compilação, Testes, Análise Código, Cobertura Código
 - prod - Empacotamento
+=======
+- hmg - Homologação
+- prd - Produção
+Pipeline
+- dev - Compilação
+- hmg - Compilação, Testes, Análise Código, Cobertura Código
+- prd - Empacotamento
+>>>>>>> Stashed changes
 <br>
 - Utiliza o Apache Maven para a automatização da construção.<br>
 - A pasta test contêm os testes unitários do projeto utilizando JUnit 4.<br>

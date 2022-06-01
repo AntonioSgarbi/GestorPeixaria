@@ -22,7 +22,7 @@ public class ClienteController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> atualizarCadastro(@RequestBody ClienteDTO cadastroBody){
+    public @ResponseBody ResponseEntity<Void> atualizarCadastro(@RequestBody ClienteDTO cadastroBody){
         this.pessoaService.atualizarCadastro(cadastroBody);
         return ResponseEntity.accepted().body(null);
     }
