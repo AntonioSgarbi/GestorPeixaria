@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gestor-peixaria
+    name: gestor_peixaria
   datasource:
     url: jdbc:postgresql://localhost:5432/gestor_peixaria
     username: postgres

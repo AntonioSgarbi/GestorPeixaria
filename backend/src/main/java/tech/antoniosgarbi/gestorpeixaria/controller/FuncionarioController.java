@@ -8,11 +8,11 @@ import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.FuncionarioService;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/funcionario")
+public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
-    public ClienteController(FuncionarioService funcionarioService) {
+    public FuncionarioController(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;
     }
 

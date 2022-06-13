@@ -1,9 +1,9 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ItemVendaDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class ItemVenda {
     @Id
     @Column(name = "id", nullable = false)
@@ -22,5 +21,11 @@ public class ItemVenda {
     private Double quantidade;
     @ManyToOne
     private Produto produto;
+
+    public ItemVenda(ItemVendaDTO dto) {
+        this.id = dto.getId();
+        this.quantidade = dto.getQuantidade();
+        this.produto = new Produto(dto.getProduto());
+    }
 
 }

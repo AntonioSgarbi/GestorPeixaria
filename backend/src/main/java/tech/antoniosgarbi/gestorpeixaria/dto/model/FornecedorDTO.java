@@ -1,21 +1,21 @@
-package tech.antoniosgarbi.gestorpeixaria.dto;
+package tech.antoniosgarbi.gestorpeixaria.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
+import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
 
 @Data
 @AllArgsConstructor
-public class ClienteDTO extends PessoaDTO {
+public class FornecedorDTO extends PessoaDTO {
 
-    public ClienteDTO(Cliente modelo) {
+    public FornecedorDTO(Fornecedor modelo) {
         super(
                 modelo.getId(),
                 modelo.getNome(),
                 modelo.getDocumento(),
                 modelo.getPessoaTipo(),
                 modelo.getTelefones(),
-                modelo.getEmails()
+                modelo.getEmail()
         );
     }
 }

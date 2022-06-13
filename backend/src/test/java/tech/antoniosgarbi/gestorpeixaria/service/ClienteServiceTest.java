@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
-import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
-import tech.antoniosgarbi.gestorpeixaria.exception.ClienteException;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
+import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
 import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
 import tech.antoniosgarbi.gestorpeixaria.repository.ClienteRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.ClienteServiceImpl;
@@ -48,7 +48,7 @@ public class ClienteServiceTest {
         when(clienteRepository.findClienteByDocumento(anyString())).thenReturn(Optional.of(Builder.cliente1()));
 
         var exception =
-                assertThrows(ClienteException.class, () -> underTest.cadastrar(Builder.clienteDTO1()));
+                assertThrows(PessoaException.class, () -> underTest.cadastrar(Builder.clienteDTO1()));
 
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -69,7 +69,7 @@ public class ClienteServiceTest {
     @DisplayName("Deve lançar uma ClienteException ao receber id não cadastrado no sistema")
     void encontrarCadastro1() {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
-        var exception = assertThrows(ClienteException.class, () -> underTest.encontrarCadastro(1L));
+        var exception = assertThrows(PessoaException.class, () -> underTest.encontrarCadastro(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage(), exception.getMessage());
@@ -90,11 +90,11 @@ public class ClienteServiceTest {
     }
 
     @Test
-    @DisplayName("Deve lançar ClienteException ao receber id inválido")
+    @DisplayName("Deve lançar PessoaException ao receber id inválido")
     void apagarCadastro0() {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        var exception = assertThrows(ClienteException.class, () -> underTest.apagarCadastro(1L));
+        var exception = assertThrows(PessoaException.class, () -> underTest.apagarCadastro(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());

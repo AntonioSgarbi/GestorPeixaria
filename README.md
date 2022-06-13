@@ -9,25 +9,17 @@ Atividade prática de Visão e análise de projeto
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AntonioSgarbi_gestor_peixaria&metric=coverage)](https://sonarcloud.io/component_measures?id=AntonioSgarbi_gestor_peixaria&metric=coverage)
 
 
-# Calculadora com CI.
-Utiliza 3 ambientes:
+## Utiliza 3 ambientes:
 - dev - Desenvolvimento
-<<<<<<< Updated upstream
 - test - Homologação
-- prod - Produção
-Pipeline
+- prod - Produção Pipeline
+<hr>
+
 - dev - Compilação
 - test - Compilação, Testes, Análise Código, Cobertura Código
 - prod - Empacotamento
-=======
-- hmg - Homologação
-- prd - Produção
-Pipeline
-- dev - Compilação
-- hmg - Compilação, Testes, Análise Código, Cobertura Código
-- prd - Empacotamento
->>>>>>> Stashed changes
-<br>
+<hr>
+
 - Utiliza o Apache Maven para a automatização da construção.<br>
 - A pasta test contêm os testes unitários do projeto utilizando JUnit 4.<br>
 - A cobertura do código é realizada através do JaCoCo.<br>

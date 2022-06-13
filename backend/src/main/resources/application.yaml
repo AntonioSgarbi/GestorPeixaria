@@ -8,7 +8,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
-    active: test
+    active: dev
 
 personal:
   security:
@@ -19,3 +19,4 @@ personal:
     url-cors: https://antoniosgarbi.tech/example
   mock:
     token: tok3n
+

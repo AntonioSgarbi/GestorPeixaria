@@ -2,7 +2,7 @@ package tech.antoniosgarbi.gestorpeixaria.service.contract;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import tech.antoniosgarbi.gestorpeixaria.dto.ClienteDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
 
 public interface ClienteService {
     long cadastrar(ClienteDTO cliente);

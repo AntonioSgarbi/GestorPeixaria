@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tech.antoniosgarbi.gestorpeixaria.dto.PessoaDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.PessoaDTO;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.PessoaTipo;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,25 +19,21 @@ import java.util.Set;
 public abstract class Pessoa {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     protected String documento;
     protected String nome;
     protected PessoaTipo pessoaTipo;
     @ElementCollection
     protected Set<String> telefones;
-    @ElementCollection
-    protected Set<String> emails;
+    protected String email;
     protected Boolean excluido;
-    @OneToMany
-    protected Set<Venda> compra;
 
     public Pessoa(PessoaDTO dto) {
         this.id = dto.getId();
         this.documento = dto.getDocumento();
         this.pessoaTipo = dto.getPessoaTipo();
         this.telefones = dto.getTelefones();
-        this.emails = dto.getEmails();
+        this.email = dto.getEmail();
         this.excluido = false;
     }
 

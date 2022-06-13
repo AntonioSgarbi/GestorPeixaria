@@ -1,27 +1,14 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.FornecedorDTO;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
-public class Funcionario extends Pessoa {
-
-    @OneToMany
-    private Set<Venda> vendas;
-    @OneToOne
-    private User user;
-
-    public Funcionario(FuncionarioDTO dto) {
+public class Fornecedor extends Pessoa {
+    public Fornecedor(FornecedorDTO dto) {
         super(
                 dto.getId(),
                 dto.getDocumento(),

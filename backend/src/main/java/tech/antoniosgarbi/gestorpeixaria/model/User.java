@@ -14,7 +14,6 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -24,5 +23,7 @@ public class User {
     private boolean admin;
     @ElementCollection
     private List<String> roles;
+    @OneToOne
+    private Funcionario funcionario;
 
 }

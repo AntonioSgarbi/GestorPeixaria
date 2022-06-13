@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.dto;
+package tech.antoniosgarbi.gestorpeixaria.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,15 +17,14 @@ public abstract class PessoaDTO {
     protected String documento;
     protected PessoaTipo pessoaTipo;
     protected Set<String> telefones;
-    protected Set<String> emails;
+    protected String email;
 
     public PessoaDTO(Pessoa modelo) {
         this.id = modelo.getId();
         this.documento = modelo.getDocumento();
         this.pessoaTipo = modelo.getPessoaTipo();
         this.telefones = modelo.getTelefones();
-        this.emails = modelo.getEmails();
+        this.email = modelo.getEmail();
     }
 
 }
-

@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ProdutoDTO;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -19,9 +20,13 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany
-    private Set<Lote> lotes;
-    @OneToMany
-    private Set<ItemVenda> registroVenda;
+    private QuantidadeTipo quantidadeTipo;
+    private Boolean excluido;
+
+    public Produto(ProdutoDTO dto) {
+        this.id = dto.getId();
+        this.nome = dto.getNome();
+        this.quantidadeTipo = dto.getQuantidadeTipo();
+    }
 
 }
