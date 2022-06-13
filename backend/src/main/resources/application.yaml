@@ -8,7 +8,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
-    active: prod
+    active: @active.profile@
 
 personal:
   security:

@@ -21,7 +21,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Compila o projeto com Maven
-      run: mvn -B compile --file backend/pom.xml          
+      run: mvn -B compile --file backend/pom.xml -Dactive.profile=test          
 
   build-test:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Compila o projeto com Maven
-      run: mvn -B test --file backend/pom.xml
+      run: mvn -B test --file backend/pom.xml -Dactive.profile=test
     - name: Cache dos pacotes do SonarCloud
       uses: actions/cache@v1
       with:
@@ -57,7 +57,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AntonioSgarbi_gestor_peixaria org.jacoco:jacoco-maven-plugin:prepare-agent -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml  --file backend/pom.xml 
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AntonioSgarbi_gestor_peixaria org.jacoco:jacoco-maven-plugin:prepare-agent -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml  --file backend/pom.xml -Dactive.profile=test
   build-prod:
     runs-on: ubuntu-latest
     environment:
@@ -73,7 +73,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Compila o projeto com Maven
-      run: mvn -B package --file backend/pom.xml -Dskiptests
+      run: mvn -B package --file backend/pom.xml -Dskiptests -Dactive.profile=test
     - name: cria uma pasta temporária de downloads de artefatos
       run: mkdir staging
     - name: Copia os artefatos a serem publicados na pasta temporária
