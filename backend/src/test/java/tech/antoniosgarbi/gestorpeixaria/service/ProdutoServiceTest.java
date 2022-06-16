@@ -38,7 +38,6 @@ public class ProdutoServiceTest {
 
         long idResposta = underTest.cadastrar(Builder.produtoDTO1());
 
-        assertNotNull(idResposta);
         assertEquals(produtoEsperado.getId(), idResposta);
     }
 

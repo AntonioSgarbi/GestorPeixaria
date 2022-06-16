@@ -38,7 +38,6 @@ public class FuncionarioServiceTest {
 
         long idResposta = underTest.cadastrar(Builder.funcionarioDTO1());
 
-        assertNotNull(idResposta);
         assertEquals(funcionarioEsperado.getId(), idResposta);
     }
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.antoniosgarbi.gestorpeixaria.exception.TokenRefreshException;
 import tech.antoniosgarbi.gestorpeixaria.model.RefreshToken;
+import tech.antoniosgarbi.gestorpeixaria.model.User;
 import tech.antoniosgarbi.gestorpeixaria.repository.RefreshTokenRepository;
 import tech.antoniosgarbi.gestorpeixaria.repository.UserRepository;
 
@@ -32,8 +33,7 @@ public class RefreshTokenService {
 
   public RefreshToken createRefreshToken(Long userId) {
     RefreshToken refreshToken = new RefreshToken();
-
-    refreshToken.setUser(userRepository.findById(userId).get());
+    refreshToken.setUser(this.getUser(userId));
     refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
     refreshToken.setToken(UUID.randomUUID().toString());
 
@@ -52,6 +52,11 @@ public class RefreshTokenService {
 
   @Transactional
   public int deleteByUserId(Long userId) {
-    return refreshTokenRepository.deleteByUser(userRepository.findById(userId).get());
+    return refreshTokenRepository.deleteByUser(this.getUser(userId));
   }
+
+  private User getUser(long userId) {
+    return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Faça login novamente!"));
+  }
+
 }

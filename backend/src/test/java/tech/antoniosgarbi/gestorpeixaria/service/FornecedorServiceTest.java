@@ -38,7 +38,6 @@ public class FornecedorServiceTest {
 
         long idResposta = underTest.cadastrar(Builder.fornecedorDTO1());
 
-        assertNotNull(idResposta);
         assertEquals(fornecedorEsperado.getId(), idResposta);
     }
 
