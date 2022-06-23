@@ -44,10 +44,12 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve lançar uma ClienteException ao receber um ClienteDTO com documento já cadastrado no sistema")
     void cadastrar1() {
+        ClienteDTO dto = Builder.clienteDTO1();
+
         when(clienteRepository.findClienteByDocumento(anyString())).thenReturn(Optional.of(Builder.cliente1()));
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.cadastrar(Builder.clienteDTO1()));
+                assertThrows(PessoaException.class, () -> underTest.cadastrar(dto));
 
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());
