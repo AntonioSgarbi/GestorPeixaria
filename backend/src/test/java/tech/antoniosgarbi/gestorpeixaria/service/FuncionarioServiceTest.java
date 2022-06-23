@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class FuncionarioServiceTest {
+class FuncionarioServiceTest {
     @Mock
     FuncionarioRepository funcionarioRepository;
     @InjectMocks
@@ -44,10 +44,12 @@ public class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve lançar PessoaException ao receber um FornecedorDTO com documento já cadastrado no sistema")
     void cadastrar1() {
+        FuncionarioDTO dto = Builder.funcionarioDTO1();
+
         when(funcionarioRepository.findByDocumento(anyString())).thenReturn(Optional.of(Builder.funcionario1()));
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.cadastrar(Builder.funcionarioDTO1()));
+                assertThrows(PessoaException.class, () -> underTest.cadastrar(dto));
 
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());

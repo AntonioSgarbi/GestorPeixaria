@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ClienteServiceTest {
+class ClienteServiceTest {
     @Mock
     ClienteRepository clienteRepository;
     @InjectMocks
@@ -38,7 +38,6 @@ public class ClienteServiceTest {
 
         long idResposta = underTest.cadastrar(Builder.clienteDTO1());
 
-        assertNotNull(idResposta);
         assertEquals(clienteEsperado.getId(), idResposta);
     }
 

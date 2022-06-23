@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyFornecedor;
 import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
 
+import javax.persistence.Transient;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class FornecedorSpecification implements Specification<Fornecedor> {
 
+    @Transient
     private final SpecBodyFornecedor specBodyFornecedor;
 
     public FornecedorSpecification(SpecBodyFornecedor specBody) {

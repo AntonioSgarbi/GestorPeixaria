@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ProdutoServiceTest {
+class ProdutoServiceTest {
     @Mock
     ProdutoRepository produtoRepository;
     @InjectMocks

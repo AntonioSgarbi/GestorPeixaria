@@ -75,7 +75,7 @@ public class JwtUtils {
   public void geradorDeSenha() {
     Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
     String senhaEncripitada = argon.encode(this.senha);
-    System.out.println("Nova Senha gerada! \n" +
+    logger.info("Nova Senha gerada! \n" +
             "\nfonte: "+ this.senha + "\ngerado: " + senhaEncripitada + "\n");
   }
 }

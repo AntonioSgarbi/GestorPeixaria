@@ -25,20 +25,14 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
-        prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsService;
     @Value("${personal.security.url-cors}")
-    private final String URL_FROTEND = "**";
+    private static final String URL_FROTEND = "**";
 
-    private final AuthEntryPointJwt unauthorizedHandler;
-
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.unauthorizedHandler = unauthorizedHandler;
     }
 
     @Bean

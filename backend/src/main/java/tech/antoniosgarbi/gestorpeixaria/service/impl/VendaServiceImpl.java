@@ -18,7 +18,7 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public Page<VendaDTO> encontrarTodos(Pageable pageable) {
-        return null;
+        return vendaRepository.findAll(pageable).map(VendaDTO::new);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public void apagarCadastro(Long id) {
-
+        vendaRepository.deleteById(id);
     }
 }
