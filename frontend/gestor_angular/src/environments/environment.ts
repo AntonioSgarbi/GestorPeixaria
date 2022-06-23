@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_endpoint: 'https://gestor-peixaria.herokuapp.com/'
+  apiUrl: 'https://gestor-peixaria.herokuapp.com/',
 };
 
 /*

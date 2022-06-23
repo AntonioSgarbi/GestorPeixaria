@@ -6,10 +6,10 @@ import {EnumTipoCadastro} from "../shared/tipoCadastro";
 
 @Component({
   selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css']
+  templateUrl: './pessoa-cadastro.component.html',
+  styleUrls: ['./pessoa-cadastro.component.css']
 })
-export class CadastroComponent implements OnInit {
+export class PessoaCadastroComponent implements OnInit {
 
   formulario: FormGroup = new FormGroup({});
   aparencia: string = 'outline';

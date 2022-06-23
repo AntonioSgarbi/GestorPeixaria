@@ -1,4 +1,5 @@
 export enum EnumTipoCadastro {
   CLIENTE = "Cliente",
-  FUNCIONARIO = "Funcionário"
+  FUNCIONARIO = "Funcionário",
+  FORNECEDOR = "Fornecedor"
 }

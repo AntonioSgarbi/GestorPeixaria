@@ -1,0 +1,17 @@
+<h1 class="d-flex justify-content-center pt-3">Login</h1>
+<form [formGroup]="form" class="p-2">
+  <div class="d-flex justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <input matInput placeholder="Usuário" formControlName="username">
+      </mat-form-field>
+      <div style="width: 10px;"></div>
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" placeholder="Senha" formControlName="password">
+      </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button mat-raised-button class="btn-outline-info" (click)="login()">Login</button>
+  </div>
+</form>
