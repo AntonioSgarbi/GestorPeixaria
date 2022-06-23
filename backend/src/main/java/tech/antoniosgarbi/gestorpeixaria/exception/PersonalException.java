@@ -4,10 +4,14 @@ import java.time.LocalDateTime;
 
 public abstract class PersonalException extends RuntimeException {
 
-    private LocalDateTime momento;
+    protected final LocalDateTime momento;
 
-    public PersonalException(String mensagem) {
+    protected PersonalException(String mensagem) {
         super(mensagem);
         momento = LocalDateTime.now();
+    }
+
+    public LocalDateTime getMomento() {
+        return this.momento;
     }
 }

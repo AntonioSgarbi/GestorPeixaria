@@ -14,7 +14,6 @@ import java.util.List;
 
 public class FuncionarioSpecification implements Specification<Funcionario> {
 
-    @Transient
     private final SpecBodyFuncionario specBodyFuncionario;
 
     public FuncionarioSpecification(SpecBodyFuncionario specBody) {

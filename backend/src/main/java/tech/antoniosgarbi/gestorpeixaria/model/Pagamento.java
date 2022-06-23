@@ -25,7 +25,7 @@ public class Pagamento {
     private LocalDateTime momentoRegistrado;
     private PagamentoTipo pagamentoTipo;
     private Boolean retiradaCaixa;
-    private LocalDate pagamento;
+    private LocalDate dataPagamento;
     @ManyToOne
     private Funcionario funcionario;
     @Column(columnDefinition = "TEXT")

@@ -28,7 +28,7 @@ public abstract class Pessoa {
     protected String email;
     protected Boolean excluido;
 
-    public Pessoa(PessoaDTO dto) {
+    protected Pessoa(PessoaDTO dto) {
         this.id = dto.getId();
         this.documento = dto.getDocumento();
         this.pessoaTipo = dto.getPessoaTipo();

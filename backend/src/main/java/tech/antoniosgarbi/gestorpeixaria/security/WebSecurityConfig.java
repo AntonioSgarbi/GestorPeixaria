@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import tech.antoniosgarbi.gestorpeixaria.security.jwt.AuthEntryPointJwt;
 import tech.antoniosgarbi.gestorpeixaria.security.jwt.AuthTokenFilter;
 import tech.antoniosgarbi.gestorpeixaria.security.services.UserDetailsServiceImpl;
 

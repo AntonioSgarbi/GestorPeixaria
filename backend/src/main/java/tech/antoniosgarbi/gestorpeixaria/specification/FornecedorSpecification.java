@@ -14,7 +14,6 @@ import java.util.List;
 
 public class FornecedorSpecification implements Specification<Fornecedor> {
 
-    @Transient
     private final SpecBodyFornecedor specBodyFornecedor;
 
     public FornecedorSpecification(SpecBodyFornecedor specBody) {

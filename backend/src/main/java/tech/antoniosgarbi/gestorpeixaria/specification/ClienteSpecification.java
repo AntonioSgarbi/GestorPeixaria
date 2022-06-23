@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ClienteSpecification implements Specification<Cliente> {
 
-    @Transient
     private final SpecBodyCliente specBodyCliente;
 
     public ClienteSpecification(SpecBodyCliente specBody) {

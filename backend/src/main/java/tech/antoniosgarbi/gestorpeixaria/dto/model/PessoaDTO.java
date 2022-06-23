@@ -19,7 +19,7 @@ public abstract class PessoaDTO {
     protected Set<String> telefones;
     protected String email;
 
-    public PessoaDTO(Pessoa modelo) {
+    protected PessoaDTO(Pessoa modelo) {
         this.id = modelo.getId();
         this.documento = modelo.getDocumento();
         this.pessoaTipo = modelo.getPessoaTipo();
