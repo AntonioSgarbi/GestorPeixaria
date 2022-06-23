@@ -58,16 +58,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Primary
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/v3/**").permitAll().and().
-                formLogin().passwordParameter("senha123").usernameParameter("antonio");
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .antMatchers("/v3/**").permitAll().and()
+        .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

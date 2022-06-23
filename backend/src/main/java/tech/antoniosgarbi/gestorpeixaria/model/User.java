@@ -18,6 +18,7 @@ public class User {
 
     private String username;
     private String login;
+    @Column(columnDefinition = "text")
     private String password;
     private String email;
     private boolean admin;
