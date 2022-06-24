@@ -19,4 +19,4 @@ personal:
     jwtRefreshExpirationMs: 60000000
     nova-senha: teste123
 #    url-cors: http://localhost:4200
-    url-cors: https://antoniosgarbi.github.io/GestorPeixaria
+    url-cors: https://antoniosgarbi.github.io
