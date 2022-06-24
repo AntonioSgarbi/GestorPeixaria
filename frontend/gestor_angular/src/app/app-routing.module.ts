@@ -6,7 +6,7 @@ import {HomeComponent} from "./pages/home/home.component";
 import {ProdutoCadastroComponent} from "./pages/produto/cadastro/produto-cadastro.component";
 import {PessoaPesquisaComponent} from "./pages/pessoa/pesquisa/pesquisa.component";
 import {LoginComponent} from "./pages/login/login.component";
-import {AuthGuard} from "./pages/login/auth-guard.service";
+import {AuthGuard} from "./guard/auth-guard.service";
 
 const routes: Routes = [
     {
@@ -20,19 +20,23 @@ const routes: Routes = [
       children: [
         {
           path: 'home',
-          component: HomeComponent
+          component: HomeComponent,
+          canActivate: [AuthGuard],
         },
         {
           path: 'pessoa/cadastro',
-          component: PessoaCadastroComponent
+          component: PessoaCadastroComponent,
+          canActivate: [AuthGuard],
         },
         {
           path: 'pessoa/pesquisa',
-          component: PessoaPesquisaComponent
+          component: PessoaPesquisaComponent,
+          canActivate: [AuthGuard],
         },
         {
           path: 'produto/cadastro',
-          component: ProdutoCadastroComponent
+          component: ProdutoCadastroComponent,
+          canActivate: [AuthGuard],
         }
       ]
     }

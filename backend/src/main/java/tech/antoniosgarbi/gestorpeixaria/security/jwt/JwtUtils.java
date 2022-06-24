@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 import tech.antoniosgarbi.gestorpeixaria.security.services.UserDetailsImpl;
@@ -22,34 +21,40 @@ public class JwtUtils {
   @Value("${personal.security.jwtExpirationMs}")
   private int jwtExpirationMs;
 
+  @Value("${personal.security.jwtRefreshExpirationMs}")
+  private Long refreshTokenDurationMs;
+
   @Value("${personal.security.nova-senha}")
-  private String senha;
+  private String senhaGeradaNoBoot;
 
-
-  public String generateJwtToken(Authentication authentication) {
-
-    UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
-    return Jwts.builder()
-        .setSubject((userPrincipal.getUsername()))
-        .setIssuedAt(new Date())
-        .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-        .signWith(SignatureAlgorithm.HS512, jwtSecret)
-        .compact();
-  }
-
-  public String generateJwtToken(UserDetailsImpl userPrincipal) {
+  public String generateAccessToken(UserDetailsImpl userPrincipal) {
     return generateTokenFromUsername(userPrincipal.getUsername());
   }
-
-  public String getUserNameFromJwtToken(String token) {
-    return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+  public String generateAccessToken(String username) {
+    return generateTokenFromUsername(username);
   }
 
   public String generateTokenFromUsername(String username) {
     return Jwts.builder().setSubject(username).setIssuedAt(new Date())
             .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact();
+  }
+
+  public String generateRefreshTokenFromUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + refreshTokenDurationMs))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
+  public String getUserNameFromJwtToken(String token) {
+    return Jwts.parser()
+            .setSigningKey(jwtSecret)
+            .parseClaimsJws(token)
+            .getBody()
+            .getSubject();
   }
 
   public boolean validateJwtToken(String authToken) {
@@ -74,7 +79,7 @@ public class JwtUtils {
   @Bean()
   public void geradorDeSenha() {
     Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
-    String senhaEncripitada = argon.encode(this.senha);
-    logger.info(String.format("Nova Senha gerada! \n\nfonte: %s\ngerado: %s\n", senha, senhaEncripitada));
+    String senhaEncripitada = argon.encode(this.senhaGeradaNoBoot);
+    logger.info(String.format("Nova Senha gerada! \n\nfonte: %s\ngerado: %s\n", senhaGeradaNoBoot, senhaEncripitada));
   }
 }

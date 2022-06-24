@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {LoginResponse} from "./shared/login.response.model";
-import {Observable, tap, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 const ACCESS_TOKEN: string = 'access_token';
 const REFRESH_TOKEN: string = 'refresh_token';
@@ -14,7 +13,7 @@ const REFRESH_TOKEN: string = 'refresh_token';
 export class AuthenticationService {
   private accessToken: string;
   private refreshToken: string;
-  private loginResponse: LoginResponse | null = null;
+  private roles: string[] = [];
 
   constructor(private http: HttpClient) {
     this.accessToken = this.getToken() ?? '';
@@ -22,7 +21,7 @@ export class AuthenticationService {
   }
 
   isTokenPresent(): boolean {
-    return !!localStorage.getItem(ACCESS_TOKEN);
+    return !!localStorage.getItem(ACCESS_TOKEN); // !! converts to boolean
   }
 
   getToken(): string | null {
@@ -34,11 +33,17 @@ export class AuthenticationService {
   }
 
   setAccessToken(token: string): void {
+    this.accessToken = token;
     localStorage.setItem(ACCESS_TOKEN, token);
   }
 
   setRefreshToken(refreshToken: string): void {
+    this.refreshToken = refreshToken;
     localStorage.setItem(REFRESH_TOKEN, refreshToken);
+  }
+
+  setRoles(roles: string[]): void {
+    this.roles = roles;
   }
 
   removeTokens(): void {
@@ -46,57 +51,19 @@ export class AuthenticationService {
     localStorage.removeItem(REFRESH_TOKEN);
   }
 
-  async validateToken(): Promise<boolean> {
-    let isValid = false;
-    this.http.get(environment.apiUrl + '/auth/validate')
-      .subscribe({
-        next: () => {
-          isValid = true;
-        },
-        error: () => {
-          console.log('tokenExpirado');
-          this.refreshTheToken().then(res => {
-            isValid = res;
-          });
-        }
-      });
-    return isValid;
+  validateToken(): Observable<boolean> {
+    console.log("validateToken");
+    return this.http.get<boolean>(environment.apiUrl + '/auth/validate');
   }
 
-  async refreshTheToken(): Promise<boolean> {
-    let isRefreshed = false;
-    await this.http.post(environment.apiUrl + '/auth/refresh', {refresh_token: this.refreshToken})
-      .subscribe({
-        next: (data: any) => {
-          this.setAccessToken(data.access_token);
-          this.setRefreshToken(data.refresh_token);
-          isRefreshed = true;
-        },
-        error: () => {
-          this.removeTokens();
-          console.log('refreshTokenExpirado');
-          isRefreshed = false;
-        }
-      });
-    return isRefreshed;
+  refreshTheToken(): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(environment.apiUrl + '/auth/refresh', {refreshToken: this.refreshToken});
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http
-      .post<LoginResponse>(environment.apiUrl + '/auth/login', {
-      'username': username,
-      'password': password
-    })
-      .pipe(
-        tap(res => {
-            this.setAccessToken(res.access_token)
-            this.setRefreshToken(res.refresh_token);
-          }
-        ), catchError(() => {
-            alert('Usuário ou Senha invalido');
-            return throwError(() => 'usuário ou senha inválidos');
-          }
-        ));
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(environment.apiUrl + '/auth/login',
+        {'username': username, 'password': password}
+      );
   }
 
 }

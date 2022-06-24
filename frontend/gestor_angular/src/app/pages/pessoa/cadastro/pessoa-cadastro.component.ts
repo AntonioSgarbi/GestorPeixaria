@@ -1,6 +1,5 @@
 import {Component, NgIterable, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatFormFieldAppearance} from "@angular/material/form-field";
 import {EnumTipoPessoa} from "../shared/tipoPessoa";
 import {EnumTipoCadastro} from "../shared/tipoCadastro";
 

@@ -4,7 +4,6 @@ import org.springframework.data.jpa.domain.Specification;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyFuncionario;
 import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
 
-import javax.persistence.Transient;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;

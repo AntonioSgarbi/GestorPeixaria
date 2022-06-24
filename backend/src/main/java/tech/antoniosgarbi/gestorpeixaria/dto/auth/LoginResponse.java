@@ -1,6 +1,7 @@
 package tech.antoniosgarbi.gestorpeixaria.dto.auth;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +10,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class LoginResponse {
-    private String jwt;
-    private String token;
+    private String accessToken;
+    private String refreshToken;
     private Long id;
     private String username;
     private String email;

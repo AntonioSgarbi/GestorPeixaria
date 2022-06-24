@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://gestor-peixaria.herokuapp.com/',
+  apiUrl: 'https://gestor-peixaria.herokuapp.com/api',
 };

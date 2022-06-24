@@ -1,16 +1,18 @@
 package tech.antoniosgarbi.gestorpeixaria.dto.auth;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 public class RefreshResponse {
-    private String token;
-    private String requestRefreshToken;
+    private String accessToken;
+    private String refreshToken;
 
-    public RefreshResponse(String token, String requestRefreshToken) {
-        this.token = token;
-        this.requestRefreshToken = requestRefreshToken;
+    public RefreshResponse(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 }

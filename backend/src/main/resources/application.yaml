@@ -8,7 +8,9 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
-    active: prod
+    active: dev
+#    active: prod
+#    active: @active.profile@
 
 personal:
   security:
@@ -16,7 +18,4 @@ personal:
     jwtExpirationMs: 360 000 000
     jwtRefreshExpirationMs: 60000000
     nova-senha: teste123
-    url-cors: https://antoniosgarbi.tech/example
-  mock:
-    token: tok3n
-
+    url-cors: http://localhost:4200

@@ -1,6 +1,6 @@
 <body>
 <div class="container pt-1">
-  <mat-card class="mat-elevation-z10" class="height-card">
+  <mat-card class="mat-elevation-z10 height-card">
     <div class="d-flex mt-3 justify-content-center">
     <mat-card-title>Cadastro de Pessoa</mat-card-title>
     </div>
@@ -21,7 +21,7 @@
         </mat-form-field>
         <mat-form-field appearance="{{aparencia}}">
           <mat-label>E-mail</mat-label>
-          <input matInput type="email" formControlName="email">
+          <input autocomplete="off" matInput type="email" formControlName="email">
         </mat-form-field>
 
         <mat-form-field appearance="{{aparencia}}">
@@ -35,8 +35,9 @@
 
         <mat-form-field appearance="{{aparencia}}">
           <mat-label>Documento</mat-label>
-          <input matInput mask="{{mascaraDocumento()}}"formControlName="documento" placeholder="{{placeholderDocumento()}}">
+          <input autocomplete="off"  matInput mask="{{mascaraDocumento()}}" formControlName="documento" placeholder="{{placeholderDocumento()}}">
         </mat-form-field>
+
         <mat-form-field appearance="{{aparencia}}" *ngIf="isPessoaFisica()">
           <mat-label>Data de Nascimento</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="dataNascimento">
