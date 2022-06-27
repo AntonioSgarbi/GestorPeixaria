@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ sonar ]
+    branches: [ main ]
   pull_request:
-    branches: [ sonar ]
+    branches: [ main ]
 
 jobs:
   build-dev:
@@ -82,4 +82,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Package
-        path: staging 
+        path: staging
