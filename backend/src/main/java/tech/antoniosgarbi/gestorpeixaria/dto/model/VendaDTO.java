@@ -19,6 +19,7 @@ public class VendaDTO {
     private ClienteDTO cliente;
     private FuncionarioDTO funcionario;
     private List<ItemVendaDTO> produtosQuantidades;
+    private Double valorTotal;
 
     public VendaDTO(Venda modelo) {
         this.id = modelo.getId();
@@ -29,7 +30,8 @@ public class VendaDTO {
         this.produtosQuantidades = modelo.getProdutosQuantidades()
                 .stream()
                 .map(ItemVendaDTO::new)
-                .collect(Collectors.toList());
+                .toList();
+        this.valorTotal = modelo.getValorTotal();
     }
 
 }

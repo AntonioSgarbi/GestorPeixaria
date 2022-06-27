@@ -21,6 +21,8 @@ public class Funcionario extends Pessoa {
     @OneToOne
     private User user;
 
+    private Double salario;
+
     public Funcionario(FuncionarioDTO dto) {
         super(
                 dto.getId(),

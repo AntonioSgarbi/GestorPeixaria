@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ItemVendaDTO;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,7 +14,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class ItemVenda {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double quantidade;
     @ManyToOne

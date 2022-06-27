@@ -11,11 +11,13 @@ public class ProdutoDTO {
     private Long id;
     private String nome;
     private QuantidadeTipo quantidadeTipo;
+    private Double quantidadeEstoque;
 
     public ProdutoDTO(Produto modelo) {
         this.id = modelo.getId();
         this.nome = modelo.getNome();
         this.quantidadeTipo = modelo.getQuantidadeTipo();
+        this.quantidadeEstoque = modelo.getQuantidadeEstoque();
     }
 
 }

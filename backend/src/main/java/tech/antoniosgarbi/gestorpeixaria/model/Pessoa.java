@@ -19,6 +19,7 @@ import java.util.Set;
 public abstract class Pessoa {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
     protected String documento;
     protected String nome;

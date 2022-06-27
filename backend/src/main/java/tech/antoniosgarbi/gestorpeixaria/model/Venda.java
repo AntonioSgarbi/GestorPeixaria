@@ -24,9 +24,13 @@ public class Venda {
     private Long id;
     private LocalDateTime momentoLancamento;
     private PagamentoTipo pagamentoTipo;
-    @ManyToOne private Cliente cliente;
-    @ManyToOne private Funcionario funcionario;
-    @OneToMany private List<ItemVenda> produtosQuantidades;
+    @ManyToOne
+    private Cliente cliente;
+    @ManyToOne(optional = false)
+    private Funcionario funcionario;
+    @OneToMany
+    private List<ItemVenda> produtosQuantidades;
+    private Double valorTotal;
 
     public Venda(VendaDTO dto) {
         this.id = dto.getId();
@@ -37,7 +41,8 @@ public class Venda {
         this.produtosQuantidades = dto.getProdutosQuantidades()
                 .stream()
                 .map(ItemVenda::new)
-                .collect(Collectors.toList());
+                .toList();
+        this.valorTotal = dto.getValorTotal();
     }
 
 }

@@ -10,6 +10,8 @@ import tech.antoniosgarbi.gestorpeixaria.repository.ProdutoRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.ProdutoService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,5 +60,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         if (optional.isEmpty()) throw new ProdutoException("Cadastro não encontrado");
         return optional.get();
     }
+
+
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 import tech.antoniosgarbi.gestorpeixaria.security.services.UserDetailsImpl;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Component
@@ -41,10 +42,11 @@ public class JwtUtils {
   }
 
   public String generateRefreshTokenFromUsername(String username) {
+    Date momentoAtual = new Date();
         return Jwts.builder()
                 .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + refreshTokenDurationMs))
+                .setIssuedAt(momentoAtual)
+                .setExpiration(new Date(momentoAtual.getTime() + refreshTokenDurationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
@@ -80,6 +82,6 @@ public class JwtUtils {
   public void geradorDeSenha() {
     Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
     String senhaEncripitada = argon.encode(this.senhaGeradaNoBoot);
-    logger.info(String.format("Nova Senha gerada! \n\nfonte: %s\ngerado: %s\n", senhaGeradaNoBoot, senhaEncripitada));
+    logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", senhaGeradaNoBoot, senhaEncripitada));
   }
 }

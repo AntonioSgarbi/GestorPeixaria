@@ -9,8 +9,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
 #    active: dev
-    active: prod
-#    active: @active.profile@
+#    active: prod
+    active: @active.profile@
 
 personal:
   security:
@@ -18,5 +18,4 @@ personal:
     jwtExpirationMs: 360 000 000
     jwtRefreshExpirationMs: 60000000
     nova-senha: teste123
-#    url-cors: http://localhost:4200
-    url-cors: https://antoniosgarbi.github.io
+    url-cors: http://localhost:4200
