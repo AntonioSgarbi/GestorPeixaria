@@ -54,7 +54,7 @@ class ProdutoServiceTest {
 //    }
 
     @Test
-    @DisplayName("Deve retornar um FuncionarioDTO ao receber um id cadastrado")
+    @DisplayName("Deve retornar um ProdutoDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
         ProdutoDTO produtoDTO = Builder.produtoDTO1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(new Produto(produtoDTO)));
@@ -75,7 +75,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar uma Page<FornecedorDTO> ao receber Pageable")
+    @DisplayName("Deve retornar uma Page<ProdutoDTO> ao receber Pageable")
     void encontrarTodos0() {
         List<Produto> produtoList = List.of(Builder.produto1(), Builder.produto1(), Builder.produto1());
         Page<Produto> produtoPage = new PageImpl<>(produtoList);
@@ -89,7 +89,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @DisplayName("Deve lançar PessoaException ao receber id inválido")
+    @DisplayName("Deve lançar ProdutoException ao receber id inválido")
     void apagarCadastro0() {
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
 

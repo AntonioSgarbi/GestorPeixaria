@@ -9,14 +9,14 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
-import tech.antoniosgarbi.gestorpeixaria.security.services.TokenService;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.AuthenticationService;
 
 @RestController
 @RequestMapping("/api/auth")
 public class LoginController {
-    private final TokenService tokenService;
+    private final AuthenticationService tokenService;
 
-    public LoginController(TokenService tokenService) {
+    public LoginController(AuthenticationService tokenService) {
         this.tokenService = tokenService;
     }
 

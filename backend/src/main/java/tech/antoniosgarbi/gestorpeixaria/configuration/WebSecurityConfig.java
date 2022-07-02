@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.security;
+package tech.antoniosgarbi.gestorpeixaria.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import tech.antoniosgarbi.gestorpeixaria.security.jwt.AuthTokenFilter;
-import tech.antoniosgarbi.gestorpeixaria.security.services.UserDetailsServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.UserDetailsServiceImpl;
 
 import java.util.Arrays;
 

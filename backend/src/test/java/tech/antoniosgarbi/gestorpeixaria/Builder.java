@@ -1,9 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria;
 
-import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.FornecedorDTO;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.ProdutoDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.*;
 import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
 import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
 import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
@@ -63,6 +60,13 @@ public interface Builder {
         ProdutoDTO dto = new ProdutoDTO();
         dto.setId(1L);
         dto.setNome("produto");
+        return dto;
+    }
+
+    static VendaDTO vendaDTO1() {
+        VendaDTO dto = new VendaDTO();
+        dto.setCliente(clienteDTO1());
+        dto.setFuncionario(funcionarioDTO1());
         return dto;
     }
 }

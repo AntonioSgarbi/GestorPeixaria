@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.security.jwt;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
-import tech.antoniosgarbi.gestorpeixaria.security.services.UserDetailsImpl;
+import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Component
-public class JwtUtils {
-  private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+public class TokenService {
+  private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
   @Value("${personal.security.jwtSecret}")
   private String jwtSecret;

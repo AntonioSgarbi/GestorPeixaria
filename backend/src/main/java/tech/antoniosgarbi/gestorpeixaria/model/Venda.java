@@ -10,7 +10,6 @@ import tech.antoniosgarbi.gestorpeixaria.model.enums.PagamentoTipo;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ItemVendaDTO;
-import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 
 import javax.persistence.*;
 

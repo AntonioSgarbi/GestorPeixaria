@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.security.services;
+package tech.antoniosgarbi.gestorpeixaria.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

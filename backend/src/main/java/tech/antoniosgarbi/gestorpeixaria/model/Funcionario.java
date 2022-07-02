@@ -7,7 +7,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.Set;
 
 @Entity
@@ -18,8 +17,6 @@ public class Funcionario extends Pessoa {
 
     @OneToMany
     private Set<Venda> vendas;
-    @OneToOne
-    private User user;
 
     private Double salario;
 

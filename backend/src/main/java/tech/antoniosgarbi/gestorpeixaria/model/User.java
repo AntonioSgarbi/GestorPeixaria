@@ -1,8 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,22 +8,26 @@ import java.util.List;
 @Entity(name = "user_auth")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
-    private String login;
-    @Column(columnDefinition = "text")
-    private String password;
+
     private String email;
-    private boolean admin;
+
     @ElementCollection
     private List<String> roles;
-    @OneToOne
-    private Funcionario funcionario;
+
+    @Column(columnDefinition = "text")
+    private String password;
+
+    @OneToOne(optional = false)
+    private Pessoa pessoa;
 
 }
+

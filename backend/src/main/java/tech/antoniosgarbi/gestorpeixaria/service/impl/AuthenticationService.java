@@ -1,29 +1,29 @@
-package tech.antoniosgarbi.gestorpeixaria.security.services;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
 import tech.antoniosgarbi.gestorpeixaria.exception.TokenRefreshException;
-import tech.antoniosgarbi.gestorpeixaria.repository.UserRepository;
-import tech.antoniosgarbi.gestorpeixaria.security.jwt.JwtUtils;
+import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
+import tech.antoniosgarbi.gestorpeixaria.model.User;
+import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class TokenService {
-    private final UserRepository userRepository;
-    private final JwtUtils jwtUtils;
+public class AuthenticationService {
+    private final TokenService jwtUtils;
     private final AuthenticationManager authenticationManager;
 
-    public TokenService(UserRepository userRepository, JwtUtils jwtUtils,
-                        AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
+    public AuthenticationService(TokenService jwtUtils, AuthenticationManager authenticationManager) {
         this.jwtUtils = jwtUtils;
         this.authenticationManager = authenticationManager;
     }
@@ -63,6 +63,19 @@ public class TokenService {
         } catch (Exception e) {
             throw new TokenRefreshException(e.getMessage());
         }
+    }
+
+    public User criarUsuariodeFuncionario(Funcionario funcionario) {
+        Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
+        String senhaEncripitada = argon.encode(LocalDateTime.now().toString());
+
+        return User.builder()
+                .email(funcionario.getEmail())
+                .username(funcionario.getDocumento())
+                .password(senhaEncripitada)
+                .roles(List.of("FUNCIONARIO"))
+                .pessoa(funcionario)
+                .build();
     }
 
 }
