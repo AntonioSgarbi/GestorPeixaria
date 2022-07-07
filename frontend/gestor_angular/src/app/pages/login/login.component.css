@@ -1,0 +1,24 @@
+.main-div {
+  height: 100%;
+  margin: 3% 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  min-height: 350px;
+  padding-bottom: 3rem;
+}
+.card {
+  max-height: 350px;
+  margin: 0 2rem;
+  display: grid;
+  justify-items: center;
+}
+.forget-text {
+  color: darkslategrey;
+}
+.forget-text:hover {
+  color: red;
+  cursor: pointer;
+}
+
+

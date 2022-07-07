@@ -7,6 +7,10 @@ import {ProdutoCadastroComponent} from "./pages/produto/cadastro/produto-cadastr
 import {PessoaPesquisaComponent} from "./pages/pessoa/pesquisa/pesquisa.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./guard/auth-guard.service";
+import {EstoquePesquisaComponent} from "./pages/estoque/pesquisa/estoque-pesquisa.component";
+import {EstoqueEntradaComponent} from "./pages/estoque/entrada/estoque-entrada.component";
+import {ProdutoPesquisaComponent} from "./pages/produto/produto-pesquisa/produto-pesquisa.component";
+import {FormularioComponent} from "./components/formulario/formulario.component";
 
 const routes: Routes = [
     {
@@ -37,7 +41,25 @@ const routes: Routes = [
           path: 'produto/cadastro',
           component: ProdutoCadastroComponent,
           canActivate: [AuthGuard],
-        }
+        },        {
+          path: 'produto/pesquisa',
+          component: ProdutoPesquisaComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'estoque/entrada',
+          component: EstoqueEntradaComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'estoque/pesquisa',
+          component: EstoquePesquisaComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'form',
+          component: FormularioComponent,
+        },
       ]
     }
   ];

@@ -17,16 +17,27 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
+import { FormularioComponent } from './components/formulario/formulario.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { LoaderComponent } from './components/loader/loader.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {LoaderInterceptor} from "./interceptor/loader.interceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    FormularioComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     PessoaModule,
     NavbarModule,
@@ -36,7 +47,11 @@ import {AuthInterceptor} from "./interceptor/auth.interceptor";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    MatSnackBarModule
   ],
   providers: [
     {
@@ -47,7 +62,12 @@ import {AuthInterceptor} from "./interceptor/auth.interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

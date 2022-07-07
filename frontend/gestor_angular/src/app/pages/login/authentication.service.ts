@@ -60,10 +60,13 @@ export class AuthenticationService {
     return this.http.post<LoginResponse>(environment.apiUrl + '/auth/refresh', {refreshToken: this.refreshToken});
   }
 
-  login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(environment.apiUrl + '/auth/login',
-        {'username': username, 'password': password}
-      );
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(
+      environment.apiUrl + '/auth/login', {'username': username, 'password': password});
+  }
+
+  forgot(email: string): Observable<void> {
+    return this.http.post<void>(environment.apiUrl + '/auth/forgot', email);
   }
 
 }

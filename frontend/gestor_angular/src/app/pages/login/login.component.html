@@ -1,17 +1,40 @@
-<h1 class="d-flex justify-content-center pt-3">Login</h1>
-<form [formGroup]="form" class="p-2">
-  <div class="d-flex justify-content-center">
+<div class="main-div animate__animated animate__fadeInDown">
+
+  <mat-card *ngIf="!isReset" class="card">
+    <mat-card-title class="text-center pt-3">Login</mat-card-title>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="login()"
+      class="mx-5 d-grid justify-content-center animate__animated animate__fadeInDown"
+    >
       <mat-form-field appearance="outline">
         <mat-label>Usuário</mat-label>
         <input matInput placeholder="Usuário" formControlName="username">
       </mat-form-field>
-      <div style="width: 10px;"></div>
       <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
         <input matInput type="password" placeholder="Senha" formControlName="password">
       </mat-form-field>
-  </div>
-  <div class="d-flex justify-content-center">
-    <button mat-raised-button class="btn-outline-info" (click)="login()">Login</button>
-  </div>
-</form>
+      <button mat-raised-button class="btn-info" type="submit">Entrar</button>
+      <p (click)="changeToReset()" class="pt-1 text-end forget-text">Esqueceu a senha?</p>
+    </form>
+  </mat-card>
+
+  <mat-card *ngIf="isReset" class="card">
+    <mat-card-title class="text-center pt-3">Recuperar Senha</mat-card-title>
+    <mat-card-subtitle class="text-center pt-3">Envia usuário e senha para demonstração</mat-card-subtitle>
+    <form
+      [formGroup]="formReset"
+      (ngSubmit)="resetPassword()"
+      class="d-grid justify-content-center animate__animated animate__fadeInUp"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="E-email" formControlName="email">
+      </mat-form-field>
+      <button mat-raised-button class="mb-2 btn-info" type="submit">Enviar</button>
+      <button (click)="this.isReset=false" mat-raised-button class="">Voltar</button>
+    </form>
+  </mat-card>
+
+</div>

@@ -8,11 +8,13 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
+import { ProdutoPesquisaComponent } from './produto-pesquisa/produto-pesquisa.component';
 
 
 @NgModule({
   declarations: [
-    ProdutoCadastroComponent
+    ProdutoCadastroComponent,
+    ProdutoPesquisaComponent
   ],
   imports: [
     BrowserModule,

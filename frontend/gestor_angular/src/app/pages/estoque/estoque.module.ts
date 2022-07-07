@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {EntradaComponent} from './entrada/entrada.component';
+import {EstoqueEntradaComponent} from './entrada/estoque-entrada.component';
+import { EstoquePesquisaComponent } from './pesquisa/estoque-pesquisa.component';
 
 
 @NgModule({
   declarations: [
-    EntradaComponent
+    EstoqueEntradaComponent,
+    EstoquePesquisaComponent
   ],
   imports: [
     CommonModule
