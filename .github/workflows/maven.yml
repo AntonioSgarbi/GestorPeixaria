@@ -72,6 +72,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Empacota o projeto com Maven, cria a imagem docker e envia imagem para dockerhub.
+      env:
+        DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+        DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
+      run: mvn -B package --file backend/pom.xml jib:build -DskipTests -Dactive.profile=dev
     - name: Compila o projeto com Maven
       run: mvn -B package --file backend/pom.xml -Dskiptests -Dactive.profile=test
     - name: cria uma pasta temporária de downloads de artefatos
