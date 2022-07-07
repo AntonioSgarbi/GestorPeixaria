@@ -6,14 +6,14 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#  profiles:
+  profiles:
 #    active: @active.profile@ #actions
 #    active: dev
     active: heroku
   mail:
-    host: smtp-mail.outlook.com #gmail smtp.gmail.com
-    port: 587
     protocol: smtp
+    host: host
+    port: 587
     username: username
     password: password
     properties:

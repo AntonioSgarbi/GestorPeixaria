@@ -1,11 +1,17 @@
 spring:
   datasource:
     url: ${DATABASE_URL}
-  mail:
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
 
 personal:
   security:
     jwtSecret: ${JWT_SECRET}
     url-cors: ${URL_CORS}
+
+mailgun:
+  api:
+    username: ${MAILGUN_USERNAME}
+    password: ${MAILGUN_PASSWORD}
+    base:
+      url: ${MAILGUN_API_BASE_URL}
+    messages:
+      url: ${MAILGUN_MESSAGES_URL}

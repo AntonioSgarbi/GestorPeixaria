@@ -1,29 +1,33 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import tech.antoniosgarbi.gestorpeixaria.service.contract.MailService;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceAdapter;
 
 @Service
-public class MailServiceImpl implements MailService {
+public class MailSpringServiceImpl implements MailServiceAdapter {
 
-    @Value("${spring.mail.username}")
-    private String from;
+    private final String from;
     private final JavaMailSender emailSender;
 
-    public MailServiceImpl(JavaMailSender emailSender) {
+    public MailSpringServiceImpl(JavaMailSender emailSender, String mailSpringUsername) {
         this.emailSender = emailSender;
+        this.from = mailSpringUsername;
     }
 
     @Override
-    public void sendSimpleMessage(String to, String subject, String text) {
+    public void sendText(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
-        message.setText(text);
+        message.setText(body);
         emailSender.send(message);
+    }
+
+    @Override
+    public void sendHTML(String to, String subject, String body) {
+
     }
 }

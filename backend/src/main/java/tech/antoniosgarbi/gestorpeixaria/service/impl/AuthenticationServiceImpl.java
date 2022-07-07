@@ -16,7 +16,7 @@ import tech.antoniosgarbi.gestorpeixaria.exception.TokenRefreshException;
 import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
 import tech.antoniosgarbi.gestorpeixaria.model.User;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
-import tech.antoniosgarbi.gestorpeixaria.service.contract.MailService;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceAdapter;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
 
 import java.time.LocalDateTime;
@@ -27,10 +27,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final TokenService jwtUtils;
     private final AuthenticationManager authenticationManager;
     private final UserDetailsServiceImpl userDetailsService;
-    private final MailService mailService;
+    private final MailServiceAdapter mailService;
 
     public AuthenticationServiceImpl(TokenService jwtUtils, AuthenticationManager authenticationManager,
-                                     UserDetailsServiceImpl userDetailsService, MailService mailService) {
+                                     UserDetailsServiceImpl userDetailsService, MailServiceAdapter mailService) {
         this.jwtUtils = jwtUtils;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
@@ -101,7 +101,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             User user = userDetailsService.findByUsername(email);
             user.setPassword(senhaEncripitada);
             userDetailsService.save(user);
-            mailService.sendSimpleMessage(email, "Gestor Peixaria - Recuperação de senha",
+            mailService.sendText(email, "Gestor Peixaria - Recuperação de senha",
                     "Sua senha foi alterada para: " + senhaGerada);
         } catch (UsernameNotFoundException e) {
         User user = User.builder()
@@ -111,7 +111,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .roles(List.of("FUNCIONARIO", "GERENTE"))
                 .build();
         userDetailsService.save(user);
-        mailService.sendSimpleMessage(email, "Gestor Peixaria - Credenciais",
+        mailService.sendText(email, "Gestor Peixaria - Credenciais",
                 "Suas credenciais de acesso são:  \n\n" +
                         "Login: " + email + "\nSenha: " + senhaGerada);
         }
