@@ -1,7 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service.contract;
 
 public interface MailService {
-
-        public void sendUserPassword(String to, String subject, String body);
+        void sendSimpleMessage(String to, String subject, String text);
 
 }

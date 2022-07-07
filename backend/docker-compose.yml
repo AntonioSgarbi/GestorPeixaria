@@ -2,16 +2,29 @@ version: '2'
 
 services:
   app:
-    image: 'antoniosk/gestor-peixaria:latest'
+    image: 'antoniosk/gestor_peixaria:latest'
     container_name: gestor
     depends_on:
       - db
+    links:
+      - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/gestor_peixaria
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
+      - SERVER_PORT=8080
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=gestor_peixaria
+      - MAIL_HOST=smtp-mail.outlook.com
+      - MAIL_PORT=587
+      - MAIL_PROTOCOL=smtp
+      - MAIL_USERNAME=username
+      - MAIL_PASSWORD=password
+      - UUID_JWT_SECRET=secret
+      - JWT_EXPIRATION_TIME=3600
+      - JWT_REFRESH_TIME=3600
+      - GENERATE_KEY=senha
+      - URL_CORS=http://localhost:4200
   db:
     image: 'postgres:14.1-alpine'
     container_name: db

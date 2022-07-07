@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.TokenService;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.UserDetailsServiceImpl;
 
 import javax.servlet.FilterChain;

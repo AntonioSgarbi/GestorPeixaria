@@ -26,7 +26,7 @@ public class User {
     @Column(columnDefinition = "text")
     private String password;
 
-    @OneToOne(optional = false)
+    @OneToOne//(optional = false) comment only for tests
     private Pessoa pessoa;
 
 }

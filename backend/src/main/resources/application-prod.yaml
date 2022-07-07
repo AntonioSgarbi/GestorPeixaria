@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    url: ${DATABASE_URL}
-
-personal:
-  security:
-    jwtSecret: aa713c1f-8025-4ce4-bfe8-0a8ea6110eea
-    nova-senha: teste123
-    url-cors: https://antoniosgarbi.github.io

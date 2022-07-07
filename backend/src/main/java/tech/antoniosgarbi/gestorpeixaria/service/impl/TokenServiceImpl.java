@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
 
 import java.util.Date;
 
 @Component
-public class TokenService {
-  private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
+public class TokenServiceImpl implements TokenService {
+  private static final Logger logger = LoggerFactory.getLogger(TokenServiceImpl.class);
 
   @Value("${personal.security.jwtSecret}")
   private String jwtSecret;
@@ -27,19 +28,23 @@ public class TokenService {
   @Value("${personal.security.nova-senha}")
   private String senhaGeradaNoBoot;
 
+  @Override
   public String generateAccessToken(UserDetailsImpl userPrincipal) {
     return generateTokenFromUsername(userPrincipal.getUsername());
   }
+  @Override
   public String generateAccessToken(String username) {
     return generateTokenFromUsername(username);
   }
 
+  @Override
   public String generateTokenFromUsername(String username) {
     return Jwts.builder().setSubject(username).setIssuedAt(new Date())
             .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact();
   }
 
+  @Override
   public String generateRefreshTokenFromUsername(String username) {
     Date momentoAtual = new Date();
         return Jwts.builder()
@@ -50,6 +55,7 @@ public class TokenService {
                 .compact();
     }
 
+  @Override
   public String getUserNameFromJwtToken(String token) {
     return Jwts.parser()
             .setSigningKey(jwtSecret)
@@ -58,6 +64,7 @@ public class TokenService {
             .getSubject();
   }
 
+  @Override
   public boolean validateJwtToken(String authToken) {
     try {
       Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

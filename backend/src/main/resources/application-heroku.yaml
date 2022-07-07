@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+
+personal:
+  security:
+    jwtSecret: ${JWT_SECRET}
+    url-cors: ${URL_CORS}

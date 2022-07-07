@@ -9,7 +9,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.AuthenticationService;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,6 +28,12 @@ public class LoginController {
     @PostMapping("/refresh")
     public ResponseEntity<RefreshResponse> refreshtoken(@RequestBody RefreshRequest request) {
         return ResponseEntity.ok(tokenService.refreshTheToken(request.getRefreshToken()));
+    }
+
+    @PostMapping("/forgot")
+        public ResponseEntity<Void> resetPassword(@RequestBody String email) {
+        tokenService.resetPassword(email);
+        return ResponseEntity.accepted().build();
     }
 
 }

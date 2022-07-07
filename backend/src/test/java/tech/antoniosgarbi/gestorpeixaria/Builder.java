@@ -1,10 +1,8 @@
 package tech.antoniosgarbi.gestorpeixaria;
 
 import tech.antoniosgarbi.gestorpeixaria.dto.model.*;
-import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
-import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
-import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
-import tech.antoniosgarbi.gestorpeixaria.model.Produto;
+import tech.antoniosgarbi.gestorpeixaria.model.*;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
 
 public interface Builder {
 
@@ -52,16 +50,66 @@ public interface Builder {
     static Produto produto1() {
         Produto produto = new Produto();
         produto.setId(1L);
-        produto.setNome("produto");
+        produto.setNome("prod unidade");
+        produto.setQuantidadeTipo(QuantidadeTipo.UNIDADE);
         return produto;
     }
 
     static ProdutoDTO produtoDTO1() {
         ProdutoDTO dto = new ProdutoDTO();
         dto.setId(1L);
-        dto.setNome("produto");
+        dto.setNome("proDto unidade");
+        dto.setQuantidadeTipo(QuantidadeTipo.UNIDADE);
         return dto;
     }
+
+    static Produto produto2() {
+        Produto produto = new Produto();
+        produto.setId(2L);
+        produto.setNome("prod peso");
+        produto.setQuantidadeTipo(QuantidadeTipo.PESO);
+        return produto;
+    }
+
+    static ProdutoDTO produtoDTO2() {
+        ProdutoDTO dto = new ProdutoDTO();
+        dto.setId(2L);
+        dto.setNome("prodTo peso");
+        return dto;
+    }
+
+    static ItemVenda itemVenda1() {
+        ItemVenda itemVenda = new ItemVenda();
+        itemVenda.setId(1L);
+        itemVenda.setQuantidade(1.0);
+        itemVenda.setProduto(produto1());
+        return itemVenda;
+    }
+
+    static ItemVendaDTO itemVendaDTO1() {
+        ItemVendaDTO dto = new ItemVendaDTO();
+        dto.setId(1L);
+        dto.setQuantidade(1.0);
+        dto.setProduto(produtoDTO1());
+        return dto;
+    }
+
+    static ItemVenda itemVenda2() {
+        ItemVenda itemVenda = new ItemVenda();
+        itemVenda.setId(2L);
+        itemVenda.setQuantidade(250.0);
+        itemVenda.setProduto(produto2());
+        return itemVenda;
+    }
+
+    static ItemVendaDTO itemVendaDTO2() {
+        ItemVendaDTO dto = new ItemVendaDTO();
+        dto.setId(2L);
+        dto.setQuantidade(250.0);
+        dto.setProduto(produtoDTO2());
+        return dto;
+    }
+
 
     static VendaDTO vendaDTO1() {
         VendaDTO dto = new VendaDTO();
