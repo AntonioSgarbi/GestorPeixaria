@@ -19,8 +19,7 @@ public class MailSpringConfig {
 
     @Bean
     public JavaMailSender getJavaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        return mailSender;
+        return new JavaMailSenderImpl();
     }
 
 }

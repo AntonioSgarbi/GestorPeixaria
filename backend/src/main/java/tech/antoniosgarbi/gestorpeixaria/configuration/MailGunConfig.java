@@ -22,25 +22,21 @@ public class MailGunConfig {
 
     @Bean
     public String mailGunAPIUsername() {
-        System.out.println("mailGunAPIUsername: " + mailGunAPIUsername);
         return this.mailGunAPIUsername;
     }
 
     @Bean
     public String mailGunAPIPassword() {
-        System.out.println("mailGunAPIPassword: " + mailGunAPIPassword);
         return this.mailGunAPIPassword;
     }
 
     @Bean
     public String mailGunAPIBaseUrl() {
-        System.out.println("mailGunAPIBaseUrl: " + mailGunAPIBaseUrl);
         return this.mailGunAPIBaseUrl;
     }
 
     @Bean
     public String mailGunAPIMessagesUrl() {
-        System.out.println("mailGunAPIMessagesUrl: " + mailGunAPIMessagesUrl);
         return this.mailGunAPIMessagesUrl;
     }
 }
