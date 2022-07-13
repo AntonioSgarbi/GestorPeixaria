@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: gestor-peixaria
@@ -13,7 +14,7 @@ spring:
 #    active: heroku
   mail:
     protocol: smtp
-    host: host
+    host: smtp-mail.outlook.com
     port: 587
     username: username
     password: password
