@@ -1,5 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,32 +32,49 @@ class ProdutoServiceTest {
     ProdutoServiceImpl underTest;
 
     @Test
-    @DisplayName("Deve retornar um Long ao receber um FornecedorDTO com documento não cadastrado")
+    @DisplayName("Deve retornar um Long ao receber um ProdutoDTO com documento não cadastrado")
     void cadastrar0() {
-        Produto produtoEsperado = Builder.produto1();
+        Produto produtoEsperado = Builder.produtoUnidade1();
         when(produtoRepository.save(any(Produto.class))).thenReturn(produtoEsperado);
 
-        long idResposta = underTest.cadastrar(Builder.produtoDTO1());
+        long idResposta = underTest.cadastrar(Builder.produtoUnidadeDTO1());
 
         assertEquals(produtoEsperado.getId(), idResposta);
     }
 
-//    @Test
-//    @DisplayName("Deve lançar PessoaException ao receber um FornecedorDTO com documento já cadastrado no sistema")
-//    void cadastrar1() {
-////        when(produtoRepository.findByDocumento(anyString())).thenReturn(Optional.of(Builder.funcionario1()));
-//
-//        var exception =
-//                assertThrows(PessoaException.class, () -> underTest.cadastrar(Builder.produtoDTO1()));
-//
-//        String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
-//        assertEquals(mensagemEsperada, exception.getMessage());
-//    }
+    @Test
+    @DisplayName("Deve lançar PessoaException ao receber um objeto que não existe no banco")
+    void atualizarCadastro0() {
+        when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        var exception =
+                assertThrows(ProdutoException.class, () -> underTest.atualizarCadastro(Builder.produtoUnidadeDTO1()));
+
+        String mensagemEsperada = "Cadastro não encontrado";
+        assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
+    void atualizarCadastro1() {
+        Produto esperado = Builder.produtoUnidade1();
+        when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
+
+        String nomeNovo = "Novo nome";
+        esperado.setNome(nomeNovo);
+        when(produtoRepository.save(any(Produto.class))).thenReturn(esperado);
+
+        ProdutoDTO argument = Builder.produtoUnidadeDTO1();
+        argument.setNome(nomeNovo);
+        ProdutoDTO resposta = underTest.atualizarCadastro(argument);
+
+        assertEquals(nomeNovo, resposta.getNome());
+    }
 
     @Test
     @DisplayName("Deve retornar um ProdutoDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        ProdutoDTO produtoDTO = Builder.produtoDTO1();
+        ProdutoDTO produtoDTO = Builder.produtoUnidadeDTO1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(new Produto(produtoDTO)));
         ProdutoDTO resposta = underTest.encontrarCadastro(1L);
 
@@ -77,7 +95,7 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<ProdutoDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Produto> produtoList = List.of(Builder.produto1(), Builder.produto1(), Builder.produto1());
+        List<Produto> produtoList = List.of(Builder.produtoUnidade1(), Builder.produtoUnidade1(), Builder.produtoUnidade1());
         Page<Produto> produtoPage = new PageImpl<>(produtoList);
         when(produtoRepository.findAll(any(Pageable.class))).thenReturn(produtoPage);
 
@@ -97,6 +115,16 @@ class ProdutoServiceTest {
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
+    void apagarCadastro1() {
+        Produto esperado = Builder.produtoUnidade1();
+        when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
+
+        Assertions.assertThatCode(() -> underTest.apagarCadastro(1L))
+                .doesNotThrowAnyException();
     }
 
 }

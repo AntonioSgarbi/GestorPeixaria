@@ -1,5 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -56,6 +57,35 @@ class FuncionarioServiceTest {
     }
 
     @Test
+    @DisplayName("Deve lançar PessoaException ao receber um objeto que não existe no banco")
+    void atualizarCadastro0() {
+        when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        var exception =
+                assertThrows(PessoaException.class, () -> underTest.atualizarCadastro(Builder.funcionarioDTO1()));
+
+        String mensagemEsperada = "Cadastro não encontrado";
+        assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar FornecedorDTO ao receber um FornecedorDTO válido")
+    void atualizarCadastro1() {
+        Funcionario esperado = Builder.funcionario1();
+        when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
+
+        String nomeNovo = "Novo nome";
+        esperado.setNome(nomeNovo);
+        when(funcionarioRepository.save(any(Funcionario.class))).thenReturn(esperado);
+
+        FuncionarioDTO argument = Builder.funcionarioDTO1();
+        argument.setNome(nomeNovo);
+        FuncionarioDTO resposta = underTest.atualizarCadastro(argument);
+
+        assertEquals(nomeNovo, resposta.getNome());
+    }
+
+    @Test
     @DisplayName("Deve retornar um FuncionarioDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
         FuncionarioDTO funcionarioDTO = Builder.funcionarioDTO1();
@@ -99,6 +129,16 @@ class FuncionarioServiceTest {
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
+    void apagarCadastro1() {
+        Funcionario funcionarioEsperado = Builder.funcionario1();
+        when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(funcionarioEsperado));
+
+        Assertions.assertThatCode(() -> underTest.apagarCadastro(1L))
+                .doesNotThrowAnyException();
     }
 
 }

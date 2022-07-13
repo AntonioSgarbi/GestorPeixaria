@@ -1,5 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -56,6 +57,35 @@ class ClienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve lançar PessoaException ao receber um objeto que não existe no banco")
+    void atualizarCadastro0() {
+        when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        var exception =
+                assertThrows(PessoaException.class, () -> underTest.atualizarCadastro(Builder.clienteDTO1()));
+
+        String mensagemEsperada = "Cadastro não encontrado";
+        assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
+    void atualizarCadastro1() {
+        Cliente esperado = Builder.cliente1();
+        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
+
+        String nomeNovo = "Novo nome";
+        esperado.setNome(nomeNovo);
+        when(clienteRepository.save(any(Cliente.class))).thenReturn(esperado);
+
+        ClienteDTO argument = Builder.clienteDTO1();
+        argument.setNome(nomeNovo);
+        ClienteDTO resposta = underTest.atualizarCadastro(argument);
+
+        assertEquals(nomeNovo, resposta.getNome());
+    }
+
+    @Test
     @DisplayName("Deve retornar um ClienteDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
         ClienteDTO clienteEsperado = Builder.clienteDTO1();
@@ -99,6 +129,16 @@ class ClienteServiceTest {
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
+    void apagarCadastro1() {
+        ClienteDTO clienteEsperado = Builder.clienteDTO1();
+        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Cliente(clienteEsperado)));
+
+        Assertions.assertThatCode(() -> underTest.apagarCadastro(1L))
+                .doesNotThrowAnyException();
     }
 
 }

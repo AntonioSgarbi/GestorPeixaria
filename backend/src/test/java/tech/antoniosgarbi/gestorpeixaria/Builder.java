@@ -47,7 +47,7 @@ public interface Builder {
         return dto;
     }
 
-    static Produto produto1() {
+    static Produto produtoUnidade1() {
         Produto produto = new Produto();
         produto.setId(1L);
         produto.setNome("prod unidade");
@@ -55,7 +55,7 @@ public interface Builder {
         return produto;
     }
 
-    static ProdutoDTO produtoDTO1() {
+    static ProdutoDTO produtoUnidadeDTO1() {
         ProdutoDTO dto = new ProdutoDTO();
         dto.setId(1L);
         dto.setNome("proDto unidade");
@@ -63,7 +63,7 @@ public interface Builder {
         return dto;
     }
 
-    static Produto produto2() {
+    static Produto produtoPeso1() {
         Produto produto = new Produto();
         produto.setId(2L);
         produto.setNome("prod peso");
@@ -71,42 +71,42 @@ public interface Builder {
         return produto;
     }
 
-    static ProdutoDTO produtoDTO2() {
+    static ProdutoDTO produtoPesoDTO1() {
         ProdutoDTO dto = new ProdutoDTO();
         dto.setId(2L);
         dto.setNome("prodTo peso");
         return dto;
     }
 
-    static ItemVenda itemVenda1() {
-        ItemVenda itemVenda = new ItemVenda();
+    static ItemCompra itemVenda1() {
+        ItemCompra itemVenda = new ItemCompra();
         itemVenda.setId(1L);
         itemVenda.setQuantidade(1.0);
-        itemVenda.setProduto(produto1());
+        itemVenda.setProduto(produtoUnidade1());
         return itemVenda;
     }
 
-    static ItemVendaDTO itemVendaDTO1() {
-        ItemVendaDTO dto = new ItemVendaDTO();
+    static ItemCompraDTO itemVendaDTO1() {
+        ItemCompraDTO dto = new ItemCompraDTO();
         dto.setId(1L);
         dto.setQuantidade(1.0);
-        dto.setProduto(produtoDTO1());
+        dto.setProduto(produtoUnidadeDTO1());
         return dto;
     }
 
-    static ItemVenda itemVenda2() {
-        ItemVenda itemVenda = new ItemVenda();
+    static ItemCompra itemVenda2() {
+        ItemCompra itemVenda = new ItemCompra();
         itemVenda.setId(2L);
         itemVenda.setQuantidade(250.0);
-        itemVenda.setProduto(produto2());
+        itemVenda.setProduto(produtoPeso1());
         return itemVenda;
     }
 
-    static ItemVendaDTO itemVendaDTO2() {
-        ItemVendaDTO dto = new ItemVendaDTO();
+    static ItemCompraDTO itemVendaDTO2() {
+        ItemCompraDTO dto = new ItemCompraDTO();
         dto.setId(2L);
         dto.setQuantidade(250.0);
-        dto.setProduto(produtoDTO2());
+        dto.setProduto(produtoPesoDTO1());
         return dto;
     }
 

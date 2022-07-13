@@ -18,6 +18,7 @@ import tech.antoniosgarbi.gestorpeixaria.service.impl.FornecedorServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -54,6 +55,36 @@ class FornecedorServiceTest {
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Deve lançar PessoaException ao receber um objeto que não existe no banco")
+    void atualizarCadastro0() {
+        when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        var exception =
+                assertThrows(PessoaException.class, () -> underTest.atualizarCadastro(Builder.fornecedorDTO1()));
+
+        String mensagemEsperada = "Cadastro não encontrado";
+        assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve retornar FornecedorDTO ao receber um FornecedorDTO válido")
+    void atualizarCadastro1() {
+        Fornecedor esperado = Builder.fornecedor1();
+        when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
+
+        String nomeNovo = "Novo nome";
+        esperado.setNome(nomeNovo);
+        when(fornecedorRepository.save(any(Fornecedor.class))).thenReturn(esperado);
+
+        FornecedorDTO argument = Builder.fornecedorDTO1();
+        argument.setNome(nomeNovo);
+        FornecedorDTO resposta = underTest.atualizarCadastro(argument);
+
+        assertEquals(nomeNovo, resposta.getNome());
+    }
+
 
     @Test
     @DisplayName("Deve retornar um FornecedorDTO ao receber um id cadastrado")
@@ -99,6 +130,16 @@ class FornecedorServiceTest {
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
+    void apagarCadastro1() {
+        Fornecedor fornecedor = Builder.fornecedor1();
+        when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(fornecedor));
+
+        assertThatCode(() -> underTest.apagarCadastro(1L))
+                .doesNotThrowAnyException();
     }
 
 }
