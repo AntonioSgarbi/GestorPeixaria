@@ -28,7 +28,7 @@ public class Venda {
     @ManyToOne(optional = false)
     private Funcionario funcionario;
     @OneToMany
-    private List<ItemVenda> produtosQuantidades;
+    private List<ItemCompra> produtosQuantidades;
     private Double valorTotal;
 
     public Venda(VendaDTO dto) {
@@ -39,7 +39,7 @@ public class Venda {
         this.funcionario = new Funcionario(dto.getFuncionario());
         this.produtosQuantidades = dto.getProdutosQuantidades()
                 .stream()
-                .map(ItemVenda::new)
+                .map(ItemCompra::new)
                 .toList();
         this.valorTotal = dto.getValorTotal();
     }

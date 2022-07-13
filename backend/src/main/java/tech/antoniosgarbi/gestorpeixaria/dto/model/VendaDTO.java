@@ -17,7 +17,7 @@ public class VendaDTO {
     private PagamentoTipo pagamentoTipo;
     private ClienteDTO cliente;
     private FuncionarioDTO funcionario;
-    private List<ItemVendaDTO> produtosQuantidades;
+    private List<ItemCompraDTO> produtosQuantidades;
     private Double valorTotal;
 
     public VendaDTO(Venda modelo) {
@@ -28,7 +28,7 @@ public class VendaDTO {
         this.funcionario = new FuncionarioDTO(modelo.getFuncionario());
         this.produtosQuantidades = modelo.getProdutosQuantidades()
                 .stream()
-                .map(ItemVendaDTO::new)
+                .map(ItemCompraDTO::new)
                 .toList();
         this.valorTotal = modelo.getValorTotal();
     }

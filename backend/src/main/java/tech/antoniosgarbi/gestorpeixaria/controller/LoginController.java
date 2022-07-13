@@ -12,7 +12,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class LoginController {
     private final AuthenticationService tokenService;
 
@@ -31,10 +31,8 @@ public class LoginController {
     }
 
     @PostMapping("/forgot")
-        public ResponseEntity<Void> resetPassword(@RequestBody String email) {
-        tokenService.resetPassword(email);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<String> resetPassword(@RequestBody String email) {
+        return ResponseEntity.accepted().body(tokenService.resetPassword(email));
     }
 
 }
-

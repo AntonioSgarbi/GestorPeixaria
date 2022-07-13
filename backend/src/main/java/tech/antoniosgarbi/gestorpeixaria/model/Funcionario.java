@@ -1,8 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
 
 import javax.persistence.Entity;
@@ -12,7 +10,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Funcionario extends Pessoa {
 
     @OneToMany

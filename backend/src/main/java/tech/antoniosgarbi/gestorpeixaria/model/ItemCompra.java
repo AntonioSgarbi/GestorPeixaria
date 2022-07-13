@@ -1,17 +1,17 @@
 package tech.antoniosgarbi.gestorpeixaria.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.ItemVendaDTO;
+import lombok.*;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ItemCompraDTO;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-public class ItemVenda {
+@AllArgsConstructor
+public class ItemCompra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +19,7 @@ public class ItemVenda {
     @ManyToOne
     private Produto produto;
 
-    public ItemVenda(ItemVendaDTO dto) {
+    public ItemCompra(ItemCompraDTO dto) {
         this.id = dto.getId();
         this.quantidade = dto.getQuantidade();
         this.produto = new Produto(dto.getProduto());
