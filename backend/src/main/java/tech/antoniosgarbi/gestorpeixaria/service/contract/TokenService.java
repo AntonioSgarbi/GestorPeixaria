@@ -1,9 +1,9 @@
 package tech.antoniosgarbi.gestorpeixaria.service.contract;
 
-import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface TokenService {
-    String generateAccessToken(UserDetailsImpl userPrincipal);
+    String generateAccessToken(UserDetails userPrincipal);
 
     String generateAccessToken(String username);
 

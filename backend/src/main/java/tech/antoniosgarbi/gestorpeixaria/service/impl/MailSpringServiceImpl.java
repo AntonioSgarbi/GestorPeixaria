@@ -3,10 +3,10 @@ package tech.antoniosgarbi.gestorpeixaria.service.impl;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceAdapter;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 
 @Service
-public class MailSpringServiceImpl implements MailServiceAdapter {
+public class MailSpringServiceImpl implements MailServiceStrategy {
 
     private final String from;
     private final JavaMailSender emailSender;
@@ -28,6 +28,6 @@ public class MailSpringServiceImpl implements MailServiceAdapter {
 
     @Override
     public void sendHTML(String to, String subject, String body) {
-
+        // sem necessidade ainda
     }
 }

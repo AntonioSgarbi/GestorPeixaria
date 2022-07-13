@@ -5,14 +5,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceAdapter;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.RestClientService;
 
 @Service
 @Primary
 @Profile("heroku")
-public class MailGunServiceImpl implements MailServiceAdapter {
+public class MailGunServiceImpl implements MailServiceStrategy {
 
     private final RestClientService restClient;
     private final String password;
@@ -44,8 +43,8 @@ public class MailGunServiceImpl implements MailServiceAdapter {
         sendEmail(map);
     }
 
-    private void sendEmail(MultiValueMap<String, String> map) {
-        this.restClient.post(this.messagesUrl, map, this.username, this.password);
+    protected void sendEmail(MultiValueMap<String, String> map) {
+        this.restClient.postWithBasicAuth(this.messagesUrl, map, this.username, this.password);
     }
 
     private MultiValueMap<String, String> getPostRequestObject(String from, String to, String subject) {

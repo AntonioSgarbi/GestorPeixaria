@@ -14,5 +14,5 @@ public interface AuthenticationService {
     User criarUsuariodeFuncionario(Funcionario funcionario);
 
     //public test version
-    void resetPassword(String email);
+    String resetPassword(String email);
 }

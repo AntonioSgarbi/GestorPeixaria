@@ -5,11 +5,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.VendaDTO;
 import tech.antoniosgarbi.gestorpeixaria.repository.VendaRepository;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.ItemCompraService;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.VendaService;
 
 @Service
 public class VendaServiceImpl implements VendaService {
-    private VendaRepository vendaRepository;
+    private final VendaRepository vendaRepository;
+    private ItemCompraService itemCompraService;
+
+    public VendaServiceImpl(VendaRepository vendaRepository) {
+        this.vendaRepository = vendaRepository;
+    }
 
     @Override
     public Long registrarVenda(VendaDTO vendaDTO) {

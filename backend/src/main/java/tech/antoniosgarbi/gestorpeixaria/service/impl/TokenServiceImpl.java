@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
-import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
 
 import java.util.Date;
@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
   private String senhaGeradaNoBoot;
 
   @Override
-  public String generateAccessToken(UserDetailsImpl userPrincipal) {
+  public String generateAccessToken(UserDetails userPrincipal) {
     return generateTokenFromUsername(userPrincipal.getUsername());
   }
   @Override
@@ -90,4 +90,5 @@ public class TokenServiceImpl implements TokenService {
     String senhaEncripitada = argon.encode(this.senhaGeradaNoBoot);
     logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", senhaGeradaNoBoot, senhaEncripitada));
   }
+
 }

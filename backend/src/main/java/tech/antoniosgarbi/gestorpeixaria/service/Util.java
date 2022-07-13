@@ -5,6 +5,7 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class Util {
@@ -27,5 +28,10 @@ public class Util {
     // then use Spring BeanUtils to copy and ignore null using our function
     public static void myCopyProperties(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
+    }
+
+    public static int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt(min,max);
     }
 }
