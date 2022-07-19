@@ -1,8 +1,13 @@
 spring:
   datasource:
     url: ${DATABASE_URL}
+  sendgrid:
+    api-key: ${SENDGRID_API_KEY}
 
 personal:
+  mail:
+    fromMail: ${SENDGRID_FROM_MAIL}
+    fromName: ${SENDGRID_FROM_NAME}
   security:
     jwtSecret: ${JWT_SECRET}
     url-cors: ${URL_CORS}
