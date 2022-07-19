@@ -4,42 +4,44 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.FuncionarioService;
+import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
-    private final FuncionarioService funcionarioService;
+    private final ClienteService clienteService;
 
-    public ClienteController(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
     }
 
     @PostMapping
-    public ResponseEntity<Long> cadastrarNovo(@RequestBody FuncionarioDTO cadastroBody){
-        return ResponseEntity.ok(funcionarioService.cadastrar(cadastroBody));
+    public ResponseEntity<Long> cadastrarNovo(@RequestBody ClienteDTO cadastroBody){
+        return ResponseEntity.ok(clienteService.cadastrar(cadastroBody));
     }
 
     @PutMapping
-    public ResponseEntity<Void> atualizarCadastro(@RequestBody FuncionarioDTO cadastroBody){
-        this.funcionarioService.atualizarCadastro(cadastroBody);
+    public ResponseEntity<Void> atualizarCadastro(@RequestBody ClienteDTO cadastroBody){
+        this.clienteService.atualizarCadastro(cadastroBody);
         return ResponseEntity.accepted().body(null);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FuncionarioDTO> encontrarCadastro(@PathVariable Long id) {
-        return ResponseEntity.ok(funcionarioService.encontrarCadastro(id));
+    public ResponseEntity<ClienteDTO> encontrarCadastro(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.encontrarCadastro(id));
     }
 
     @GetMapping
-    public ResponseEntity<Page<FuncionarioDTO>> encontrarTodos(Pageable pageable) {
-        return ResponseEntity.ok(funcionarioService.encontrarTodos(pageable));
+    public ResponseEntity<Page<ClienteDTO>> encontrarTodos(Pageable pageable) {
+        return ResponseEntity.ok(clienteService.encontrarTodos(pageable));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> apagarCadastro(@PathVariable Long id) {
-        funcionarioService.apagarCadastro(id);
+        clienteService.apagarCadastro(id);
         return ResponseEntity.accepted().body(null);
     }
 
