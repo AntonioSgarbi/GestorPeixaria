@@ -2,7 +2,7 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
-import {AuthenticationService} from "../pages/login/authentication.service";
+import {AuthenticationService} from "../views/login/login.service";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 

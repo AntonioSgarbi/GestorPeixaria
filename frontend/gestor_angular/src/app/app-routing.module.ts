@@ -1,21 +1,20 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PessoaCadastroComponent} from './pages/pessoa/cadastro/pessoa-cadastro.component';
+import {RegistrationPersonView} from './views/person/registration-person/registration-person.view';
 import {NavbarComponent} from "./components/navbar/navbar.component";
-import {HomeComponent} from "./pages/home/home.component";
-import {ProdutoCadastroComponent} from "./pages/produto/cadastro/produto-cadastro.component";
-import {PessoaPesquisaComponent} from "./pages/pessoa/pesquisa/pesquisa.component";
-import {LoginComponent} from "./pages/login/login.component";
+import {HomeComponent} from "./views/home/home.component";
+import {RegistrationProductView} from "./views/product/registration-product/registration-product.view";
+import {PessoaPesquisaComponent} from "./views/person/search-person/search-person.view";
+import {LoginView} from "./views/login/login.view";
 import {AuthGuard} from "./guard/auth-guard.service";
-import {EstoquePesquisaComponent} from "./pages/estoque/pesquisa/estoque-pesquisa.component";
-import {EstoqueEntradaComponent} from "./pages/estoque/entrada/estoque-entrada.component";
-import {ProdutoPesquisaComponent} from "./pages/produto/produto-pesquisa/produto-pesquisa.component";
-import {FormularioComponent} from "./components/formulario/formulario.component";
+import {SearchStockView} from "./views/stock/search-stock/search-stock.view";
+import {EntryStockView} from "./views/stock/entry-stock/entry-stock.view";
+import {SearchProductView} from "./views/product/search-product/search-product.view";
 
 const routes: Routes = [
     {
       path: 'login',
-      component: LoginComponent,
+      component: LoginView,
     },
     {
       path: '',
@@ -28,37 +27,33 @@ const routes: Routes = [
           canActivate: [AuthGuard],
         },
         {
-          path: 'pessoa/cadastro',
-          component: PessoaCadastroComponent,
+          path: 'person/registration-person',
+          component: RegistrationPersonView,
           canActivate: [AuthGuard],
         },
         {
-          path: 'pessoa/pesquisa',
+          path: 'person/search-person',
           component: PessoaPesquisaComponent,
           canActivate: [AuthGuard],
         },
         {
-          path: 'produto/cadastro',
-          component: ProdutoCadastroComponent,
+          path: 'product/registration-product',
+          component: RegistrationProductView,
           canActivate: [AuthGuard],
         },        {
-          path: 'produto/pesquisa',
-          component: ProdutoPesquisaComponent,
+          path: 'product/search-product',
+          component: SearchProductView,
           canActivate: [AuthGuard],
         },
         {
-          path: 'estoque/entrada',
-          component: EstoqueEntradaComponent,
+          path: 'stock/entry-stock',
+          component: EntryStockView,
           canActivate: [AuthGuard],
         },
         {
-          path: 'estoque/pesquisa',
-          component: EstoquePesquisaComponent,
+          path: 'stock/search-stock',
+          component: SearchStockView,
           canActivate: [AuthGuard],
-        },
-        {
-          path: 'form',
-          component: FormularioComponent,
         },
       ]
     }

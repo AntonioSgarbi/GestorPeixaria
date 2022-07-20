@@ -1,0 +1,70 @@
+<body>
+<div class="container pt-1">
+  <mat-card class="mat-elevation-z10 height-card">
+    <div class="d-flex mt-3 justify-content-center">
+    <mat-card-title>Cadastro de Pessoa</mat-card-title>
+    </div>
+    <form [formGroup]="form">
+      <div class="container pt-5 d-grid">
+
+        <mat-form-field appearance="{{appearance}}">
+          <mat-label>Tipo de cadasto</mat-label>
+
+          <mat-select formControlName="registrationType">
+            <mat-option *ngFor="let item of registrationType | keyvalue" [value]="item.key" >
+              {{item.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="{{appearance}}">
+          <mat-label>Nome</mat-label>
+          <input autofocus matInput type="text" formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="{{appearance}}">
+          <mat-label>E-mail</mat-label>
+          <input autocomplete="off" matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="{{appearance}}">
+          <mat-label>Tipo de Pessoa</mat-label>
+          <mat-select formControlName="legalRecordType">
+            <mat-option *ngFor="let item of legalRecordType | keyvalue" [value]="item.key">
+              {{item.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="{{appearance}}">
+          <mat-label>Documento</mat-label>
+          <input autocomplete="off" matInput mask="{{documentMask()}}" formControlName="document" placeholder="{{placeholderDocument()}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="{{appearance}}" *ngIf="isIndividual()">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <div *ngFor="let phone of phones; let i = index;" formArrayName="phones">
+          <mat-form-field appearance="{{appearance}}" class="col-12">
+            <mat-label>Telefone</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input matInput formControlName="{{i}}">
+            <mat-icon matSuffix class="btn-danger" (click)="removePhoneNumber(i)">remove</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button class="btn-outline-info col-8" mat-raised-button (click)="addPhoneNumber()">Adicionar telefone</button>
+        </div>
+      </div>
+      <div class="d-flex mt-5 justify-content-around">
+        <button mat-raised-button class="btn-outline-danger col-5" (click)="resetForm()">Limpar</button>
+        <button mat-raised-button class="btn-outline-success col-5" (click)="submit()">Cadastrar</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+</body>
