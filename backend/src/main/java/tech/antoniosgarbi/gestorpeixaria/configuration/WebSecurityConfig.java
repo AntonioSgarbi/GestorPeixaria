@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/**").permitAll()
-                .antMatchers("/funcionario/**").hasRole("ADMIN")
+                .antMatchers("/funcionario/**").hasRole("GERENTE")
                 .anyRequest().authenticated()
                 .and()
         .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
