@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyFuncionario;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.FuncionarioService;
 
 @RestController
@@ -35,6 +36,11 @@ public class FuncionarioController {
     @GetMapping
     public ResponseEntity<Page<FuncionarioDTO>> encontrarTodos(Pageable pageable) {
         return ResponseEntity.ok(funcionarioService.encontrarTodos(pageable));
+    }
+
+    @PutMapping("/query")
+    public ResponseEntity<Page<FuncionarioDTO>> encontrarTodos(@RequestBody SpecBodyFuncionario specBodyFuncionario, Pageable pageable) {
+        return ResponseEntity.ok(funcionarioService.encontrarTodos(specBodyFuncionario, pageable));
     }
 
     @DeleteMapping("/{id}")

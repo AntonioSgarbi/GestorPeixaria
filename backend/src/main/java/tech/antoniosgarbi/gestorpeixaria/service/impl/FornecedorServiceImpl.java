@@ -2,13 +2,16 @@ package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.FornecedorDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyFornecedor;
 import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
 import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
 import tech.antoniosgarbi.gestorpeixaria.repository.FornecedorRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.FornecedorService;
+import tech.antoniosgarbi.gestorpeixaria.specification.FornecedorSpecification;
 
 import java.util.Optional;
 
@@ -45,6 +48,12 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Override
     public Page<FornecedorDTO> encontrarTodos(Pageable pageable) {
         return this.fornecedorRepository.findAll(pageable).map(FornecedorDTO::new);
+    }
+
+    @Override
+    public Page<FornecedorDTO> encontrarTodos(SpecBodyFornecedor specBody, Pageable pageable) {
+        Specification<Fornecedor> specification = new FornecedorSpecification(specBody);
+        return this.fornecedorRepository.findAll(specification, pageable).map(FornecedorDTO::new);
     }
 
     @Override

@@ -2,13 +2,16 @@ package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.FuncionarioDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyFuncionario;
 import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
 import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
 import tech.antoniosgarbi.gestorpeixaria.repository.FuncionarioRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.FuncionarioService;
+import tech.antoniosgarbi.gestorpeixaria.specification.FuncionarioSpecification;
 
 import java.util.Optional;
 
@@ -45,6 +48,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public Page<FuncionarioDTO> encontrarTodos(Pageable pageable) {
         return this.funcionarioRepository.findAll(pageable).map(FuncionarioDTO::new);
+    }
+
+    @Override
+    public Page<FuncionarioDTO> encontrarTodos(SpecBodyFuncionario specBody, Pageable pageable) {
+        Specification<Funcionario> specification = new FuncionarioSpecification(specBody);
+        return this.funcionarioRepository.findAll(specification, pageable).map(FuncionarioDTO::new);
     }
 
     @Override

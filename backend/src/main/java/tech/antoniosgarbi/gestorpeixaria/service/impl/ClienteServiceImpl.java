@@ -2,13 +2,16 @@ package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SpecBodyCliente;
 import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
 import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
 import tech.antoniosgarbi.gestorpeixaria.repository.ClienteRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.ClienteService;
+import tech.antoniosgarbi.gestorpeixaria.specification.ClienteSpecification;
 
 import java.util.Optional;
 
@@ -45,6 +48,12 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Page<ClienteDTO> encontrarTodos(Pageable pageable) {
         return this.clienteRepository.findAll(pageable).map(ClienteDTO::new);
+    }
+
+    @Override
+    public Page<ClienteDTO> encontrarTodos(SpecBodyCliente specBody, Pageable pageable) {
+        Specification<Cliente> specification = new ClienteSpecification(specBody);
+        return this.clienteRepository.findAll(specification, pageable).map(ClienteDTO::new);
     }
 
     @Override
