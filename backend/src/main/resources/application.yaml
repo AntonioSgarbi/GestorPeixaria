@@ -11,7 +11,7 @@ spring:
     active: @active.profile@ #actions
 #    active: dev
 #    active: test
-    active: heroku
+#    active: heroku
   mail:
     protocol: smtp
     host: smtp-mail.outlook.com
@@ -30,5 +30,5 @@ personal:
     jwtSecret: aa713c1f-8025-4ce4-bfe8-0a8ea6110eea
     jwtExpirationMs: 360 000 000
     jwtRefreshExpirationMs: 60000000
-    nova-senha: teste123
+    passwordGenerate: teste123
     url-cors: http://localhost:4200

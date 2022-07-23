@@ -2,108 +2,108 @@ package tech.antoniosgarbi.gestorpeixaria;
 
 import tech.antoniosgarbi.gestorpeixaria.dto.model.*;
 import tech.antoniosgarbi.gestorpeixaria.model.*;
-import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantidadeTipo;
+import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
 public interface Builder {
 
-    static Cliente cliente1() {
-        Cliente cliente = new Cliente();
+    static Customer cliente1() {
+        Customer cliente = new Customer();
         cliente.setId(1L);
         return cliente;
     }
 
-    static ClienteDTO clienteDTO1() {
-        ClienteDTO dto = new ClienteDTO();
+    static CustomerDTO clienteDTO1() {
+        CustomerDTO dto = new CustomerDTO();
         dto.setId(1L);
-        dto.setDocumento("documento");
+        dto.setDocument("documento");
         return dto;
     }
 
-    static Fornecedor fornecedor1() {
-        Fornecedor fornecedor = new Fornecedor();
+    static Supplier fornecedor1() {
+        Supplier fornecedor = new Supplier();
         fornecedor.setId(1L);
-        fornecedor.setDocumento("documento");
+        fornecedor.setDocument("documento");
         return fornecedor;
     }
 
-    static FornecedorDTO fornecedorDTO1() {
-        FornecedorDTO dto = new FornecedorDTO();
+    static SupplierDTO fornecedorDTO1() {
+        SupplierDTO dto = new SupplierDTO();
         dto.setId(1L);
-        dto.setDocumento("documento");
+        dto.setDocument("documento");
         return dto;
     }
 
-    static Funcionario funcionario1() {
-        Funcionario funcionario = new Funcionario();
+    static Collaborator funcionario1() {
+        Collaborator funcionario = new Collaborator();
         funcionario.setId(1L);
-        funcionario.setDocumento("documento");
+        funcionario.setDocument("documento");
         return funcionario;
     }
 
-    static FuncionarioDTO funcionarioDTO1() {
-        FuncionarioDTO dto = new FuncionarioDTO();
+    static CollaboratorDTO funcionarioDTO1() {
+        CollaboratorDTO dto = new CollaboratorDTO();
         dto.setId(1L);
-        dto.setDocumento("documento");
+        dto.setDocument("documento");
         return dto;
     }
 
-    static Produto produtoUnidade1() {
-        Produto produto = new Produto();
+    static Product produtoUnidade1() {
+        Product produto = new Product();
         produto.setId(1L);
-        produto.setNome("prod unidade");
-        produto.setQuantidadeTipo(QuantidadeTipo.UNIDADE);
+        produto.setName("prod unidade");
+        produto.setQuantityType(QuantityType.UNITY);
         return produto;
     }
 
-    static ProdutoDTO produtoUnidadeDTO1() {
-        ProdutoDTO dto = new ProdutoDTO();
+    static ProductDTO produtoUnidadeDTO1() {
+        ProductDTO dto = new ProductDTO();
         dto.setId(1L);
-        dto.setNome("proDto unidade");
-        dto.setQuantidadeTipo(QuantidadeTipo.UNIDADE);
+        dto.setName("proDto unidade");
+        dto.setQuantityType(QuantityType.UNITY);
         return dto;
     }
 
-    static Produto produtoPeso1() {
-        Produto produto = new Produto();
+    static Product produtoPeso1() {
+        Product produto = new Product();
         produto.setId(2L);
-        produto.setNome("prod peso");
-        produto.setQuantidadeTipo(QuantidadeTipo.PESO);
+        produto.setName("prod peso");
+        produto.setQuantityType(QuantityType.WEIGHT);
         return produto;
     }
 
-    static ProdutoDTO produtoPesoDTO1() {
-        ProdutoDTO dto = new ProdutoDTO();
+    static ProductDTO produtoPesoDTO1() {
+        ProductDTO dto = new ProductDTO();
         dto.setId(2L);
-        dto.setNome("prodTo peso");
+        dto.setName("prodTo peso");
         return dto;
     }
 
-    static ItemCompra itemVenda1() {
-        ItemCompra itemVenda = new ItemCompra();
+    static SaleItem itemVenda1() {
+        SaleItem itemVenda = new SaleItem();
         itemVenda.setId(1L);
         itemVenda.setQuantidade(1.0);
         itemVenda.setProduto(produtoUnidade1());
         return itemVenda;
     }
 
-    static ItemCompraDTO itemVendaDTO1() {
-        ItemCompraDTO dto = new ItemCompraDTO();
+    static SaleItemDTO itemVendaDTO1() {
+        SaleItemDTO dto = new SaleItemDTO();
         dto.setId(1L);
         dto.setQuantidade(1.0);
         dto.setProduto(produtoUnidadeDTO1());
         return dto;
     }
 
-    static ItemCompra itemVenda2() {
-        ItemCompra itemVenda = new ItemCompra();
+    static SaleItem itemVenda2() {
+        SaleItem itemVenda = new SaleItem();
         itemVenda.setId(2L);
         itemVenda.setQuantidade(250.0);
         itemVenda.setProduto(produtoPeso1());
         return itemVenda;
     }
 
-    static ItemCompraDTO itemVendaDTO2() {
-        ItemCompraDTO dto = new ItemCompraDTO();
+    static SaleItemDTO itemVendaDTO2() {
+        SaleItemDTO dto = new SaleItemDTO();
         dto.setId(2L);
         dto.setQuantidade(250.0);
         dto.setProduto(produtoPesoDTO1());
@@ -111,10 +111,10 @@ public interface Builder {
     }
 
 
-    static VendaDTO vendaDTO1() {
-        VendaDTO dto = new VendaDTO();
-        dto.setCliente(clienteDTO1());
-        dto.setFuncionario(funcionarioDTO1());
+    static SaleDTO vendaDTO1() {
+        SaleDTO dto = new SaleDTO();
+        dto.setCustomer(clienteDTO1());
+        dto.setCollaborator(funcionarioDTO1());
         return dto;
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.ProdutoDTO;
-import tech.antoniosgarbi.gestorpeixaria.exception.ProdutoException;
-import tech.antoniosgarbi.gestorpeixaria.model.Produto;
-import tech.antoniosgarbi.gestorpeixaria.repository.ProdutoRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.ProdutoServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
+import tech.antoniosgarbi.gestorpeixaria.exception.ProductException;
+import tech.antoniosgarbi.gestorpeixaria.model.Product;
+import tech.antoniosgarbi.gestorpeixaria.repository.ProductRepository;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.ProductServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,17 +27,17 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ProdutoServiceTest {
     @Mock
-    ProdutoRepository produtoRepository;
+    ProductRepository produtoRepository;
     @InjectMocks
-    ProdutoServiceImpl underTest;
+    ProductServiceImpl underTest;
 
     @Test
     @DisplayName("Deve retornar um Long ao receber um ProdutoDTO com documento não cadastrado")
     void cadastrar0() {
-        Produto produtoEsperado = Builder.produtoUnidade1();
-        when(produtoRepository.save(any(Produto.class))).thenReturn(produtoEsperado);
+        Product produtoEsperado = Builder.produtoUnidade1();
+        when(produtoRepository.save(any(Product.class))).thenReturn(produtoEsperado);
 
-        long idResposta = underTest.cadastrar(Builder.produtoUnidadeDTO1());
+        long idResposta = underTest.register(Builder.produtoUnidadeDTO1());
 
         assertEquals(produtoEsperado.getId(), idResposta);
     }
@@ -48,7 +48,7 @@ class ProdutoServiceTest {
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(ProdutoException.class, () -> underTest.atualizarCadastro(Builder.produtoUnidadeDTO1()));
+                assertThrows(ProductException.class, () -> underTest.update(Builder.produtoUnidadeDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -57,26 +57,26 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
     void atualizarCadastro1() {
-        Produto esperado = Builder.produtoUnidade1();
+        Product esperado = Builder.produtoUnidade1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
-        esperado.setNome(nomeNovo);
-        when(produtoRepository.save(any(Produto.class))).thenReturn(esperado);
+        esperado.setName(nomeNovo);
+        when(produtoRepository.save(any(Product.class))).thenReturn(esperado);
 
-        ProdutoDTO argument = Builder.produtoUnidadeDTO1();
-        argument.setNome(nomeNovo);
-        ProdutoDTO resposta = underTest.atualizarCadastro(argument);
+        ProductDTO argument = Builder.produtoUnidadeDTO1();
+        argument.setName(nomeNovo);
+        ProductDTO resposta = underTest.update(argument);
 
-        assertEquals(nomeNovo, resposta.getNome());
+        assertEquals(nomeNovo, resposta.getName());
     }
 
     @Test
     @DisplayName("Deve retornar um ProdutoDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        ProdutoDTO produtoDTO = Builder.produtoUnidadeDTO1();
-        when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(new Produto(produtoDTO)));
-        ProdutoDTO resposta = underTest.encontrarCadastro(1L);
+        ProductDTO produtoDTO = Builder.produtoUnidadeDTO1();
+        when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(new Product(produtoDTO)));
+        ProductDTO resposta = underTest.findById(1L);
 
         assertNotNull(resposta);
         assertEquals(produtoDTO.getId(), resposta.getId());
@@ -86,7 +86,7 @@ class ProdutoServiceTest {
     @DisplayName("Deve lançar ProdutoException ao receber id não cadastrado no sistema")
     void encontrarCadastro1() {
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
-        var exception = assertThrows(ProdutoException.class, () -> underTest.encontrarCadastro(1L));
+        var exception = assertThrows(ProductException.class, () -> underTest.findById(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage(), exception.getMessage());
@@ -95,11 +95,11 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<ProdutoDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Produto> produtoList = List.of(Builder.produtoUnidade1(), Builder.produtoUnidade1(), Builder.produtoUnidade1());
-        Page<Produto> produtoPage = new PageImpl<>(produtoList);
+        List<Product> produtoList = List.of(Builder.produtoUnidade1(), Builder.produtoUnidade1(), Builder.produtoUnidade1());
+        Page<Product> produtoPage = new PageImpl<>(produtoList);
         when(produtoRepository.findAll(any(Pageable.class))).thenReturn(produtoPage);
 
-        Page<ProdutoDTO> pageResposta = underTest.encontrarTodos(Pageable.unpaged());
+        Page<ProductDTO> pageResposta = underTest.findAll(Pageable.unpaged());
 
         assertNotNull(pageResposta.getContent());
         assertEquals(produtoPage.getTotalElements(), pageResposta.getTotalElements());
@@ -111,7 +111,7 @@ class ProdutoServiceTest {
     void apagarCadastro0() {
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        var exception = assertThrows(ProdutoException.class, () -> underTest.apagarCadastro(1L));
+        var exception = assertThrows(ProductException.class, () -> underTest.delete(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -120,10 +120,10 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        Produto esperado = Builder.produtoUnidade1();
+        Product esperado = Builder.produtoUnidade1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
-        Assertions.assertThatCode(() -> underTest.apagarCadastro(1L))
+        Assertions.assertThatCode(() -> underTest.delete(1L))
                 .doesNotThrowAnyException();
     }
 

@@ -25,8 +25,8 @@ public class TokenServiceImpl implements TokenService {
   @Value("${personal.security.jwtRefreshExpirationMs}")
   private Long refreshTokenDurationMs;
 
-  @Value("${personal.security.nova-senha}")
-  private String senhaGeradaNoBoot;
+  @Value("${personal.security.passwordGenerate}")
+  private String passwordToEncript;
 
   @Override
   public String generateAccessToken(UserDetails userPrincipal) {
@@ -87,8 +87,8 @@ public class TokenServiceImpl implements TokenService {
   @Bean()
   public void geradorDeSenha() {
     Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
-    String senhaEncripitada = argon.encode(this.senhaGeradaNoBoot);
-    logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", senhaGeradaNoBoot, senhaEncripitada));
+    String encripted = argon.encode(this.passwordToEncript);
+    logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", passwordToEncript, encripted));
   }
 
 }

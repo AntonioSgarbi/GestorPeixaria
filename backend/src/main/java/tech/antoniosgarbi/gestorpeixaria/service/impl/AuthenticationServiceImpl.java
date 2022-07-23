@@ -16,7 +16,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
 import tech.antoniosgarbi.gestorpeixaria.exception.TokenRefreshException;
-import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
+import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.model.User;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
@@ -85,47 +85,47 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User criarUsuariodeFuncionario(Funcionario funcionario) {
+    public User criarUsuariodeFuncionario(Collaborator collaborator) {
         Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
-        String senhaEncripitada = argon.encode(LocalDateTime.now().toString());
+        String encripted = argon.encode(LocalDateTime.now().toString());
 
         return User.builder()
-                .email(funcionario.getEmail())
-                .username(funcionario.getDocumento())
-                .password(senhaEncripitada)
-                .roles(List.of("FUNCIONARIO"))
-                .pessoa(funcionario)
+                .email(collaborator.getEmail())
+                .username(collaborator.getDocument())
+                .password(encripted)
+                .roles(List.of("COLLABORATOR"))
+                .pessoa(collaborator)
                 .build();
     }
 
     //public test version
     @Override
     public String resetPassword(String email) {
-        String senhaGerada = Integer.toString(Util.getRandomNumberInRange(100000, 999999));
-        String senhaEncripitada = passwordEncoder.encode(senhaGerada);
+        String generated = Integer.toString(Util.getRandomNumberInRange(100000, 999999));
+        String encripted = passwordEncoder.encode(generated);
 
         try {
             User user = userDetailsService.findByUsername(email);
-            user.setPassword(senhaEncripitada);
+            user.setPassword(encripted);
             userDetailsService.save(user);
             mailService.sendText(email, "Gestor Peixaria - Recuperação de senha",
-                    "Sua senha foi alterada para: " + senhaGerada);
+                    "Sua senha foi alterada para: " + generated);
         } catch (UsernameNotFoundException e) {
             User user = User.builder()
                     .email(email)
                     .username(email)
-                    .password(senhaEncripitada)
-                    .roles(List.of("FUNCIONARIO", "GERENTE"))
+                    .password(encripted)
+                    .roles(List.of("COLLABORADOR", "MANAGER"))
                     .build();
             userDetailsService.save(user);
             try {
                 mailService.sendText(email, "Gestor Peixaria - Credenciais",
                         "Suas credenciais de acesso são:  \n\n" +
-                                "Login: " + email + "\nSenha: " + senhaGerada);
+                                "Login: " + email + "\nSenha: " + generated);
             } catch (Exception mailException) {
                 //do nothing on email fail, return password to frontend
             }
         }
-        return senhaGerada;
+        return generated;
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.ClienteDTO;
-import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
-import tech.antoniosgarbi.gestorpeixaria.model.Cliente;
-import tech.antoniosgarbi.gestorpeixaria.repository.ClienteRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.ClienteServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.CustomerDTO;
+import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
+import tech.antoniosgarbi.gestorpeixaria.model.Customer;
+import tech.antoniosgarbi.gestorpeixaria.repository.CustomerRepository;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.CustomerServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,18 +26,18 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ClienteServiceTest {
     @Mock
-    ClienteRepository clienteRepository;
+    CustomerRepository clienteRepository;
     @InjectMocks
-    ClienteServiceImpl underTest;
+    CustomerServiceImpl underTest;
 
     @Test
     @DisplayName("Deve retornar um Long ao receber um ClienteDTO com documento não cadastrado")
     void cadastrar0() {
-        Cliente clienteEsperado = Builder.cliente1();
-        when(clienteRepository.findClienteByDocumento(anyString())).thenReturn(Optional.empty());
-        when(clienteRepository.save(any(Cliente.class))).thenReturn(clienteEsperado);
+        Customer clienteEsperado = Builder.cliente1();
+        when(clienteRepository.findCustomerByDocument(anyString())).thenReturn(Optional.empty());
+        when(clienteRepository.save(any(Customer.class))).thenReturn(clienteEsperado);
 
-        long idResposta = underTest.cadastrar(Builder.clienteDTO1());
+        long idResposta = underTest.register(Builder.clienteDTO1());
 
         assertEquals(clienteEsperado.getId(), idResposta);
     }
@@ -45,12 +45,12 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve lançar uma ClienteException ao receber um ClienteDTO com documento já cadastrado no sistema")
     void cadastrar1() {
-        ClienteDTO dto = Builder.clienteDTO1();
+        CustomerDTO dto = Builder.clienteDTO1();
 
-        when(clienteRepository.findClienteByDocumento(anyString())).thenReturn(Optional.of(Builder.cliente1()));
+        when(clienteRepository.findCustomerByDocument(anyString())).thenReturn(Optional.of(Builder.cliente1()));
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.cadastrar(dto));
+                assertThrows(PersonException.class, () -> underTest.register(dto));
 
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -62,7 +62,7 @@ class ClienteServiceTest {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.atualizarCadastro(Builder.clienteDTO1()));
+                assertThrows(PersonException.class, () -> underTest.update(Builder.clienteDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -71,26 +71,26 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
     void atualizarCadastro1() {
-        Cliente esperado = Builder.cliente1();
+        Customer esperado = Builder.cliente1();
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
-        esperado.setNome(nomeNovo);
-        when(clienteRepository.save(any(Cliente.class))).thenReturn(esperado);
+        esperado.setName(nomeNovo);
+        when(clienteRepository.save(any(Customer.class))).thenReturn(esperado);
 
-        ClienteDTO argument = Builder.clienteDTO1();
-        argument.setNome(nomeNovo);
-        ClienteDTO resposta = underTest.atualizarCadastro(argument);
+        CustomerDTO argument = Builder.clienteDTO1();
+        argument.setName(nomeNovo);
+        CustomerDTO resposta = underTest.update(argument);
 
-        assertEquals(nomeNovo, resposta.getNome());
+        assertEquals(nomeNovo, resposta.getName());
     }
 
     @Test
     @DisplayName("Deve retornar um ClienteDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        ClienteDTO clienteEsperado = Builder.clienteDTO1();
-        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Cliente(clienteEsperado)));
-        ClienteDTO resposta = underTest.encontrarCadastro(1L);
+        CustomerDTO clienteEsperado = Builder.clienteDTO1();
+        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(clienteEsperado)));
+        CustomerDTO resposta = underTest.findById(1L);
 
         assertNotNull(resposta);
         assertEquals(clienteEsperado.getId(), resposta.getId());
@@ -100,7 +100,7 @@ class ClienteServiceTest {
     @DisplayName("Deve lançar uma ClienteException ao receber id não cadastrado no sistema")
     void encontrarCadastro1() {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
-        var exception = assertThrows(PessoaException.class, () -> underTest.encontrarCadastro(1L));
+        var exception = assertThrows(PersonException.class, () -> underTest.findById(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage(), exception.getMessage());
@@ -109,11 +109,11 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<ClienteDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Cliente> listaCliente = List.of(Builder.cliente1(), Builder.cliente1(), Builder.cliente1());
-        Page<Cliente> pageCliente = new PageImpl<>(listaCliente);
+        List<Customer> listaCliente = List.of(Builder.cliente1(), Builder.cliente1(), Builder.cliente1());
+        Page<Customer> pageCliente = new PageImpl<>(listaCliente);
         when(clienteRepository.findAll(any(Pageable.class))).thenReturn(pageCliente);
 
-        Page<ClienteDTO> pageResposta = underTest.encontrarTodos(Pageable.unpaged());
+        Page<CustomerDTO> pageResposta = underTest.findAll(Pageable.unpaged());
 
         assertNotNull(pageResposta.getContent());
         assertEquals(pageCliente.getTotalElements(), pageResposta.getTotalElements());
@@ -125,7 +125,7 @@ class ClienteServiceTest {
     void apagarCadastro0() {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        var exception = assertThrows(PessoaException.class, () -> underTest.apagarCadastro(1L));
+        var exception = assertThrows(PersonException.class, () -> underTest.delete(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -134,10 +134,10 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        ClienteDTO clienteEsperado = Builder.clienteDTO1();
-        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Cliente(clienteEsperado)));
+        CustomerDTO clienteEsperado = Builder.clienteDTO1();
+        when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(clienteEsperado)));
 
-        Assertions.assertThatCode(() -> underTest.apagarCadastro(1L))
+        Assertions.assertThatCode(() -> underTest.delete(1L))
                 .doesNotThrowAnyException();
     }
 

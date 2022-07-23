@@ -9,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
-import tech.antoniosgarbi.gestorpeixaria.dto.model.FornecedorDTO;
-import tech.antoniosgarbi.gestorpeixaria.exception.PessoaException;
-import tech.antoniosgarbi.gestorpeixaria.model.Fornecedor;
-import tech.antoniosgarbi.gestorpeixaria.repository.FornecedorRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.FornecedorServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.dto.model.SupplierDTO;
+import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
+import tech.antoniosgarbi.gestorpeixaria.model.Supplier;
+import tech.antoniosgarbi.gestorpeixaria.repository.SupplierRepository;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.SupplierServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,18 +26,18 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class FornecedorServiceTest {
     @Mock
-    FornecedorRepository fornecedorRepository;
+    SupplierRepository fornecedorRepository;
     @InjectMocks
-    FornecedorServiceImpl underTest;
+    SupplierServiceImpl underTest;
 
     @Test
     @DisplayName("Deve retornar um Long ao receber um FornecedorDTO com documento não cadastrado")
     void cadastrar0() {
-        Fornecedor fornecedorEsperado = Builder.fornecedor1();
-        when(fornecedorRepository.findByDocumento(anyString())).thenReturn(Optional.empty());
-        when(fornecedorRepository.save(any(Fornecedor.class))).thenReturn(fornecedorEsperado);
+        Supplier fornecedorEsperado = Builder.fornecedor1();
+        when(fornecedorRepository.findByDocument(anyString())).thenReturn(Optional.empty());
+        when(fornecedorRepository.save(any(Supplier.class))).thenReturn(fornecedorEsperado);
 
-        long idResposta = underTest.cadastrar(Builder.fornecedorDTO1());
+        long idResposta = underTest.register(Builder.fornecedorDTO1());
 
         assertEquals(fornecedorEsperado.getId(), idResposta);
     }
@@ -45,12 +45,12 @@ class FornecedorServiceTest {
     @Test
     @DisplayName("Deve lançar PessoaException ao receber um FornecedorDTO com documento já cadastrado no sistema")
     void cadastrar1() {
-        FornecedorDTO dto = Builder.fornecedorDTO1();
+        SupplierDTO dto = Builder.fornecedorDTO1();
 
-        when(fornecedorRepository.findByDocumento(anyString())).thenReturn(Optional.of(Builder.fornecedor1()));
+        when(fornecedorRepository.findByDocument(anyString())).thenReturn(Optional.of(Builder.fornecedor1()));
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.cadastrar(dto));
+                assertThrows(PersonException.class, () -> underTest.register(dto));
 
         String mensagemEsperada = "O documento informado já possui cadastro no sistema!";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -62,7 +62,7 @@ class FornecedorServiceTest {
         when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(PessoaException.class, () -> underTest.atualizarCadastro(Builder.fornecedorDTO1()));
+                assertThrows(PersonException.class, () -> underTest.update(Builder.fornecedorDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -71,27 +71,27 @@ class FornecedorServiceTest {
     @Test
     @DisplayName("Deve retornar FornecedorDTO ao receber um FornecedorDTO válido")
     void atualizarCadastro1() {
-        Fornecedor esperado = Builder.fornecedor1();
+        Supplier esperado = Builder.fornecedor1();
         when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
-        esperado.setNome(nomeNovo);
-        when(fornecedorRepository.save(any(Fornecedor.class))).thenReturn(esperado);
+        esperado.setName(nomeNovo);
+        when(fornecedorRepository.save(any(Supplier.class))).thenReturn(esperado);
 
-        FornecedorDTO argument = Builder.fornecedorDTO1();
-        argument.setNome(nomeNovo);
-        FornecedorDTO resposta = underTest.atualizarCadastro(argument);
+        SupplierDTO argument = Builder.fornecedorDTO1();
+        argument.setName(nomeNovo);
+        SupplierDTO resposta = underTest.update(argument);
 
-        assertEquals(nomeNovo, resposta.getNome());
+        assertEquals(nomeNovo, resposta.getName());
     }
 
 
     @Test
     @DisplayName("Deve retornar um FornecedorDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        FornecedorDTO fornecedorDTO = Builder.fornecedorDTO1();
-        when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(new Fornecedor(fornecedorDTO)));
-        FornecedorDTO resposta = underTest.encontrarCadastro(1L);
+        SupplierDTO fornecedorDTO = Builder.fornecedorDTO1();
+        when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(new Supplier(fornecedorDTO)));
+        SupplierDTO resposta = underTest.findById(1L);
 
         assertNotNull(resposta);
         assertEquals(fornecedorDTO.getId(), resposta.getId());
@@ -101,7 +101,7 @@ class FornecedorServiceTest {
     @DisplayName("Deve lançar PessoaException ao receber id não cadastrado no sistema")
     void encontrarCadastro1() {
         when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.empty());
-        var exception = assertThrows(PessoaException.class, () -> underTest.encontrarCadastro(1L));
+        var exception = assertThrows(PersonException.class, () -> underTest.findById(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage(), exception.getMessage());
@@ -110,11 +110,11 @@ class FornecedorServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<FornecedorDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Fornecedor> fornecedorList = List.of(Builder.fornecedor1(), Builder.fornecedor1(), Builder.fornecedor1());
-        Page<Fornecedor> fornecedorPage = new PageImpl<>(fornecedorList);
+        List<Supplier> fornecedorList = List.of(Builder.fornecedor1(), Builder.fornecedor1(), Builder.fornecedor1());
+        Page<Supplier> fornecedorPage = new PageImpl<>(fornecedorList);
         when(fornecedorRepository.findAll(any(Pageable.class))).thenReturn(fornecedorPage);
 
-        Page<FornecedorDTO> pageResposta = underTest.encontrarTodos(Pageable.unpaged());
+        Page<SupplierDTO> pageResposta = underTest.findAll(Pageable.unpaged());
 
         assertNotNull(pageResposta.getContent());
         assertEquals(fornecedorPage.getTotalElements(), pageResposta.getTotalElements());
@@ -126,7 +126,7 @@ class FornecedorServiceTest {
     void apagarCadastro0() {
         when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        var exception = assertThrows(PessoaException.class, () -> underTest.apagarCadastro(1L));
+        var exception = assertThrows(PersonException.class, () -> underTest.delete(1L));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -135,10 +135,10 @@ class FornecedorServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        Fornecedor fornecedor = Builder.fornecedor1();
+        Supplier fornecedor = Builder.fornecedor1();
         when(fornecedorRepository.findById(anyLong())).thenReturn(Optional.of(fornecedor));
 
-        assertThatCode(() -> underTest.apagarCadastro(1L))
+        assertThatCode(() -> underTest.delete(1L))
                 .doesNotThrowAnyException();
     }
 

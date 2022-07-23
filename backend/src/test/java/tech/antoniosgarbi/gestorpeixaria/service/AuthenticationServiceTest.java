@@ -20,7 +20,7 @@ import tech.antoniosgarbi.gestorpeixaria.configuration.UserDetailsImpl;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
-import tech.antoniosgarbi.gestorpeixaria.model.Funcionario;
+import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.model.User;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
@@ -144,8 +144,8 @@ class AuthenticationServiceTest {
         String documento = "username";
         String email = "email";
         List<String> roles = List.of("FUNCIONARIO");
-        Funcionario funcionario = new Funcionario();
-        funcionario.setDocumento(documento);
+        Collaborator funcionario = new Collaborator();
+        funcionario.setDocument(documento);
         funcionario.setEmail(email);
         User resposta = underTest.criarUsuariodeFuncionario(funcionario);
 

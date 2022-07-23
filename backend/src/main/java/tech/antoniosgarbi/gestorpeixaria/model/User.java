@@ -27,7 +27,7 @@ public class User {
     private String password;
 
     @OneToOne//(optional = false) comment only for tests
-    private Pessoa pessoa;
+    private Person pessoa;
 
 }
 
