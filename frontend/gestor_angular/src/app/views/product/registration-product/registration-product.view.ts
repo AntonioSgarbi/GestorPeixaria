@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {TipoQuantidade} from "../shared/enumTipoQuantidade";
+import {QuantityType} from "../shared/quantity.type.enum";
 
 @Component({
   selector: 'app-registration-person',
@@ -10,7 +10,7 @@ import {TipoQuantidade} from "../shared/enumTipoQuantidade";
 export class RegistrationProductView implements OnInit {
   formulario: FormGroup = new FormGroup({});
   aparencia: string = 'outline';
-  tipoQuantidade: any = TipoQuantidade;
+  tipoQuantidade: any = QuantityType;
 
 
   constructor(private fb: FormBuilder) { }

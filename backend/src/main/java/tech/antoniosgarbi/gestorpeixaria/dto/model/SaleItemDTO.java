@@ -13,12 +13,12 @@ import tech.antoniosgarbi.gestorpeixaria.model.SaleItem;
 @AllArgsConstructor
 public class SaleItemDTO {
     private Long id;
-    private Double quantidade;
-    private ProductDTO produto;
+    private Double quantity;
+    private ProductDTO product;
 
     public SaleItemDTO(SaleItem modelo) {
         this.id = modelo.getId();
-        this.quantidade = modelo.getQuantidade();
-        this.produto = new ProductDTO(modelo.getProduto());
+        this.quantity = modelo.getQuantity();
+        this.product = new ProductDTO(modelo.getProduct());
     }
 }

@@ -15,14 +15,14 @@ public class SaleItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double quantidade;
+    private Double quantity;
     @ManyToOne
-    private Product produto;
+    private Product product;
 
     public SaleItem(SaleItemDTO dto) {
         this.id = dto.getId();
-        this.quantidade = dto.getQuantidade();
-        this.produto = new Product(dto.getProduto());
+        this.quantity = dto.getQuantity();
+        this.product = new Product(dto.getProduct());
     }
 
 }

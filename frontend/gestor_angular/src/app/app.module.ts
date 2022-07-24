@@ -9,7 +9,7 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {NavbarModule} from "./components/navbar/navbar.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HomeModule} from "./views/home/home.module";
-import {ProdutoModule} from "./views/product/produto.module";
+import {ProductModule} from "./views/product/product.module";
 import {EstoqueModule} from "./views/stock/estoque.module";
 import {LoginView} from './views/login/login.view';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -24,6 +24,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LoaderInterceptor} from "./interceptor/loader.interceptor";
+import { SearchBarAutocompleteComponent } from './components/person-search/search-bar-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {LoaderInterceptor} from "./interceptor/loader.interceptor";
     PersonModule,
     NavbarModule,
     HomeModule,
-    ProdutoModule,
+    ProductModule,
     EstoqueModule,
     MatFormFieldModule,
     MatInputModule,

@@ -1,22 +1,22 @@
 import {LegalRecordType} from "./legal.record.type.enum";
-import {Venda} from "./sale.model";
+import {Sale} from "./sale.model";
 
-export interface Pessoa {
+export interface Person {
   id?: number;
-  documento?: string;
-  nome?: string;
-  pessoaTipo?: LegalRecordType;
-  telefones?: Set<string>;
+  document?: string;
+  name?: string;
+  legalRecordType?: LegalRecordType;
+  phones?: Set<string>;
   email?: string;
 }
 
-export interface Cliente extends Pessoa {
-  compras?: Set<Venda>;
+export interface Customer extends Person {
+  purchases?: Set<Sale>;
 }
 
-export interface Funcionario extends Pessoa {
-  vendas?: Set<Venda>;
-  salario?: number;
+export interface Collaborator extends Person {
+  sales?: Set<Sale>;
+  wage?: number;
 }
 
-export interface Fornecedor extends Pessoa { }
+export interface Supplier extends Person { }

@@ -1,31 +1,32 @@
-import {Cliente, Funcionario} from "./person.model";
-import {TipoQuantidade} from "../../product/shared/enumTipoQuantidade";
+import {Customer, Collaborator} from "./person.model";
+import {QuantityType} from "../../product/shared/quantity.type.enum";
 
-export interface Venda {
+export interface Sale {
   id?: number;
-  momentoLancamento?: any;
-  pagamentoTipo?: TipoPagamento;
-  cliente?: Cliente;
-  funcionario?: Funcionario;
-  produtosQuantidades?: ItemCompra;
-  valorTotal?: number;
+  moment?: any;
+  paymentType?: PaymentType;
+  customer?: Customer;
+  collaborator?: Collaborator;
+  saleItems?: SaleItem;
+  totalValue?: number;
 }
 
-export enum TipoPagamento {
-  DINHEIRO = 'Dinheiro',
-  CARTAO_CREDITO = 'Cartão de Crédito',
-  CARTAO_DEBITO = 'Cartão de Débito',
+export enum PaymentType {
+  CASH = 'Dinheiro',
+  DEBIT_CARD = 'Cartão de Débito',
+  CREDIT_CARD = 'Cartão de Crédito',
 }
 
-interface Produto {
+export interface Product {
   id?: number;
-  nome?: string;
-  tipoQuantidade?: TipoQuantidade;
-  quantidadeEstoque?: number;
+  name?: string;
+  price?: number;
+  quantityType?: QuantityType;
+  availableQuantity?: number;
 }
 
-interface ItemCompra {
+export interface SaleItem {
   id?: number;
-  quantidade?: number;
-  produto?: Produto;
+  quantity?: number;
+  product?: Product;
 }

@@ -34,18 +34,18 @@ class ItemCompraServiceTest {
         List<SaleItem> esperado = List.of(itemVenda, itemVenda2);
         when(itemVendaRepository.saveAll(any(List.class))).thenReturn(esperado);
 
-        SaleItemDTO itemVendaDTO = SaleItemDTO.builder().quantidade(1.0).produto(Builder.produtoUnidadeDTO1()).build();
-        SaleItemDTO itemVendaDTO2 = SaleItemDTO.builder().quantidade(3.0).produto(Builder.produtoPesoDTO1()).build();
+        SaleItemDTO itemVendaDTO = SaleItemDTO.builder().quantity(1.0).product(Builder.produtoUnidadeDTO1()).build();
+        SaleItemDTO itemVendaDTO2 = SaleItemDTO.builder().quantity(3.0).product(Builder.produtoPesoDTO1()).build();
         List<SaleItemDTO> entrada = List.of(itemVendaDTO, itemVendaDTO2);
         List<SaleItemDTO> resposta = underTest.saveAll(entrada);
 
         assertNotNull(resposta);
         assertEquals(itemVenda.getId(), resposta.get(0).getId());
         assertEquals(itemVenda2.getId(), resposta.get(1).getId());
-        assertEquals(itemVenda.getQuantidade(), resposta.get(0).getQuantidade());
-        assertEquals(itemVenda2.getQuantidade(), resposta.get(1).getQuantidade());
-        assertEquals(itemVenda.getProduto().getId(), resposta.get(0).getProduto().getId());
-        assertEquals(itemVenda2.getProduto().getId(), resposta.get(1).getProduto().getId());
+        assertEquals(itemVenda.getQuantity(), resposta.get(0).getQuantity());
+        assertEquals(itemVenda2.getQuantity(), resposta.get(1).getQuantity());
+        assertEquals(itemVenda.getProduct().getId(), resposta.get(0).getProduct().getId());
+        assertEquals(itemVenda2.getProduct().getId(), resposta.get(1).getProduct().getId());
     }
 
 }

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'https://gestor-peixaria.herokuapp.com',
-  // apiUrl: 'http://127.0.0.1:8080/api',
+  // apiUrl: 'http://127.0.0.1:8080/',
+  appearance: 'outline'
 };
 
 /*

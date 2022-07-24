@@ -29,5 +29,5 @@ import { SearchProductView } from './search-product/search-product.view';
     MatButtonModule
   ]
 })
-export class ProdutoModule {
+export class ProductModule {
 }

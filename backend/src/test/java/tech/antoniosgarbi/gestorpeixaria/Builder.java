@@ -81,32 +81,32 @@ public interface Builder {
     static SaleItem itemVenda1() {
         SaleItem itemVenda = new SaleItem();
         itemVenda.setId(1L);
-        itemVenda.setQuantidade(1.0);
-        itemVenda.setProduto(produtoUnidade1());
+        itemVenda.setQuantity(1.0);
+        itemVenda.setProduct(produtoUnidade1());
         return itemVenda;
     }
 
     static SaleItemDTO itemVendaDTO1() {
         SaleItemDTO dto = new SaleItemDTO();
         dto.setId(1L);
-        dto.setQuantidade(1.0);
-        dto.setProduto(produtoUnidadeDTO1());
+        dto.setQuantity(1.0);
+        dto.setProduct(produtoUnidadeDTO1());
         return dto;
     }
 
     static SaleItem itemVenda2() {
         SaleItem itemVenda = new SaleItem();
         itemVenda.setId(2L);
-        itemVenda.setQuantidade(250.0);
-        itemVenda.setProduto(produtoPeso1());
+        itemVenda.setQuantity(250.0);
+        itemVenda.setProduct(produtoPeso1());
         return itemVenda;
     }
 
     static SaleItemDTO itemVendaDTO2() {
         SaleItemDTO dto = new SaleItemDTO();
         dto.setId(2L);
-        dto.setQuantidade(250.0);
-        dto.setProduto(produtoPesoDTO1());
+        dto.setQuantity(250.0);
+        dto.setProduct(produtoPesoDTO1());
         return dto;
     }
 

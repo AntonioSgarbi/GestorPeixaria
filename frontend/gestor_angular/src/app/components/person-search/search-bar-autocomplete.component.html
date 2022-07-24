@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="{{appearance}}" class="w-100">
+    <mat-label>{{ model }}</mat-label>
+    <input (ngModelChange)="textChange($event)"
+           [matAutocomplete]="auto"
+           [value]="valueInput()"
+           formControlName="name"
+           matInput>
+  </mat-form-field>
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+  >
+    <mat-option
+      (onSelectionChange)="optionSelect(item)"
+      *ngFor="let item of loadList; let i = index"
+    >
+      <span>{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</form>

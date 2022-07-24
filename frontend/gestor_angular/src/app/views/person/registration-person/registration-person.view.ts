@@ -65,46 +65,18 @@ export class RegistrationPersonView implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
-      let tipo: number = this.form.get('registrationType')?.value;
-      console.error(tipo);
+      let type: RegistrationType = this.form.get('registrationType')?.value;
+      console.error(type);
+      console.info(this.form);
 
-      switch (tipo) {
-        case 0:
-          this.cadastroService.cadastrarCliente(this.form.getRawValue())
-            .subscribe({
-              next: (n) => {
-                this.successSubmit();
-              },
-              error: (e) => {
-                this.failSubmit();
-              }
-            });
-          break;
-        case 1:
-          this.cadastroService.cadastrarFuncionario(this.form.getRawValue())
-            .subscribe({
-              next: (n) => {
-                alert('sucesso')
-              },
-              error: (e) => {
-                this.failSubmit();
-              }
-            });
-          break;
-        case 2:
-          this.cadastroService.cadastrarFornecedor(this.form.getRawValue())
-            .subscribe({
-              next: (n) => {
-                this.successSubmit();
-              },
-              error: (e) => {
-                this.failSubmit();
-              },
-            });
-          break;
-        default:
-          this.appService.showMessage('erro cadastrar', 'fechar');
-      }
+      this.cadastroService.registerPerson(this.form.value, type).subscribe({
+        next: (id: number) => {
+          this.successSubmit();
+        },
+        error: (err: any) => {
+          this.failSubmit();
+        }
+      });
     } else {
       this.appService.showMessage('Preencha todos os campos obrigatórios!', 'fechar')
     }

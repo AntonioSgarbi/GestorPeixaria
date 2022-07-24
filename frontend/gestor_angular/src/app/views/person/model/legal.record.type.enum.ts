@@ -1,4 +1,4 @@
 export enum LegalRecordType {
-  PESSOA_FISICA = 'Pessoa Física',
-  PESSOA_JURIDICA = 'Pessoa Jurídica',
+  INDIVIDUAL = 'Pessoa Física',
+  LEGAL_ENTITY = 'Pessoa Jurídica',
 }
