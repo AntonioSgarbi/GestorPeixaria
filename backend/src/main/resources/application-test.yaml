@@ -10,3 +10,19 @@ spring:
       path: /h2-console
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+  sendgrid:
+    api-key: api-key
+
+personal:
+  mail:
+    fromMail: antonio.sgarbi@hotmail.com
+    fromName: Fish Stock
+
+mailgun:
+  api:
+    username: api
+    password: password
+    base:
+      url: url
+    messages:
+      url: url
