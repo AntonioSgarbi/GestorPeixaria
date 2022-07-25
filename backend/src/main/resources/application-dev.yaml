@@ -11,7 +11,7 @@ spring:
     resources:
       add-mappings: false
   sendgrid:
-    api-key: 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
+    api-key: api-key
 logging:
   level:
     org.hibernate.SQL: DEBUG
@@ -24,8 +24,8 @@ personal:
 mailgun:
   api:
     username: api
-    password: d1674f346083ed435ac44e64a1944d3c-1b8ced53-7999ca56
+    password: pass
     base:
-      url: https://api.mailgun.net/v3/sandboxb0912365106e427e9fd0d5eacaf11823.mailgun.org
+      url: url
     messages:
-      url: https://api.mailgun.net/v3/sandboxb0912365106e427e9fd0d5eacaf11823.mailgun.org/messages
+      url: url
