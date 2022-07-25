@@ -34,10 +34,10 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar um Long ao receber um ProdutoDTO com documento não cadastrado")
     void cadastrar0() {
-        Product produtoEsperado = Builder.produtoUnidade1();
+        Product produtoEsperado = Builder.productUnity1();
         when(produtoRepository.save(any(Product.class))).thenReturn(produtoEsperado);
 
-        long idResposta = underTest.register(Builder.produtoUnidadeDTO1());
+        long idResposta = underTest.register(Builder.productUnityDTO1());
 
         assertEquals(produtoEsperado.getId(), idResposta);
     }
@@ -48,7 +48,7 @@ class ProdutoServiceTest {
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(ProductException.class, () -> underTest.update(Builder.produtoUnidadeDTO1()));
+                assertThrows(ProductException.class, () -> underTest.update(Builder.productUnityDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -57,14 +57,14 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
     void atualizarCadastro1() {
-        Product esperado = Builder.produtoUnidade1();
+        Product esperado = Builder.productUnity1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
         esperado.setName(nomeNovo);
         when(produtoRepository.save(any(Product.class))).thenReturn(esperado);
 
-        ProductDTO argument = Builder.produtoUnidadeDTO1();
+        ProductDTO argument = Builder.productUnityDTO1();
         argument.setName(nomeNovo);
         ProductDTO resposta = underTest.update(argument);
 
@@ -74,7 +74,7 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar um ProdutoDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        ProductDTO produtoDTO = Builder.produtoUnidadeDTO1();
+        ProductDTO produtoDTO = Builder.productUnityDTO1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(new Product(produtoDTO)));
         ProductDTO resposta = underTest.findById(1L);
 
@@ -95,7 +95,7 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<ProdutoDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Product> produtoList = List.of(Builder.produtoUnidade1(), Builder.produtoUnidade1(), Builder.produtoUnidade1());
+        List<Product> produtoList = List.of(Builder.productUnity1(), Builder.productUnity1(), Builder.productUnity1());
         Page<Product> produtoPage = new PageImpl<>(produtoList);
         when(produtoRepository.findAll(any(Pageable.class))).thenReturn(produtoPage);
 
@@ -120,7 +120,7 @@ class ProdutoServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        Product esperado = Builder.produtoUnidade1();
+        Product esperado = Builder.productUnity1();
         when(produtoRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         Assertions.assertThatCode(() -> underTest.delete(1L))

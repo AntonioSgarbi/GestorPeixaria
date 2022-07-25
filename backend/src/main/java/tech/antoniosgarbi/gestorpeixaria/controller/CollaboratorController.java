@@ -2,6 +2,7 @@ package tech.antoniosgarbi.gestorpeixaria.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CollaboratorDTO;
@@ -46,7 +47,7 @@ public class CollaboratorController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         collaboratorService.delete(id);
-        return ResponseEntity.accepted().body(null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -33,11 +33,11 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve retornar um Long ao receber um FornecedorDTO com documento não cadastrado")
     void cadastrar0() {
-        Collaborator funcionarioEsperado = Builder.funcionario1();
+        Collaborator funcionarioEsperado = Builder.collaborator1();
         when(funcionarioRepository.findByDocument(anyString())).thenReturn(Optional.empty());
         when(funcionarioRepository.save(any(Collaborator.class))).thenReturn(funcionarioEsperado);
 
-        long idResposta = underTest.register(Builder.funcionarioDTO1());
+        long idResposta = underTest.register(Builder.collaboratorDTO1());
 
         assertEquals(funcionarioEsperado.getId(), idResposta);
     }
@@ -45,9 +45,9 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve lançar PessoaException ao receber um FornecedorDTO com documento já cadastrado no sistema")
     void cadastrar1() {
-        CollaboratorDTO dto = Builder.funcionarioDTO1();
+        CollaboratorDTO dto = Builder.collaboratorDTO1();
 
-        when(funcionarioRepository.findByDocument(anyString())).thenReturn(Optional.of(Builder.funcionario1()));
+        when(funcionarioRepository.findByDocument(anyString())).thenReturn(Optional.of(Builder.collaborator1()));
 
         var exception =
                 assertThrows(PersonException.class, () -> underTest.register(dto));
@@ -62,7 +62,7 @@ class FuncionarioServiceTest {
         when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(PersonException.class, () -> underTest.update(Builder.funcionarioDTO1()));
+                assertThrows(PersonException.class, () -> underTest.update(Builder.collaboratorDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -71,14 +71,14 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve retornar FornecedorDTO ao receber um FornecedorDTO válido")
     void atualizarCadastro1() {
-        Collaborator esperado = Builder.funcionario1();
+        Collaborator esperado = Builder.collaborator1();
         when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
         esperado.setName(nomeNovo);
         when(funcionarioRepository.save(any(Collaborator.class))).thenReturn(esperado);
 
-        CollaboratorDTO argument = Builder.funcionarioDTO1();
+        CollaboratorDTO argument = Builder.collaboratorDTO1();
         argument.setName(nomeNovo);
         CollaboratorDTO resposta = underTest.update(argument);
 
@@ -88,7 +88,7 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve retornar um FuncionarioDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        CollaboratorDTO funcionarioDTO = Builder.funcionarioDTO1();
+        CollaboratorDTO funcionarioDTO = Builder.collaboratorDTO1();
         when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(new Collaborator(funcionarioDTO)));
         CollaboratorDTO resposta = underTest.findById(1L);
 
@@ -109,7 +109,7 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<FornecedorDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Collaborator> fornecedorList = List.of(Builder.funcionario1(), Builder.funcionario1(), Builder.funcionario1());
+        List<Collaborator> fornecedorList = List.of(Builder.collaborator1(), Builder.collaborator1(), Builder.collaborator1());
         Page<Collaborator> fornecedorPage = new PageImpl<>(fornecedorList);
         when(funcionarioRepository.findAll(any(Pageable.class))).thenReturn(fornecedorPage);
 
@@ -134,7 +134,7 @@ class FuncionarioServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        Collaborator funcionarioEsperado = Builder.funcionario1();
+        Collaborator funcionarioEsperado = Builder.collaborator1();
         when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(funcionarioEsperado));
 
         Assertions.assertThatCode(() -> underTest.delete(1L))

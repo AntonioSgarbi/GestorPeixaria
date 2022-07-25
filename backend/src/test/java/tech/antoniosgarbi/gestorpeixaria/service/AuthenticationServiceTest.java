@@ -143,7 +143,7 @@ class AuthenticationServiceTest {
     void criarUsuariodeFuncionario0() {
         String documento = "username";
         String email = "email";
-        List<String> roles = List.of("FUNCIONARIO");
+        List<String> roles = List.of("COLLABORATOR");
         Collaborator funcionario = new Collaborator();
         funcionario.setDocument(documento);
         funcionario.setEmail(email);

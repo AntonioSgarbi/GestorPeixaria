@@ -33,11 +33,11 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar um Long ao receber um ClienteDTO com documento não cadastrado")
     void cadastrar0() {
-        Customer clienteEsperado = Builder.cliente1();
+        Customer clienteEsperado = Builder.customer1();
         when(clienteRepository.findCustomerByDocument(anyString())).thenReturn(Optional.empty());
         when(clienteRepository.save(any(Customer.class))).thenReturn(clienteEsperado);
 
-        long idResposta = underTest.register(Builder.clienteDTO1());
+        long idResposta = underTest.register(Builder.customerDTO1());
 
         assertEquals(clienteEsperado.getId(), idResposta);
     }
@@ -45,9 +45,9 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve lançar uma ClienteException ao receber um ClienteDTO com documento já cadastrado no sistema")
     void cadastrar1() {
-        CustomerDTO dto = Builder.clienteDTO1();
+        CustomerDTO dto = Builder.customerDTO1();
 
-        when(clienteRepository.findCustomerByDocument(anyString())).thenReturn(Optional.of(Builder.cliente1()));
+        when(clienteRepository.findCustomerByDocument(anyString())).thenReturn(Optional.of(Builder.customer1()));
 
         var exception =
                 assertThrows(PersonException.class, () -> underTest.register(dto));
@@ -62,7 +62,7 @@ class ClienteServiceTest {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         var exception =
-                assertThrows(PersonException.class, () -> underTest.update(Builder.clienteDTO1()));
+                assertThrows(PersonException.class, () -> underTest.update(Builder.customerDTO1()));
 
         String mensagemEsperada = "Cadastro não encontrado";
         assertEquals(mensagemEsperada, exception.getMessage());
@@ -71,14 +71,14 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar ClienteDTO ao receber um ClienteDTO válido")
     void atualizarCadastro1() {
-        Customer esperado = Builder.cliente1();
+        Customer esperado = Builder.customer1();
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(esperado));
 
         String nomeNovo = "Novo nome";
         esperado.setName(nomeNovo);
         when(clienteRepository.save(any(Customer.class))).thenReturn(esperado);
 
-        CustomerDTO argument = Builder.clienteDTO1();
+        CustomerDTO argument = Builder.customerDTO1();
         argument.setName(nomeNovo);
         CustomerDTO resposta = underTest.update(argument);
 
@@ -88,7 +88,7 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar um ClienteDTO ao receber um id cadastrado")
     void encontrarCadastro0() {
-        CustomerDTO clienteEsperado = Builder.clienteDTO1();
+        CustomerDTO clienteEsperado = Builder.customerDTO1();
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(clienteEsperado)));
         CustomerDTO resposta = underTest.findById(1L);
 
@@ -109,7 +109,7 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve retornar uma Page<ClienteDTO> ao receber Pageable")
     void encontrarTodos0() {
-        List<Customer> listaCliente = List.of(Builder.cliente1(), Builder.cliente1(), Builder.cliente1());
+        List<Customer> listaCliente = List.of(Builder.customer1(), Builder.customer1(), Builder.customer1());
         Page<Customer> pageCliente = new PageImpl<>(listaCliente);
         when(clienteRepository.findAll(any(Pageable.class))).thenReturn(pageCliente);
 
@@ -134,7 +134,7 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve não lançar uma exceção ao receber id existente e mudar objeto para excluído")
     void apagarCadastro1() {
-        CustomerDTO clienteEsperado = Builder.clienteDTO1();
+        CustomerDTO clienteEsperado = Builder.customerDTO1();
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(clienteEsperado)));
 
         Assertions.assertThatCode(() -> underTest.delete(1L))

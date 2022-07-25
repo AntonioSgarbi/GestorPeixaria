@@ -16,9 +16,9 @@ public class SaleItemDTO {
     private Double quantity;
     private ProductDTO product;
 
-    public SaleItemDTO(SaleItem modelo) {
-        this.id = modelo.getId();
-        this.quantity = modelo.getQuantity();
-        this.product = new ProductDTO(modelo.getProduct());
+    public SaleItemDTO(SaleItem model) {
+        this.id = model.getId();
+        this.quantity = model.getQuantity();
+        this.product = new ProductDTO(model.getProduct());
     }
 }
