@@ -29,8 +29,8 @@ class ItemCompraServiceTest {
     @Test
     @DisplayName("Deve retornar List<ItemVenda> ao receber List<ItemVendaDTO>")
     void saveAll0() {
-        SaleItem itemVenda = SaleItem.builder().id(1L).quantidade(1.0).produto(Builder.produtoUnidade1()).build();
-        SaleItem itemVenda2 = SaleItem.builder().id(2L).quantidade(3.0).produto(Builder.produtoPeso1()).build();
+        SaleItem itemVenda = SaleItem.builder().id(1L).quantity(1.0).product(Builder.produtoUnidade1()).build();
+        SaleItem itemVenda2 = SaleItem.builder().id(2L).quantity(3.0).product(Builder.produtoPeso1()).build();
         List<SaleItem> esperado = List.of(itemVenda, itemVenda2);
         when(itemVendaRepository.saveAll(any(List.class))).thenReturn(esperado);
 
