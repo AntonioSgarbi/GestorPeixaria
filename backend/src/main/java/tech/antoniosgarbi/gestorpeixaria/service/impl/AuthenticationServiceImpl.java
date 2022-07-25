@@ -123,7 +123,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         "Suas credenciais de acesso são:  \n\n" +
                                 "Login: " + email + "\nSenha: " + generated);
             } catch (Exception mailException) {
-                //do nothing on email fail, return password to frontend
+                System.out.println("\nmail exception; " + mailException.getMessage());
             }
         }
         return generated;
