@@ -9,7 +9,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginRequest;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
