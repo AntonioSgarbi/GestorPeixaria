@@ -1,5 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
+import lombok.Getter;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.*;
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Service
+@Getter
 @Profile("heroku")
 public class RestClientServiceImpl implements RestClientService {
 

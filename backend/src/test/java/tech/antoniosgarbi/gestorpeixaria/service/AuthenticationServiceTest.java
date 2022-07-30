@@ -65,7 +65,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar um LoginResponse ao receber um LoginRequest válido")
+    @DisplayName("Should return a LoginResponse when receiving a valid LoginRequest")
     void authenticateUser0() {
         String username = "username";
         String password = "password";
@@ -96,7 +96,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve lançar BadCredentialsException ao receber um LoginRequest inválido")
+    @DisplayName("Throws BadCredentialsException when receiving an invalid LoginRequest")
     void authenticateUser1() {
         when(authenticationManager.authenticate(any(Authentication.class)))
                 .thenThrow(new BadCredentialsException("BadCredentialsException"));
@@ -109,7 +109,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar um RefreshResponse ao receber um RefreshToken válido")
+    @DisplayName("Should return a RefreshResponse when receiving a valid RefreshToken")
     void refreshTheToken0() {
         String username = "username";
         String refreshToken = "refreshToken";
@@ -128,7 +128,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve lançar TokenRefreshException ao receber um RefreshToken inválido")
+    @DisplayName("Throws TokenRefreshException when receiving an invalid RefreshToken")
     void refreshTheToken1() {
         when(tokenService.validateJwtToken(anyString())).thenReturn(false);
 
@@ -139,7 +139,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar um User ao receber um Funcionario válido")
+    @DisplayName("Should return a User when receiving a valid Employee")
     void criarUsuariodeFuncionario0() {
         String documento = "username";
         String email = "email";
@@ -156,7 +156,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve atualizar usuario com a nova senha encriptada ao receber um endereço de email cadastrado")
+    @DisplayName("Should update the user with the new encrypted password when receiving a registered email address")
     void resetPassword0() {
         int senhaGerada = 222222;
         util.when(() -> Util.getRandomNumberInRange(100000, 999999)).thenReturn(senhaGerada);
@@ -177,7 +177,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve encaminhar senha para o email e retornar a senha ao receber um endereço de email cadastrado")
+    @DisplayName("Should forward password to email and return the password when receiving a registered email address")
     void resetPassword1() {
         int senhaGerada = 222222;
         util.when(() -> Util.getRandomNumberInRange(100000, 999999)).thenReturn(senhaGerada);
@@ -197,7 +197,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve encaminhar senha para o email e retornar a senha ao receber um endereço de email não cadastrado")
+    @DisplayName("Should forward password to email and return the password when receiving a unregistered email address")
     void resetPassword2() {
         int senhaGerada = 222222;
         util.when(() -> Util.getRandomNumberInRange(100000, 999999)).thenReturn(senhaGerada);
@@ -214,7 +214,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar a senha mesmo sem conseguir enviar o email")
+    @DisplayName("Should return the password even without being able to send the email")
     void resetPassword3() {
         int senhaGerada = 222222;
         util.when(() -> Util.getRandomNumberInRange(100000, 999999)).thenReturn(senhaGerada);

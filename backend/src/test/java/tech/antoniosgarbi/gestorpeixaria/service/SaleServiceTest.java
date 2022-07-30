@@ -5,22 +5,22 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import tech.antoniosgarbi.gestorpeixaria.repository.VendaRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.VendaServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.repository.SaleRepository;
+import tech.antoniosgarbi.gestorpeixaria.service.impl.SaleServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class VendaServiceTest {
+class SaleServiceTest {
     @Mock
-    private VendaRepository vendaRepository;
+    private SaleRepository saleRepository;
 
     @InjectMocks
-    private VendaServiceImpl underTest;
+    private SaleServiceImpl underTest;
 
     @Test
     @DisplayName("Deve lançar uma venda ao receber um VendaDTO sem Cliente")
-    void registrarVenda0() {
+    void register0() {
         assertTrue(true);
     }
 }

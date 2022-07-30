@@ -4,17 +4,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SaleDTO;
-import tech.antoniosgarbi.gestorpeixaria.repository.VendaRepository;
+import tech.antoniosgarbi.gestorpeixaria.repository.SaleRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.SaleItemService;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.SaleService;
 
 @Service
-public class VendaServiceImpl implements SaleService {
-    private final VendaRepository vendaRepository;
-    private SaleItemService itemCompraService;
+public class SaleServiceImpl implements SaleService {
+    private final SaleRepository saleRepository;
+    private SaleItemService saleItemService;
 
-    public VendaServiceImpl(VendaRepository vendaRepository) {
-        this.vendaRepository = vendaRepository;
+    public SaleServiceImpl(SaleRepository vendaRepository) {
+        this.saleRepository = vendaRepository;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class VendaServiceImpl implements SaleService {
 
     @Override
     public Page<SaleDTO> findAll(Pageable pageable) {
-        return vendaRepository.findAll(pageable).map(SaleDTO::new);
+        return saleRepository.findAll(pageable).map(SaleDTO::new);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class VendaServiceImpl implements SaleService {
 
     @Override
     public void delete(Long id) {
-        vendaRepository.deleteById(id);
+        saleRepository.deleteById(id);
     }
 }

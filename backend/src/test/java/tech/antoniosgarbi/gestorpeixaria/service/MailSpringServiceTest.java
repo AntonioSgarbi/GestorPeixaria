@@ -19,7 +19,7 @@ public class MailSpringServiceTest {
     private MailSpringServiceImpl underTest;
 
     @Test
-    @DisplayName("Deve enviar email ao receber destinatário, assunto e corpo")
+    @DisplayName("Should send email when receiving recipient, subject and message")
     void sendText0() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("to");

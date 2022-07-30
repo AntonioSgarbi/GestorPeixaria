@@ -121,7 +121,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    @DisplayName("Thws PersonException when deleting id that doesn't exist")
+    @DisplayName("Throws PersonException when deleting id that doesn't exist")
     void delete0() {
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -132,7 +132,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    @DisplayName("Should update CustomerDTO with excluded true when receives id that exists")
+    @DisplayName("Should update Customer with excluded true when receives id that exists")
     void delete1() {
         CustomerDTO expected = Builder.customerDTO1();
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(expected)));

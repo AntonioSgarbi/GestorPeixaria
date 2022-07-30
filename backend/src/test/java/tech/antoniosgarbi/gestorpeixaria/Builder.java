@@ -7,9 +7,9 @@ import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 public interface Builder {
 
     static Customer customer1() {
-        Customer cliente = new Customer();
-        cliente.setId(1L);
-        return cliente;
+        Customer customer = new Customer();
+        customer.setId(1L);
+        return customer;
     }
 
     static CustomerDTO customerDTO1() {
@@ -20,10 +20,10 @@ public interface Builder {
     }
 
     static Supplier supllier1() {
-        Supplier fornecedor = new Supplier();
-        fornecedor.setId(1L);
-        fornecedor.setDocument("documento");
-        return fornecedor;
+        Supplier supplier = new Supplier();
+        supplier.setId(1L);
+        supplier.setDocument("documento");
+        return supplier;
     }
 
     static SupplierDTO supllierDTO1() {
@@ -34,10 +34,10 @@ public interface Builder {
     }
 
     static Collaborator collaborator1() {
-        Collaborator funcionario = new Collaborator();
-        funcionario.setId(1L);
-        funcionario.setDocument("documento");
-        return funcionario;
+        Collaborator collaborator = new Collaborator();
+        collaborator.setId(1L);
+        collaborator.setDocument("documento");
+        return collaborator;
     }
 
     static CollaboratorDTO collaboratorDTO1() {
@@ -48,11 +48,11 @@ public interface Builder {
     }
 
     static Product productUnity1() {
-        Product produto = new Product();
-        produto.setId(1L);
-        produto.setName("prod unidade");
-        produto.setQuantityType(QuantityType.UNITY);
-        return produto;
+        Product product = new Product();
+        product.setId(1L);
+        product.setName("prod unidade");
+        product.setQuantityType(QuantityType.UNITY);
+        return product;
     }
 
     static ProductDTO productUnityDTO1() {
@@ -64,11 +64,11 @@ public interface Builder {
     }
 
     static Product productWeight1() {
-        Product produto = new Product();
-        produto.setId(2L);
-        produto.setName("prod peso");
-        produto.setQuantityType(QuantityType.WEIGHT);
-        return produto;
+        Product product = new Product();
+        product.setId(2L);
+        product.setName("prod peso");
+        product.setQuantityType(QuantityType.WEIGHT);
+        return product;
     }
 
     static ProductDTO productWeightDTO1() {
@@ -79,11 +79,11 @@ public interface Builder {
     }
 
     static SaleItem saleItem1() {
-        SaleItem itemVenda = new SaleItem();
-        itemVenda.setId(1L);
-        itemVenda.setQuantity(1.0);
-        itemVenda.setProduct(productUnity1());
-        return itemVenda;
+        SaleItem saleItem = new SaleItem();
+        saleItem.setId(1L);
+        saleItem.setQuantity(1.0);
+        saleItem.setProduct(productUnity1());
+        return saleItem;
     }
 
     static SaleItemDTO saleItemDTO1() {
@@ -95,11 +95,11 @@ public interface Builder {
     }
 
     static SaleItem saleItem2() {
-        SaleItem itemVenda = new SaleItem();
-        itemVenda.setId(2L);
-        itemVenda.setQuantity(250.0);
-        itemVenda.setProduct(productWeight1());
-        return itemVenda;
+        SaleItem saleItem = new SaleItem();
+        saleItem.setId(2L);
+        saleItem.setQuantity(250.0);
+        saleItem.setProduct(productWeight1());
+        return saleItem;
     }
 
     static SaleItemDTO saleItemDTO2() {

@@ -28,7 +28,7 @@ public class MailGunServiceImpl implements MailServiceStrategy {
 
     @Override
     public void sendText(String to, String subject, String body) {
-        MultiValueMap<String, String> map = getPostRequestObject(from, to, subject);
+        MultiValueMap<String, String> map = this.getPostRequestObject(from, to, subject);
         map.add("text", body);
         sendEmail(map);
 
@@ -36,7 +36,7 @@ public class MailGunServiceImpl implements MailServiceStrategy {
 
     @Override
     public void sendHTML(String to, String subject, String body) {
-        MultiValueMap<String, String> map = getPostRequestObject(from, to, subject);
+        MultiValueMap<String, String> map = this.getPostRequestObject(from, to, subject);
         map.add("html", body);
         sendEmail(map);
     }
