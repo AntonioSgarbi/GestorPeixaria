@@ -72,9 +72,8 @@ export class LoginView implements OnInit {
       let email: string = this.formReset.get('email')!.value;
       this.authService.forgot(email)
         .subscribe({
-          next: () => {
-            this.appService.showMessage('Informações de acesso enviadas!', 'fechar')
-            this.isReset = false;
+          next: (res) => {
+            this.appService.showMessage(`Informações de acesso enviadas!\nlogin: ${email}\nsenha: ${res}`, 'fechar')
           },
           error: (err) => {
             this.appService.showMessage('Falha ao gerar credenciais', 'fechar')

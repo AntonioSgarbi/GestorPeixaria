@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {environment} from "../../../environments/environment";
 import {ModelSelectedEnum} from "./model.selected.enum";
@@ -22,10 +22,19 @@ export class SearchBarAutocompleteComponent implements OnInit {
     return this.formGroup;
   }
 
-  @Input('model') model!: string;
+  @Input('model') model!: any;
+  @Output('onSelect') onSelect = new EventEmitter<any>();
+  @Output('enterKeyPressed') enterKeyPressed = new EventEmitter<any>();
+  @Output('arrowUpKeyPressed') arrowUpKeyPressed = new EventEmitter<any>();
+  @Output('arrowDownKeyPressed') arrowDownKeyPressed = new EventEmitter<any>();
+  @Output('arrowRightPressed') arrowRightPressed = new EventEmitter<any>();
+  @Output('arrowLeftPressed') arrowLeftPressed = new EventEmitter<any>();
   private readonly formGroup: FormGroup;
   appearance: string = environment.appearance;
   private objectList?: Array<any>;
+  private valueSelected: any;
+
+
 
   constructor(private fb: FormBuilder, private searchService: SearchAutocompleteService) {
     this.formGroup = this.fb.group({
@@ -38,15 +47,17 @@ export class SearchBarAutocompleteComponent implements OnInit {
   }
 
   textChange(text: string) {
-    if(text.length > 1) {
+    //extract key from enum -- value from left
+    let model = Object.keys(ModelSelectedEnum)[Object.values(ModelSelectedEnum).indexOf(this.model)];
+    if(text?.length > 1) {
       if(isNaN(Number(text))) {
-        this.searchService.searchText(this.model, text).subscribe({
+        this.searchService.searchText(model, text).subscribe({
           next: (data) => {
             this.loadList = data.content;
           }
         });
       } else {
-        this.searchService.searchNumber(this.model, text).subscribe({
+        this.searchService.searchNumber(model, text).subscribe({
           next: (data) => {
             this.loadList = data.content;
           }
@@ -60,10 +71,37 @@ export class SearchBarAutocompleteComponent implements OnInit {
   }
 
   optionSelect(element: any) {
-    console.log(element);
+    this.onSelect.emit(element);
+    this.valueSelected = element;
+    console.log('optionSelect: ' + element);
   }
 
-  valueInput() {
-    return undefined;
+  valueFromInput(): string {
+    return this.valueSelected?.name ?? '';
+  }
+
+  keyEnterPressed(event: any) {
+    this.enterKeyPressed.emit();
+    console.info(event);
+  }
+
+  keyArrowUpPressed($event: any) {
+    this.arrowDownKeyPressed.emit();
+    console.info($event);
+  }
+
+  keyArrowRightPressed($event: any) {
+    this.arrowRightPressed.emit();
+    console.info($event);
+  }
+
+  keyArrowDownPressed($event: any) {
+    this.arrowDownKeyPressed.emit();
+    console.info($event);
+  }
+
+  keyArrowLeftPressed($event: any) {
+    this.arrowLeftPressed.emit();
+    console.info($event);
   }
 }

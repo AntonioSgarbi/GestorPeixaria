@@ -65,8 +65,8 @@ export class AuthenticationService {
       environment.apiUrl + '/auth/login', {'username': username, 'password': password});
   }
 
-  forgot(email: string): Observable<void> {
-    return this.http.post<void>(environment.apiUrl + '/auth/forgot', email);
+  forgot(email: string): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + '/auth/forgot', email);
   }
 
 }

@@ -7,20 +7,22 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
   declarations: [
     HomeComponent
   ],
-  imports: [
-    CommonModule,
-    SearchBarAutocompleteModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatButtonModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        SearchBarAutocompleteModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule
+    ]
 })
 export class HomeModule { }

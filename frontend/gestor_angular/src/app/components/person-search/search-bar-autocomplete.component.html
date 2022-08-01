@@ -1,9 +1,14 @@
 <form [formGroup]="form">
-  <mat-form-field appearance="{{appearance}}" class="w-100">
+  <mat-form-field appearance="{{ appearance }}" class="w-100">
     <mat-label>{{ model }}</mat-label>
     <input (ngModelChange)="textChange($event)"
+           (keydown.enter)="keyEnterPressed($event)"
+           (keydown.arrowUp)="keyArrowUpPressed($event)"
+           (keydown.arrowRight)="keyArrowRightPressed($event)"
+           (keydown.arrowDown)="keyArrowDownPressed($event)"
+           (keydown.arrowLeft)="keyArrowLeftPressed($event)"
            [matAutocomplete]="auto"
-           [value]="valueInput()"
+           [value]="valueFromInput()"
            formControlName="name"
            matInput>
   </mat-form-field>
