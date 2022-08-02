@@ -13,6 +13,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RegistrationPersonView} from "./registration-person/registration-person.view";
 import {NgxMaskModule} from "ngx-mask";
 import {PessoaPesquisaComponent} from './search-person/search-person.view';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -20,23 +23,26 @@ import {PessoaPesquisaComponent} from './search-person/search-person.view';
     PessoaPesquisaComponent
 
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDatepickerModule,
-    NgxMaskModule.forRoot({
-      dropSpecialCharacters: false
-    }),
-    MatNativeDateModule,
-    MatCardModule,
-    MatSelectModule,
-  ]
+    imports: [
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDatepickerModule,
+        NgxMaskModule.forRoot({
+            dropSpecialCharacters: false
+        }),
+        MatNativeDateModule,
+        MatCardModule,
+        MatSelectModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSidenavModule,
+    ]
 
 })
 export class PersonModule { }
