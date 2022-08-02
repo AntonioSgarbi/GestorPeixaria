@@ -24,14 +24,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LoaderInterceptor} from "./interceptor/loader.interceptor";
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginView,
     LoaderComponent,
-    SidenavComponent,
   ],
   imports: [
     BrowserModule,
