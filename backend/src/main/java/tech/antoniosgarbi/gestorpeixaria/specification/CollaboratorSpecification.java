@@ -13,34 +13,34 @@ import java.util.List;
 
 public class CollaboratorSpecification implements Specification<Collaborator> {
 
-    private final CollaboratorSpecBody specBodyFuncionario;
+    private final CollaboratorSpecBody specBody;
 
     public CollaboratorSpecification(CollaboratorSpecBody specBody) {
-        this.specBodyFuncionario = specBody;
+        this.specBody = specBody;
     }
     @Override
     public Predicate toPredicate(Root<Collaborator> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
-        if (specBodyFuncionario.getNome() != null) {
+        if (specBody.getName() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("nome")),
-                            String.format("%%%s%%", specBodyFuncionario.getNome().toUpperCase())
+                            builder.upper(root.get("name")),
+                            String.format("%%%s%%", specBody.getName().toUpperCase())
                     ));
         }
-        if (specBodyFuncionario.getDocumento() != null) {
+        if (specBody.getDocument() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("documento")),
-                            String.format("%%%s%%", specBodyFuncionario.getDocumento().toUpperCase())
+                            builder.upper(root.get("document")),
+                            String.format("%%%s%%", specBody.getDocument().toUpperCase())
                     ));
         }
-        if (specBodyFuncionario.getPessoaTipo() != null) {
+        if (specBody.getLegalRecordType() != null) {
             predicates.add(
                     builder.equal(
-                            root.get("pessoaTipo"),
-                            specBodyFuncionario.getPessoaTipo()
+                            root.get("legalRecordType"),
+                            specBody.getLegalRecordType()
                     )
             );
         }

@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.ProductException;
+import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.ProductService;
+import tech.antoniosgarbi.gestorpeixaria.specification.ProductSpecification;
 
 import java.util.List;
 import java.util.Objects;
@@ -113,12 +116,18 @@ class ProductControllerTest {
 
     @Test
     @DisplayName("Should return 200 Page<ProductDTO> when findAll receives ProductSpecBody")
-    void testFindAll3() {
-    }
+    void FindAll2() {
+        List<ProductDTO> productList = List.of(Builder.productUnityDTO1(), Builder.productWeightDTO1());
+        Page<ProductDTO> productPage = new PageImpl<>(productList);
+        when(productService.findAll(any(ProductSpecBody.class),any(Pageable.class))).thenReturn(productPage);
 
-    @Test
-    @DisplayName("Should return 200 Page<ProductDTO> empty when findAll receives ProductSpecBody")
-    void testFindAll4() {
+        ResponseEntity<Page<ProductDTO>> response = underTest.findAll(new ProductSpecBody(), Pageable.unpaged());
+
+        assertNotNull(response.getBody().getContent());
+        assertEquals(2, response.getBody().getTotalElements());
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(productPage.getTotalElements(), response.getBody().getTotalElements());
+        assertEquals(productPage.getContent().get(0).getId(), response.getBody().getContent().get(0).getId());
     }
 
     @Test

@@ -10,10 +10,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SupplierDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SupplierSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Supplier;
 import tech.antoniosgarbi.gestorpeixaria.repository.SupplierRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.SupplierServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.specification.SupplierSpecification;
 
 import java.util.List;
 import java.util.Optional;
@@ -85,7 +87,6 @@ class SupplierServiceTest {
         assertEquals(newName, response.getName());
     }
 
-
     @Test
     @DisplayName("Should return SupplierDTO when receiving a valid id")
     void findById0() {
@@ -115,6 +116,20 @@ class SupplierServiceTest {
         when(supplierRepository.findAll(any(Pageable.class))).thenReturn(supplierPage);
 
         Page<SupplierDTO> response = underTest.findAll(Pageable.unpaged());
+
+        assertNotNull(response.getContent());
+        assertEquals(supplierPage.getTotalElements(), response.getTotalElements());
+        assertEquals(supplierPage.getContent().get(0).getId(), response.getContent().get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Should return Page<SupplierDTO> when receives SupplierSpecBody and Pageable")
+    void findAll1() {
+        List<Supplier> supplierList = List.of(Builder.supllier1(), Builder.supllier1(), Builder.supllier1());
+        Page<Supplier> supplierPage = new PageImpl<>(supplierList);
+        when(supplierRepository.findAll(any(SupplierSpecification.class), any(Pageable.class))).thenReturn(supplierPage);
+
+        Page<SupplierDTO> response = underTest.findAll(new SupplierSpecBody(), Pageable.unpaged());
 
         assertNotNull(response.getContent());
         assertEquals(supplierPage.getTotalElements(), response.getTotalElements());

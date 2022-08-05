@@ -2,13 +2,16 @@ package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.ProductException;
 import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.repository.ProductRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.ProductService;
+import tech.antoniosgarbi.gestorpeixaria.specification.ProductSpecification;
 
 import java.util.Optional;
 
@@ -43,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductDTO> findAll(Pageable pageable) {
         return this.productRepository.findAll(pageable).map(ProductDTO::new);
+    }
+
+    @Override
+    public Page<ProductDTO> findAll(ProductSpecBody productSpecBody, Pageable pageable) {
+        Specification<Product> specification = new ProductSpecification(productSpecBody);
+        return this.productRepository.findAll(specification, pageable).map(ProductDTO::new);
     }
 
     @Override

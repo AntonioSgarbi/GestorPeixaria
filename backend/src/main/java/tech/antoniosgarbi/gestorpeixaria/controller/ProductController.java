@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.ProductService;
 
 @RestController
@@ -38,10 +39,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
 
+    @PutMapping("/query")
+    public ResponseEntity<Page<ProductDTO>> findAll(ProductSpecBody specBody, Pageable pageable) {
+        return ResponseEntity.ok(productService.findAll(specBody, pageable));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

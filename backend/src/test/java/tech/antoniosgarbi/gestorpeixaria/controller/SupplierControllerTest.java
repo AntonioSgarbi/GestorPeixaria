@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SupplierDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.SupplierSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
+import tech.antoniosgarbi.gestorpeixaria.model.Supplier;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.SupplierService;
+import tech.antoniosgarbi.gestorpeixaria.specification.SupplierSpecification;
 
 import java.util.List;
 import java.util.Objects;
@@ -113,12 +116,18 @@ class SupplierControllerTest {
 
     @Test
     @DisplayName("Should return 200 Page<SupplierDTO> when findAll receives SupplierSpecBody")
-    void findAll3() {
-    }
+    void findAll2() {
+        List<SupplierDTO> supplierList = List.of(Builder.supllierDTO1(), Builder.supllierDTO1(), Builder.supllierDTO1());
+        Page<SupplierDTO> supplierPage = new PageImpl<>(supplierList);
+        when(supplierService.findAll(any(SupplierSpecBody.class), any(Pageable.class))).thenReturn(supplierPage);
 
-    @Test
-    @DisplayName("Should return 200 Page<SupplierDTO> empty when findAll receives SupplierSpecBody")
-    void findAll4() {
+        ResponseEntity<Page<SupplierDTO>> response = underTest.findAll(new SupplierSpecBody(), Pageable.unpaged());
+
+        assertNotNull(response.getBody().getContent());
+        assertEquals(3, response.getBody().getContent().size());
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(supplierPage.getTotalElements(), response.getBody().getTotalElements());
+        assertEquals(supplierPage.getContent().get(0).getId(), response.getBody().getContent().get(0).getId());
     }
 
     @Test
@@ -128,4 +137,5 @@ class SupplierControllerTest {
         verify(supplierService).delete(any(Long.class));
         assertEquals(204, response.getStatusCodeValue());
     }
+
 }

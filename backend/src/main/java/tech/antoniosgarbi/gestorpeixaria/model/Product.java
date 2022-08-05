@@ -8,6 +8,8 @@ import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -21,14 +23,18 @@ public class Product {
     private Long id;
     private String name;
     private QuantityType quantityType;
-    private Boolean excluded;
     private Double availableQuantity;
+    @ManyToMany
+    private List<Supplier> supplier;
+    private Boolean excluded;
 
     public Product(ProductDTO dto) {
         this.id = dto.getId();
         this.name = dto.getName();
         this.quantityType = dto.getQuantityType();
         this.availableQuantity = dto.getAvailableQuantity();
+        if(dto.getSupplier() != null)
+            this.supplier = dto.getSupplier().stream().map(Supplier::new).toList();
     }
 
 }

@@ -11,10 +11,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.ProductException;
 import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.repository.ProductRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.ProductServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.specification.ProductSpecification;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,7 +101,21 @@ class ProductServiceTest {
         Page<Product> productPage = new PageImpl<>(productList);
         when(productRepository.findAll(any(Pageable.class))).thenReturn(productPage);
 
-        Page<ProductDTO> response = underTest.findAll(Pageable.unpaged());
+        Page<ProductDTO> response = underTest.findAll(new ProductSpecBody(), Pageable.unpaged());
+
+        assertNotNull(response.getContent());
+        assertEquals(productPage.getTotalElements(), response.getTotalElements());
+        assertEquals(productPage.getContent().get(0).getId(), response.getContent().get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Should return Page<ProductDTO> when receives ProductSpecBody and Pageable")
+    void findAll1() {
+        List<Product> productList = List.of(Builder.productUnity1(), Builder.productUnity1(), Builder.productUnity1());
+        Page<Product> productPage = new PageImpl<>(productList);
+        when(productRepository.findAll(any(ProductSpecification.class),any(Pageable.class))).thenReturn(productPage);
+
+        Page<ProductDTO> response = underTest.findAll(new ProductSpecBody(), Pageable.unpaged());
 
         assertNotNull(response.getContent());
         assertEquals(productPage.getTotalElements(), response.getTotalElements());

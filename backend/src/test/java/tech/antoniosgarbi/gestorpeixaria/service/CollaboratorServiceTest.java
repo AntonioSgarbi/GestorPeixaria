@@ -9,12 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CollaboratorDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.repository.CollaboratorRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.CollaboratorServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.specification.CollaboratorSpecification;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +40,9 @@ class CollaboratorServiceTest {
         when(collaboratorRepository.findByDocument(anyString())).thenReturn(Optional.empty());
         when(collaboratorRepository.save(any(Collaborator.class))).thenReturn(expected);
 
-        long reponse = underTest.register(Builder.collaboratorDTO1());
+        long response = underTest.register(Builder.collaboratorDTO1());
 
-        assertEquals(expected.getId(), reponse);
+        assertEquals(expected.getId(), response);
     }
 
     @Test
@@ -113,11 +116,25 @@ class CollaboratorServiceTest {
         Page<Collaborator> collaboratorPage = new PageImpl<>(collaboratorList);
         when(collaboratorRepository.findAll(any(Pageable.class))).thenReturn(collaboratorPage);
 
-        Page<CollaboratorDTO> reponse = underTest.findAll(Pageable.unpaged());
+        Page<CollaboratorDTO> response = underTest.findAll(Pageable.unpaged());
 
-        assertNotNull(reponse.getContent());
-        assertEquals(collaboratorPage.getTotalElements(), reponse.getTotalElements());
-        assertEquals(collaboratorPage.getContent().get(0).getId(), reponse.getContent().get(0).getId());
+        assertNotNull(response.getContent());
+        assertEquals(collaboratorPage.getTotalElements(), response.getTotalElements());
+        assertEquals(collaboratorPage.getContent().get(0).getId(), response.getContent().get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Should return Page<CollaboratorDTO> when receives CollaboratorSpecBody and Pageable")
+    void findAll1() {
+        List<Collaborator> collaboratorList = List.of(Builder.collaborator1(), Builder.collaborator1(), Builder.collaborator1());
+        Page<Collaborator> collaboratorPage = new PageImpl<>(collaboratorList);
+        when(collaboratorRepository.findAll(any(CollaboratorSpecification.class), any(Pageable.class))).thenReturn(collaboratorPage);
+
+        Page<CollaboratorDTO> response = underTest.findAll(new CollaboratorSpecBody(), Pageable.unpaged());
+
+        assertNotNull(response.getContent());
+        assertEquals(collaboratorPage.getTotalElements(), response.getTotalElements());
+        assertEquals(collaboratorPage.getContent().get(0).getId(), response.getContent().get(0).getId());
     }
 
     @Test

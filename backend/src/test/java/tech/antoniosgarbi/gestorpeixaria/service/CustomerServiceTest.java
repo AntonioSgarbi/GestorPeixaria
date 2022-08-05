@@ -11,10 +11,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CustomerDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.CustomerSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Customer;
 import tech.antoniosgarbi.gestorpeixaria.repository.CustomerRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.impl.CustomerServiceImpl;
+import tech.antoniosgarbi.gestorpeixaria.specification.CustomerSpecification;
 
 import java.util.List;
 import java.util.Optional;
@@ -114,6 +116,20 @@ class CustomerServiceTest {
         when(clienteRepository.findAll(any(Pageable.class))).thenReturn(customerPage);
 
         Page<CustomerDTO> response = underTest.findAll(Pageable.unpaged());
+
+        assertNotNull(response.getContent());
+        assertEquals(customerPage.getTotalElements(), response.getTotalElements());
+        assertEquals(customerPage.getContent().get(0).getId(), response.getContent().get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Should return Page<CustomerDTO> when receives CustomerSpecBody and Pageable")
+    void findAll1() {
+        List<Customer> customerList = List.of(Builder.customer1(), Builder.customer1(), Builder.customer1());
+        Page<Customer> customerPage = new PageImpl<>(customerList);
+        when(clienteRepository.findAll(any(CustomerSpecification.class), any(Pageable.class))).thenReturn(customerPage);
+
+        Page<CustomerDTO> response = underTest.findAll(new CustomerSpecBody(), Pageable.unpaged());
 
         assertNotNull(response.getContent());
         assertEquals(customerPage.getTotalElements(), response.getTotalElements());

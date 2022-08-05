@@ -13,37 +13,37 @@ import java.util.List;
 
 public class SupplierSpecification implements Specification<Supplier> {
 
-    private final SupplierSpecBody specBodyFornecedor;
+    private final SupplierSpecBody specBody;
 
     public SupplierSpecification(SupplierSpecBody specBody) {
-        this.specBodyFornecedor = specBody;
+        this.specBody = specBody;
     }
     @Override
     public Predicate toPredicate(Root<Supplier> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
-        if (specBodyFornecedor.getNome() != null) {
+        if (specBody.getName() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("nome")),
-                            String.format("%%%s%%", specBodyFornecedor.getNome().toUpperCase())
+                            builder.upper(root.get("name")),
+                            String.format("%%%s%%", specBody.getName().toUpperCase())
                     ));
         }
-        if (specBodyFornecedor.getDocumento() != null) {
+        if (specBody.getDocument() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("documento")),
-                            String.format("%%%s%%", specBodyFornecedor.getDocumento().toUpperCase())
+                            builder.upper(root.get("document")),
+                            String.format("%%%s%%", specBody.getDocument().toUpperCase())
                     ));
         }
-        if (specBodyFornecedor.getPessoaTipo() != null) {
+        if (specBody.getLegalRecordType() != null) {
             predicates.add(
                     builder.equal(
-                            root.get("pessoaTipo"),
-                            specBodyFornecedor.getPessoaTipo()
+                            root.get("legalRecordType"),
+                            specBody.getLegalRecordType()
                     )
             );
         }
-        return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+        return builder.and(predicates.toArray(new Predicate[0]));
     }
 }

@@ -10,7 +10,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.CollaboratorService;
 
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping("/collaborator")
 public class CollaboratorController {
     private final CollaboratorService collaboratorService;
 

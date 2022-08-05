@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CollaboratorDTO;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
+import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.CollaboratorService;
+import tech.antoniosgarbi.gestorpeixaria.specification.CollaboratorSpecification;
 
 import java.util.List;
 import java.util.Objects;
@@ -112,13 +115,19 @@ class CollaboratorControllerTest {
     }
 
     @Test
-    @DisplayName("Should return 200 Page<CollaboratorDTO> when findAll receives CollaboratorSpecBody")
-    void testFindAll3() {
-    }
+    @DisplayName("Should return 200 Page<CollaboratorDTO> when findAll receives CollaboratorSpecBody and Pageable")
+    void testFindAll2() {
+        List<CollaboratorDTO> collaboratorList = List.of(Builder.collaboratorDTO1(), Builder.collaboratorDTO1(), Builder.collaboratorDTO1());
+        Page<CollaboratorDTO> collaboratorPage = new PageImpl<>(collaboratorList);
+        when(collaboratorService.findAll(any(CollaboratorSpecBody.class), any(Pageable.class))).thenReturn(collaboratorPage);
 
-    @Test
-    @DisplayName("Should return 200 Page<CollaboratorDTO> empty when findAll receives CollaboratorSpecBody")
-    void testFindAll4() {
+        ResponseEntity<Page<CollaboratorDTO>> response = underTest.findAll(new CollaboratorSpecBody(), Pageable.unpaged());
+
+        assertNotNull(response.getBody().getContent());
+        assertEquals(3, response.getBody().getContent().size());
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(collaboratorPage.getTotalElements(), response.getBody().getTotalElements());
+        assertEquals(collaboratorPage.getContent().get(0).getId(), response.getBody().getContent().get(0).getId());
     }
 
     @Test
@@ -128,4 +137,5 @@ class CollaboratorControllerTest {
         verify(collaboratorService).delete(any(Long.class));
         assertEquals(204, response.getStatusCodeValue());
     }
+
 }

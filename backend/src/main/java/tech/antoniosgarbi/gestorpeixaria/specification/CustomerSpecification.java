@@ -13,34 +13,34 @@ import java.util.List;
 
 public class CustomerSpecification implements Specification<Customer> {
 
-    private final CustomerSpecBody specBodyCliente;
+    private final CustomerSpecBody specBody;
 
     public CustomerSpecification(CustomerSpecBody specBody) {
-        this.specBodyCliente = specBody;
+        this.specBody = specBody;
     }
     @Override
     public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
-        if (specBodyCliente.getNome() != null) {
+        if (specBody.getName() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("nome")),
-                            String.format("%%%s%%", specBodyCliente.getNome().toUpperCase())
+                            builder.upper(root.get("name")),
+                            String.format("%%%s%%", specBody.getName().toUpperCase())
                     ));
         }
-        if (specBodyCliente.getDocumento() != null) {
+        if (specBody.getDocument() != null) {
             predicates.add(
                     builder.like(
-                            builder.upper(root.get("documento")),
-                            String.format("%%%s%%", specBodyCliente.getDocumento().toUpperCase())
+                            builder.upper(root.get("document")),
+                            String.format("%%%s%%", specBody.getDocument().toUpperCase())
                     ));
         }
-        if (specBodyCliente.getPessoaTipo() != null) {
+        if (specBody.getLegalRecordType() != null) {
             predicates.add(
                     builder.equal(
-                            root.get("pessoaTipo"),
-                            specBodyCliente.getPessoaTipo()
+                            root.get("legalRecordType"),
+                            specBody.getLegalRecordType()
                     )
             );
         }
