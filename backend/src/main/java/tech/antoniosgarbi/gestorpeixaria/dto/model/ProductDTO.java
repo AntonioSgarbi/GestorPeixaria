@@ -6,7 +6,6 @@ import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor

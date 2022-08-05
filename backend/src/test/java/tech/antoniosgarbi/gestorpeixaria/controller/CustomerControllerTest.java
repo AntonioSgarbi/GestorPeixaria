@@ -13,9 +13,7 @@ import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CustomerDTO;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.CustomerSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
-import tech.antoniosgarbi.gestorpeixaria.model.Customer;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.CustomerService;
-import tech.antoniosgarbi.gestorpeixaria.specification.CustomerSpecification;
 
 import java.util.List;
 import java.util.Objects;

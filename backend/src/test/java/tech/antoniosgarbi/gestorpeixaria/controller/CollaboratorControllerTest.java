@@ -13,9 +13,7 @@ import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.CollaboratorDTO;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
-import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.CollaboratorService;
-import tech.antoniosgarbi.gestorpeixaria.specification.CollaboratorSpecification;
 
 import java.util.List;
 import java.util.Objects;
