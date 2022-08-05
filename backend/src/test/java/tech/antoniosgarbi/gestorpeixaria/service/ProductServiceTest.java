@@ -101,7 +101,7 @@ class ProductServiceTest {
         Page<Product> productPage = new PageImpl<>(productList);
         when(productRepository.findAll(any(Pageable.class))).thenReturn(productPage);
 
-        Page<ProductDTO> response = underTest.findAll(new ProductSpecBody(), Pageable.unpaged());
+        Page<ProductDTO> response = underTest.findAll(Pageable.unpaged());
 
         assertNotNull(response.getContent());
         assertEquals(productPage.getTotalElements(), response.getTotalElements());

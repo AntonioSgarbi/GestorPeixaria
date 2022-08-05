@@ -4,5 +4,9 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectPackages({"tech.antoniosgarbi.gestorpeixaria.service", "tech.antoniosgarbi.gestorpeixaria.controller"})
+@SelectPackages({
+        "tech.antoniosgarbi.gestorpeixaria.service",
+        "tech.antoniosgarbi.gestorpeixaria.controller",
+        "tech.antoniosgarbi.gestorpeixaria.configuration",
+})
 class GestorPeixariaApplicationTests { }
