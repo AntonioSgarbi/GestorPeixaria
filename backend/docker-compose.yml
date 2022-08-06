@@ -9,12 +9,20 @@ services:
     links:
       - db
     environment:
+      - MAIL_PROFILE_SENDER=sendgrid
       - SERVER_PORT=8080
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - DB_NAME=gestor_peixaria
+      - SENDGRID_API_KEY=api_key
+      - SENDGRID_FROM_EMAIL=from_email
+      - SENDGRID_FROM_NAME=from_name
+      - MAILGUN_API_USERNAME=api_username
+      - MAILGUN_API_PASSWORD=api_key
+      - MAILGUN_BASE_URL=base_url
+      - MAILGUN_MESSAGES_URL=messages_url
       - MAIL_HOST=smtp-mail.outlook.com
       - MAIL_PORT=587
       - MAIL_PROTOCOL=smtp

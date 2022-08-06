@@ -1,0 +1,8 @@
+mailgun:
+  api:
+    username: api
+    password: pass
+    base:
+      url: url
+    messages:
+      url: url

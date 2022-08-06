@@ -1,0 +1,14 @@
+spring:
+  mail:
+    protocol: smtp
+    host: smtp-mail.outlook.com
+    port: 587
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true

@@ -6,9 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
-@Profile("heroku")
+@Profile("mailgun")
 @Configuration
-@PropertySource("classpath:application-heroku.yaml")
 public class MailGunConfig {
 
     @Value("${mailgun.api.username}")

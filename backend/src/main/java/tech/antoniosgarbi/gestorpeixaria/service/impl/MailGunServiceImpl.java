@@ -1,5 +1,6 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -8,7 +9,8 @@ import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.RestClientService;
 
 @Service
-@Profile("heroku")
+@Profile("mailgun")
+@Primary
 public class MailGunServiceImpl implements MailServiceStrategy {
 
     private final RestClientService restClient;

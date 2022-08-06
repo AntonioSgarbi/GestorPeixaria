@@ -179,6 +179,7 @@
                             <port>8080</port>
                         </ports>
                         <environment>
+                            <MAIL_PROFILE_SENDER>sendrid</MAIL_PROFILE_SENDER>
                             <SERVER_PORT>8080</SERVER_PORT>
                             <DB_HOST>localhost</DB_HOST>
                             <DB_PORT>5432</DB_PORT>
@@ -190,6 +191,13 @@
                             <MAIL_PROTOCOL>smtp</MAIL_PROTOCOL>
                             <MAIL_USERNAME>username</MAIL_USERNAME>
                             <MAIL_PASSWORD>password</MAIL_PASSWORD>
+                            <SENDGRID_API_KEY>sendgrid-api-key</SENDGRID_API_KEY>
+                            <SENDGRID_FROM_MAIL>sendgrid-from-mail</SENDGRID_FROM_MAIL>
+                            <SENDGRID_FROM_NAME>sendgrid-from-name</SENDGRID_FROM_NAME>
+                            <MAILGUN_API_USERNAME>mailgun-api-username</MAILGUN_API_USERNAME>
+                            <MAILGUN_API_PASSWORD>mailgun-api-password</MAILGUN_API_PASSWORD>
+                            <MAILGUN_BASE_URL>mailgun-base-url</MAILGUN_BASE_URL>
+                            <MAILGUN_MESSAGES_URL>mailgun-messages-url</MAILGUN_MESSAGES_URL>
                             <UUID_JWT_SECRET>secret</UUID_JWT_SECRET>
                             <JWT_EXPIRATION_TIME>3600</JWT_EXPIRATION_TIME>
                             <JWT_REFRESH_TIME>3600</JWT_REFRESH_TIME>
@@ -197,7 +205,8 @@
                             <URL_CORS>http://localhost:4200</URL_CORS>
                         </environment>
                         <args>
-                            <arg>--spring.profiles.active=docker</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--spring.profiles.active=${MAIL_PROFILE_SENDER}</arg>
                             <!--suppress UnresolvedMavenProperty -->
                             <arg>--server.port=${SERVER_PORT}</arg>
                             <!--suppress UnresolvedMavenProperty -->
@@ -226,6 +235,16 @@
                             <arg>--personal.security.nova-senha=${GENERATE_KEY}</arg>
                             <!--suppress UnresolvedMavenProperty -->
                             <arg>--personal.security.urlCors=${URL_CORS}</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--spring.sendgrid.api-key=${SENDGRID_API_KEY}</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--mailgun.api.username=${MAILGUN_API_USERNAME}</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--mailgun.api.password=${MAILGUN_API_PASSWORD}</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--mailgun.api.base.url=${MAILGUN_BASE_URL}</arg>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <arg>--mailgun.api.messages.url=${MAILGUN_MESSAGES_URL}</arg>
                         </args>
 
                     </container>

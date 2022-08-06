@@ -1,0 +1,7 @@
+spring:
+  sendgrid:
+    api-key: api-key
+personal:
+  mail:
+    fromMail: antonio.sgarbi@hotmail.com
+    fromName: Fish Stock

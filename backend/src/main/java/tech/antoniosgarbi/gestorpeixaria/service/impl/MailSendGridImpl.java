@@ -8,14 +8,12 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 
 import java.io.IOException;
 
 @Service
-@Primary
 public class MailSendGridImpl implements MailServiceStrategy {
     private final SendGridAPI sendGridAPI;
     @Value("${personal.mail.fromMail}")

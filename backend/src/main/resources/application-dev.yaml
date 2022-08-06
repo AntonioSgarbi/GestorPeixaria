@@ -1,31 +1,18 @@
 spring:
-  application:
-    name: gestor_peixaria
-  datasource:
-    url: jdbc:postgresql://localhost:5432/gestor_peixaria
-    username: postgres
-    password: postgres
   mvc:
     throw-exception-if-no-handler-found: true
+  sendgrid:
+    api-key: api-key
   web:
     resources:
       add-mappings: false
-  sendgrid:
-    api-key: api-key
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
     web: debug
+
 personal:
   mail:
     fromMail: antonio.sgarbi@hotmail.com
     fromName: Fish Stock
-
-mailgun:
-  api:
-    username: api
-    password: pass
-    base:
-      url: url
-    messages:
-      url: url
