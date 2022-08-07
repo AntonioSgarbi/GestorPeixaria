@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {PaymentType, SaleItem} from "../person/model/sale.model";
 import {MatTableDataSource} from '@angular/material/table';
-import {ModelSelectedEnum} from "../../components/person-search/model.selected.enum";
+import {ModelSelectedEnum} from "../../model/model.selected.enum";
 import {environment} from "../../../environments/environment";
 
 @Component({

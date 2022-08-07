@@ -9,6 +9,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import { SearchProductView } from './search-product/search-product.view';
+import {SearchBarAutocompleteModule} from "../../components/person-search/search-bar-autocomplete.module";
 
 
 @NgModule({
@@ -16,18 +17,19 @@ import { SearchProductView } from './search-product/search-product.view';
     RegistrationProductView,
     SearchProductView
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
+    imports: [
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
 
-    MatCardModule,
-    MatSelectModule,
-    MatButtonModule
-  ]
+        MatCardModule,
+        MatSelectModule,
+        MatButtonModule,
+        SearchBarAutocompleteModule
+    ]
 })
 export class ProductModule {
 }

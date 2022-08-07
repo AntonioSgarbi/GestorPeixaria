@@ -28,10 +28,10 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
 
   constructor(private searchService: SearchPersonService, private fb: FormBuilder) {
     this.formGroup = this.fb.group({
-      legalRecordType: [''],
-      name: [''],
-      document: [''],
-      email: ['']
+      legalRecordType: [null],
+      name: [null],
+      document: [null],
+      email: [null]
     });
   }
 

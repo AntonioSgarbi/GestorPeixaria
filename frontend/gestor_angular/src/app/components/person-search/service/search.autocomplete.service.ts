@@ -12,7 +12,8 @@ export class SearchAutocompleteService {
   }
 
   searchText(model: string, search: string): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${model}/query`, {name: search});
+    let body = { name: search };
+    return this.http.put(`${environment.apiUrl}/${model}/query`, body);
   }
 
   searchNumber(model: string, search: string): Observable<any> {

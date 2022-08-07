@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {environment} from "../../../environments/environment";
-import {ModelSelectedEnum} from "./model.selected.enum";
+import {ModelSelectedEnum} from "../../model/model.selected.enum";
 import {SearchAutocompleteService} from "./service/search.autocomplete.service";
 
 @Component({

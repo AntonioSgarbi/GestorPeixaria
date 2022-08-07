@@ -5,21 +5,30 @@
       <mat-card-title>Cadastro de Produto</mat-card-title>
     </div>
     <div>
-      <form [formGroup]="formulario" action="">
+      <form [formGroup]="formGroup" action="">
         <div class="d-flex justify-content-between">
-          <mat-form-field appearance="{{aparencia}}" style="width: 58%">
+          <mat-form-field appearance="{{appearence}}" style="width: 58%">
             <mat-label>Nome</mat-label>
-            <input matInput type="text" formControlName="nome">
+            <input matInput type="text" formControlName="name">
           </mat-form-field>
-          <mat-form-field appearance="{{aparencia}}" style="width: 40%">
+          <mat-form-field appearance="{{appearence}}" style="width: 40%">
             <mat-label>Tipo de Quantidade</mat-label>
-            <mat-select formControlName="tipoQuantidade">
-              <mat-option *ngFor="let item of tipoQuantidade | keyvalue" [value]="item.key">
-                {{item.value}}
-              </mat-option>
+            <mat-select formControlName="quantityType">
+              <mat-option [value]="'UNITY'">Unidade</mat-option>
+              <mat-option [value]="'WEIGHT'">Peso</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
+        <div class="d-flex justify-content-between">
+          <mat-form-field appearance="{{appearence}}" style="width: 23%">
+            <mat-label>Preço</mat-label>
+            <input matInput type="number" formControlName="price">
+          </mat-form-field>
+          <div class="w-75">
+            <search-bar [model]="modelSearch"></search-bar>
+          </div>
+        </div>
+
 
         <div class="d-flex mt-5 justify-content-around">
           <button mat-raised-button class="btn-outline-danger col-5" (click)="limparFormulario()">Limpar</button>

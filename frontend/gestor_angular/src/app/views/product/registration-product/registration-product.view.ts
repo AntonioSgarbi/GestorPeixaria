@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {QuantityType} from "../shared/quantity.type.enum";
+import {ModelSelectedEnum} from "../../../model/model.selected.enum";
 
 @Component({
   selector: 'app-registration-person',
@@ -8,9 +9,9 @@ import {QuantityType} from "../shared/quantity.type.enum";
   styleUrls: ['./registration-product.view.css']
 })
 export class RegistrationProductView implements OnInit {
-  formulario: FormGroup = new FormGroup({});
-  aparencia: string = 'outline';
-  tipoQuantidade: any = QuantityType;
+  formGroup: FormGroup = new FormGroup({});
+  appearence: string = 'outline';
+  modelSearch: any = ModelSelectedEnum.supplier;
 
 
   constructor(private fb: FormBuilder) { }
@@ -21,18 +22,19 @@ export class RegistrationProductView implements OnInit {
   }
 
   initForm(): void {
-    this.formulario = this.fb.group({
-      nome: [],
-      tipoQuantidade: []
+    this.formGroup = this.fb.group({
+      name: [],
+      quantityType: ['', Validators.required],
+      price: [null, Validators.required],
     });
   }
 
   limparFormulario() {
-    this.formulario.reset();
+    this.formGroup.reset();
   }
 
   cadastrar(): void {
-    console.log(this.formulario.getRawValue());
+    console.log(this.formGroup.getRawValue());
   }
 
 }
