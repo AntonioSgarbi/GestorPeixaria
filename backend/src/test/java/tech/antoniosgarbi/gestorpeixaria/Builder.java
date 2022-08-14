@@ -66,7 +66,7 @@ public interface Builder {
     static Product productWeight1() {
         Product product = new Product();
         product.setId(2L);
-        product.setName("prod peso");
+        product.setName("prod peso1");
         product.setQuantityType(QuantityType.WEIGHT);
         return product;
     }
@@ -74,7 +74,7 @@ public interface Builder {
     static ProductDTO productWeightDTO1() {
         ProductDTO dto = new ProductDTO();
         dto.setId(2L);
-        dto.setName("prodTo peso");
+        dto.setName("prod peso1");
         return dto;
     }
 
