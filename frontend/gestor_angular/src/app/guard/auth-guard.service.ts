@@ -19,26 +19,15 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(private tokenService: AuthenticationService, private router: Router) {
   }
 
-  verify(): boolean {
-    if (!this.tokenService.isTokenPresent()) {
-      console.log('Token not present');
-      return false;
-    } return true;
-  }
-
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return true;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if(this.verify()) {
-      console.log('active');
-      return true
-    }
-    else {
-      console.log('canot active_______________________________');
+    if(this.tokenService.isTokenPresent())
+      return true;
+    else
       return this.router.navigate(['/login']);
-    }
   }
 
 }
