@@ -23,8 +23,8 @@ class SaleServiceTest {
     @InjectMocks
     private SaleServiceImpl underTest;
 
-    @Test
-    @DisplayName("Should return SaleResponse when receives a valid SaleRequest")
+//    @Test
+//    @DisplayName("Should return SaleResponse when receives a valid SaleRequest")
     void register0() {
         SaleDTO saleRequest = Builder.saleDTO1();
         Sale sale = new Sale(saleRequest);
