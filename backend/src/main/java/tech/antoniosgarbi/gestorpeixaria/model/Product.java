@@ -22,7 +22,6 @@ public class Product {
     private Long id;
     private String name;
     private QuantityType quantityType;
-    private Double availableQuantity;
     @ManyToMany
     private List<Supplier> supplier;
     private Boolean excluded;
@@ -31,7 +30,6 @@ public class Product {
         this.id = dto.getId();
         this.name = dto.getName();
         this.quantityType = dto.getQuantityType();
-        this.availableQuantity = dto.getAvailableQuantity();
         if(dto.getSupplier() != null)
             this.supplier = dto.getSupplier().stream().map(Supplier::new).toList();
     }
