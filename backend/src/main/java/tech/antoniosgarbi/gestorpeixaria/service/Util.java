@@ -25,7 +25,6 @@ public class Util {
         return emptyNames.toArray(result);
     }
 
-    // then use Spring BeanUtils to copy and ignore null using our function
     public static void myCopyProperties(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
@@ -34,4 +33,9 @@ public class Util {
         Random r = new Random();
         return r.nextInt(min,max);
     }
+
+    public static String getPayloadFromToken(String token) {
+        return token.split("\\.")[1];
+    }
+
 }
