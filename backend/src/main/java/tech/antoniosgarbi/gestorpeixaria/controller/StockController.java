@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.StockEntries;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
-import tech.antoniosgarbi.gestorpeixaria.model.ExpirationLot;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.StockService;
 
 @RestController
@@ -20,7 +19,7 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> productEntry(ProductEntryRequest request, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<Long> productEntry(@RequestBody ProductEntryRequest request, @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(stockService.productEntry(request, token));
     }
 

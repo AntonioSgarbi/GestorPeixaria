@@ -1,6 +1,7 @@
 package tech.antoniosgarbi.gestorpeixaria.specification;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.NonNull;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 
@@ -8,18 +9,24 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.Serial;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CollaboratorSpecification implements Specification<Collaborator> {
 
+    @Serial
+    private static final long serialVersionUID = 8308450286467231359L;
     private final CollaboratorSpecBody specBody;
 
     public CollaboratorSpecification(CollaboratorSpecBody specBody) {
         this.specBody = specBody;
     }
+
     @Override
-    public Predicate toPredicate(Root<Collaborator> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    public Predicate toPredicate(@NonNull Root<Collaborator> root,
+                                 @NonNull CriteriaQuery<?> criteriaQuery,
+                                 @NonNull CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
         if (specBody.getName() != null) {
@@ -44,6 +51,6 @@ public class CollaboratorSpecification implements Specification<Collaborator> {
                     )
             );
         }
-        return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+        return builder.and(predicates.toArray(new Predicate[0]));
     }
 }

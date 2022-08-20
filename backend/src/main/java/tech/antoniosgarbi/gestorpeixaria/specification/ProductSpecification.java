@@ -1,6 +1,7 @@
 package tech.antoniosgarbi.gestorpeixaria.specification;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.NonNull;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.model.Product;
 
@@ -8,10 +9,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.Serial;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProductSpecification implements Specification<Product> {
+
+    @Serial
+    private static final long serialVersionUID = -935421897406832275L;
     private final ProductSpecBody productSpecBody;
 
     public ProductSpecification(ProductSpecBody productSpecBody) {
@@ -19,7 +24,9 @@ public class ProductSpecification implements Specification<Product> {
     }
 
     @Override
-    public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder builder) {
+    public Predicate toPredicate(@NonNull Root<Product> root,
+                                 @NonNull CriteriaQuery<?> criteriaQuery,
+                                 @NonNull CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
         if(this.productSpecBody.getName() != null) {
