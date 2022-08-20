@@ -1,1 +1,35 @@
-<p>entrada works!</p>
+<div>
+  <form action="submit" [formGroup]="formGroup" class="p-3">
+    <div class="d-flex justify-content-center w-100">
+      <mat-checkbox formControlName="arrivalRegistered" class="p-3">Acabou de chegar</mat-checkbox>
+    </div>
+
+    <mat-form-field appearance="{{ appearence }}" class="w-100" *ngIf="!formGroup.get('arrivalRegistered')?.value">
+      <mat-label>Data de entrada</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="arrivalDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="{{ appearence }}" class="w-100">
+      <mat-label>Data de validade</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="arrivalDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <search-bar [model]="product"></search-bar>
+
+    <mat-form-field appearance="{{ appearence }}" class="w-100">
+      <mat-label>Quantidade</mat-label>
+      <input autocomplete="off" matInput type="number" formControlName="arrivalQuantity"/>
+    </mat-form-field>
+
+    <search-bar [model]="supplier"></search-bar>
+
+    <div class="d-flex justify-content-center w-100 pt-3">
+    <button mat-raised-button class="btn-outline-success w-25" type="submit">Registrar entrada</button>
+    </div>
+
+  </form>
+</div>

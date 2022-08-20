@@ -72,4 +72,12 @@ export class HomeComponent implements OnInit {
     console.info(customer)
     this.form.get('customer')!.setValue(customer);
   }
+
+  totalValue() {
+    let total = 0;
+    this.myDataArray.forEach(x => {
+      x.product?.price ? total += x.product.price * x.quantity! : total += 0;
+    });
+    return total;
+  }
 }
