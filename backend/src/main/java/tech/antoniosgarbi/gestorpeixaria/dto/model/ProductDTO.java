@@ -13,14 +13,13 @@ public class ProductDTO {
     private Long id;
     private String name;
     private QuantityType quantityType;
-    private List<SupplierDTO> supplier;
+    private Double price;
 
     public ProductDTO(Product model) {
         this.id = model.getId();
         this.name = model.getName();
         this.quantityType = model.getQuantityType();
-        if(model.getSupplier() != null)
-            this.supplier = model.getSupplier().stream().map(SupplierDTO::new).toList();
+        this.price = model.getPrice();
     }
 
 }

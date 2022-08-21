@@ -22,16 +22,14 @@ public class Product {
     private Long id;
     private String name;
     private QuantityType quantityType;
-    @ManyToMany
-    private List<Supplier> supplier;
+    private Double price;
     private Boolean excluded;
 
     public Product(ProductDTO dto) {
         this.id = dto.getId();
         this.name = dto.getName();
         this.quantityType = dto.getQuantityType();
-        if(dto.getSupplier() != null)
-            this.supplier = dto.getSupplier().stream().map(Supplier::new).toList();
+        this.price = dto.getPrice();
     }
 
 }

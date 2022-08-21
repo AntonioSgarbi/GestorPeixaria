@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @PutMapping("/query")
-    public ResponseEntity<Page<ProductDTO>> findAll(ProductSpecBody specBody, Pageable pageable) {
+    public ResponseEntity<Page<ProductDTO>> findAll(@RequestBody ProductSpecBody specBody, Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(specBody, pageable));
     }
 

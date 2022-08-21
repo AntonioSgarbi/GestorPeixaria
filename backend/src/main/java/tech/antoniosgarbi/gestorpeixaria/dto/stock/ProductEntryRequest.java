@@ -13,6 +13,8 @@ public class ProductEntryRequest {
     private LocalDate expirationDate;
     private Double arrivalQuantity;
     private Double availableQuantity;
+    private Double supplierPrice;
+    private Double optionalPrice;
     private ProductDTO product;
     private SupplierDTO supplier;
     private CollaboratorDTO receivedBy;

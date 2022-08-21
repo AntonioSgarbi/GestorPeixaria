@@ -11,12 +11,12 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
-#    active: @active.profile@ #actions
+    active: @active.profile@ #actions
 #    active: dev
 #    active: test
 #    active: smtp
 #    active: mailgun
-    active: heroku
+#    active: heroku
 
 personal:
   security:

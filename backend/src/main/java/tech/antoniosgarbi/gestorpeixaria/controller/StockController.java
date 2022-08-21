@@ -19,8 +19,8 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> productEntry(@RequestBody ProductEntryRequest request, @RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(stockService.productEntry(request, token));
+    public ResponseEntity<Long> productEntry(@RequestBody ProductEntryRequest request, @RequestHeader("userId") Long userId) {
+        return ResponseEntity.ok(stockService.productEntry(request, userId));
     }
 
     @PutMapping("/query")

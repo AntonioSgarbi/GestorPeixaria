@@ -22,10 +22,9 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-        public Long productEntry(ProductEntryRequest request, String token) {
+    public Long productEntry(ProductEntryRequest request, Long userId) {
         ExpirationLot expirationLot = new ExpirationLot();
         Util.myCopyProperties(request, expirationLot);
-        String payloadToken = Util.getPayloadFromToken(token);
 
         expirationLot = expirationLotRepository.save(expirationLot);
         return expirationLot.getId();

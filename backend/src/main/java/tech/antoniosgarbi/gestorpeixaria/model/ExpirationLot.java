@@ -22,25 +22,27 @@ public class ExpirationLot {
     private LocalDate expirationDate;
     private Double arrivalQuantity;
     private Double availableQuantity;
+    private Double optionalPrice;
+    private Boolean arrivalRegistered;
+    private LocalDateTime registeredMoment;
     @ManyToOne
     private Product product;
     @ManyToOne
     private Supplier supplier;
     @ManyToOne
     private Collaborator receivedBy;
-    private Boolean arrivalRegistered;
-    private LocalDateTime registeredMoment;
 
 
-    public ExpirationLot(ProductEntryRequest request) {
-        this.arrivalDate = request.getArrivalDate();
-        this.expirationDate = request.getExpirationDate();
-        this.arrivalQuantity = request.getArrivalQuantity();
-        this.availableQuantity = request.getArrivalQuantity();
-        this.product = new Product(request.getProduct());
-        this.supplier = new Supplier(request.getSupplier());
-        this.receivedBy = new Collaborator(request.getReceivedBy());
-        this.arrivalRegistered = false;
-        this.registeredMoment = null;
+    public ExpirationLot(ProductEntryRequest body) {
+        this.arrivalDate = body.getArrivalDate();
+        this.expirationDate = body.getExpirationDate();
+        this.arrivalQuantity = body.getArrivalQuantity();
+        this.availableQuantity = body.getArrivalQuantity();
+        this.product = new Product(body.getProduct());
+        this.supplier = new Supplier(body.getSupplier());
+        this.receivedBy = new Collaborator(body.getReceivedBy());
+        this.arrivalRegistered = body.getArrivalRegistered();
+        this.registeredMoment = LocalDateTime.now();
     }
+
 }

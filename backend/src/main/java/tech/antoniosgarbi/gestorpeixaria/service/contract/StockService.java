@@ -7,7 +7,7 @@ import tech.antoniosgarbi.gestorpeixaria.dto.stock.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
 
 public interface StockService {
-    Long productEntry(ProductEntryRequest request, String token);
+    Long productEntry(ProductEntryRequest request, Long userId);
 
     Page<StockEntries> query(ExpirationLotSpecBody body, Pageable pageable);
 }

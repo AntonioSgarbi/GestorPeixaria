@@ -29,27 +29,28 @@ public class ProductSpecification implements Specification<Product> {
                                  @NonNull CriteriaBuilder builder) {
         List<Predicate> predicates = new LinkedList<>();
 
-        if(this.productSpecBody.getName() != null) {
+        if(productSpecBody.getName() != null) {
             predicates.add(
                     builder.like(
                             builder.upper(root.get("name")),
-                            String.format("%%%s%%", this.productSpecBody.getName().toUpperCase()))
+                            String.format("%%%s%%", productSpecBody.getName().toUpperCase()))
             );
         }
-        if(this.productSpecBody.getQuantityType() != null) {
+        if(productSpecBody.getQuantityType() != null) {
             predicates.add(
                     builder.equal(
                             root.get("quantityType"),
-                            this.productSpecBody.getQuantityType())
+                            productSpecBody.getQuantityType())
             );
         }
-        if(this.productSpecBody.getSupplier() != null) {
+        if(productSpecBody.getSupplier() != null) {
             predicates.add(
                     builder.equal(
                             root.get("supplier"),
-                            this.productSpecBody.getSupplier())
+                            productSpecBody.getSupplier())
             );
         }
         return builder.and(predicates.toArray(new Predicate[0]));
     }
+
 }
