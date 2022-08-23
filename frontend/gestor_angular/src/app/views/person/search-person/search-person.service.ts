@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Person} from "../model/person.model";
+import {Person} from "../../../model/person.model";
 import {environment} from "../../../../environments/environment";
-import {PageModel} from "../../../model/page.model";
+import {Page} from "../../../model/page";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -11,11 +11,12 @@ import {Router} from "@angular/router";
 })
 export class SearchPersonService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
-  findAll(personType: string, page?: number, size?: number): Observable<PageModel<Person>> {
+  findAll(personType: string, page?: number, size?: number): Observable<Page<Person>> {
     return this.http
-      .get<PageModel<Person>>(`${environment.apiUrl}/${personType}?page=${page ?? 0}&size=${size ?? 10}`);
+      .get<Page<Person>>(`${environment.apiUrl}/${personType}?page=${page ?? 0}&size=${size ?? 10}`);
   }
 
   edit(person: Person): void {
@@ -24,6 +25,6 @@ export class SearchPersonService {
 
   findAllFiltered(personType: string, page: number, size: number, filter: any) {
     return this.http
-      .put<PageModel<Person>>(`${environment.apiUrl}/${personType}/query?page=${page}&size=${size}`, filter);
+      .put<Page<Person>>(`${environment.apiUrl}/${personType}/query?page=${page}&size=${size}`, filter);
   }
 }

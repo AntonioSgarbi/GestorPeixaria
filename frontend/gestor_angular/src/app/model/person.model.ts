@@ -19,4 +19,5 @@ export interface Collaborator extends Person {
   wage?: number;
 }
 
-export interface Supplier extends Person { }
+export interface Supplier extends Person {
+}

@@ -1,9 +1,9 @@
-import {Component, NgIterable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {LegalRecordType} from "../model/legal.record.type.enum";
+import {LegalRecordType} from "../../../model/legal.record.type.enum";
 import {RegistrationPersonService} from "./registration-person.service";
 import {AppService} from "../../../app.service";
-import {RegistrationType} from "../model/registration.type.enum";
+import {RegistrationType} from "../../../model/registration.type.enum";
 
 @Component({
   selector: 'app-registration-person',
@@ -24,6 +24,11 @@ export class RegistrationPersonView implements OnInit {
   ) {
   }
 
+  get phones(): FormArray {
+    // @ts-ignore
+    return this.form.get('phones')['controls'] as FormArray;
+  }
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -38,11 +43,6 @@ export class RegistrationPersonView implements OnInit {
       "birthDate": [],
       "phones": this.fb.array([this.fb.control(null, Validators.required)]),
     })
-  }
-
-  get phones(): FormArray {
-    // @ts-ignore
-    return this.form.get('phones')['controls'] as FormArray;
   }
 
   generatePhoneField(): FormControl {

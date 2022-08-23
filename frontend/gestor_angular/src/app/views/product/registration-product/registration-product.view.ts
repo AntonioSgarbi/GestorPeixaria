@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {QuantityType} from "../shared/quantity.type.enum";
 import {ModelSelectedEnum} from "../../../model/model.selected.enum";
+import {Product} from "../../../model/sale.model";
+import {ProductService} from "../product.service";
 
 @Component({
   selector: 'app-registration-person',
@@ -9,12 +10,14 @@ import {ModelSelectedEnum} from "../../../model/model.selected.enum";
   styleUrls: ['./registration-product.view.css']
 })
 export class RegistrationProductView implements OnInit {
+  @ViewChild('supplierSearch') supplierSearchBar: any;
   formGroup: FormGroup = new FormGroup({});
   appearence: string = 'outline';
   modelSearch: any = ModelSelectedEnum.supplier;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private productService: ProductService) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -31,10 +34,17 @@ export class RegistrationProductView implements OnInit {
 
   limparFormulario() {
     this.formGroup.reset();
+    this.supplierSearchBar.dropSelectedValue();
   }
 
   cadastrar(): void {
-    console.log(this.formGroup.getRawValue());
+    let product: Product = this.formGroup.getRawValue();
+    this.productService.register(product).subscribe({
+      next: (id: number) => {
+        console.log(id);
+        this.limparFormulario();
+      }
+    });
   }
 
 }

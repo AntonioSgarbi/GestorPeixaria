@@ -15,4 +15,5 @@ import {RouterModule} from "@angular/router";
     RouterModule
   ]
 })
-export class NavbarModule { }
+export class NavbarModule {
+}

@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {SaleItem} from "../model/sale.model";
+import {SaleItem} from "../../../model/sale.model";
 import {SearchPersonService} from "./search-person.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {Person} from "../model/person.model";
-import {LegalRecordType} from "../model/legal.record.type.enum";
+import {Person} from "../../../model/person.model";
+import {LegalRecordType} from "../../../model/legal.record.type.enum";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDrawer} from "@angular/material/sidenav";
 
@@ -19,12 +19,8 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<SaleItem> = new MatTableDataSource<SaleItem>([]);
   legalRecordType: any = LegalRecordType;
   displayedColumns: string[] = ['name', 'document', 'legalRecordType', 'email'];
-  private readonly formGroup: FormGroup;
   personType: string = 'customer';
-
-  get form(): FormGroup {
-    return this.formGroup;
-  }
+  private readonly formGroup: FormGroup;
 
   constructor(private searchService: SearchPersonService, private fb: FormBuilder) {
     this.formGroup = this.fb.group({
@@ -33,6 +29,10 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
       document: [null],
       email: [null]
     });
+  }
+
+  get form(): FormGroup {
+    return this.formGroup;
   }
 
   ngOnInit(): void {

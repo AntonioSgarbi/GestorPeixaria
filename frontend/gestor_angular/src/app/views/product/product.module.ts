@@ -8,8 +8,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
-import { SearchProductView } from './search-product/search-product.view';
-import {SearchBarAutocompleteModule} from "../../components/person-search/search-bar-autocomplete.module";
+import {SearchProductView} from './search-product/search-product.view';
+import {SearchBarModule} from "../../components/search-bar/search-bar.module";
 
 
 @NgModule({
@@ -17,19 +17,18 @@ import {SearchBarAutocompleteModule} from "../../components/person-search/search
     RegistrationProductView,
     SearchProductView
   ],
-    imports: [
-        BrowserModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-
-        MatCardModule,
-        MatSelectModule,
-        MatButtonModule,
-        SearchBarAutocompleteModule
-    ]
+  imports: [
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatSelectModule,
+    MatButtonModule,
+    SearchBarModule
+  ]
 })
 export class ProductModule {
 }

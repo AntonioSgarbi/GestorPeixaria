@@ -3,19 +3,19 @@
   <mat-card *ngIf="!isReset" class="card">
     <mat-card-title class="text-center pt-3">Login</mat-card-title>
     <form
-      [formGroup]="form"
       (ngSubmit)="login()"
+      [formGroup]="form"
       class="mx-5 d-grid justify-content-center animate__animated animate__fadeInDown"
     >
       <mat-form-field appearance="outline">
         <mat-label>Usuário</mat-label>
-        <input matInput placeholder="Usuário" formControlName="username">
+        <input formControlName="username" matInput placeholder="Usuário">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
-        <input matInput type="password" placeholder="Senha" formControlName="password">
+        <input formControlName="password" matInput placeholder="Senha" type="password">
       </mat-form-field>
-      <button mat-raised-button class="btn-info" type="submit">Entrar</button>
+      <button class="btn-info" mat-raised-button type="submit">Entrar</button>
       <p (click)="changeToReset()" class="pt-1 text-end forget-text">Esqueceu a senha?</p>
     </form>
   </mat-card>
@@ -24,16 +24,16 @@
     <mat-card-title class="text-center pt-3">Recuperar Senha</mat-card-title>
     <mat-card-subtitle class="text-center pt-3">Envia usuário e senha para demonstração</mat-card-subtitle>
     <form
-      [formGroup]="formReset"
       (ngSubmit)="resetPassword()"
+      [formGroup]="formReset"
       class="d-grid justify-content-center animate__animated animate__fadeInUp"
     >
       <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="E-email" formControlName="email">
+        <input formControlName="email" matInput placeholder="E-email">
       </mat-form-field>
-      <button mat-raised-button class="mb-2 btn-info" type="submit">Enviar</button>
-      <button (click)="this.isReset=false" mat-raised-button class="">Voltar</button>
+      <button class="mb-2 btn-info" mat-raised-button type="submit">Enviar</button>
+      <button (click)="this.isReset=false" class="" mat-raised-button>Voltar</button>
     </form>
   </mat-card>
 

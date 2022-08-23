@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between">
           <mat-form-field appearance="{{appearence}}" style="width: 58%">
             <mat-label>Nome</mat-label>
-            <input matInput type="text" formControlName="name">
+            <input formControlName="name" matInput type="text">
           </mat-form-field>
           <mat-form-field appearance="{{appearence}}" style="width: 40%">
             <mat-label>Tipo de Quantidade</mat-label>
@@ -22,17 +22,17 @@
         <div class="d-flex justify-content-between">
           <mat-form-field appearance="{{appearence}}" style="width: 23%">
             <mat-label>Preço</mat-label>
-            <input matInput type="number" formControlName="price">
+            <input formControlName="price" matInput type="number">
           </mat-form-field>
           <div class="w-75">
-            <search-bar [model]="modelSearch"></search-bar>
+            <search-bar #supplierSearch [model]="modelSearch"></search-bar>
           </div>
         </div>
 
 
         <div class="d-flex mt-5 justify-content-around">
-          <button mat-raised-button class="btn-outline-danger col-5" (click)="limparFormulario()">Limpar</button>
-          <button mat-raised-button class="btn-outline-success col-5" (click)="cadastrar()">Cadastrar</button>
+          <button (click)="limparFormulario()" class="btn-outline-danger col-5" mat-raised-button>Limpar</button>
+          <button (click)="cadastrar()" class="btn-outline-success col-5" mat-raised-button>Cadastrar</button>
         </div>
 
       </form>

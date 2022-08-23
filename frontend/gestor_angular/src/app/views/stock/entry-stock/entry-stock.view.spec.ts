@@ -8,9 +8,9 @@ describe('EntradaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EntryStockView ]
+      declarations: [EntryStockView]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

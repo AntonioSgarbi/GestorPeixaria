@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EntryStockView} from './entry-stock/entry-stock.view';
-import { SearchStockView } from './search-stock/search-stock.view';
+import {SearchStockView} from './search-stock/search-stock.view';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {SearchBarAutocompleteModule} from "../../components/person-search/search-bar-autocomplete.module";
+import {SearchBarModule} from "../../components/search-bar/search-bar.module";
 import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -21,12 +22,14 @@ import {MatButtonModule} from "@angular/material/button";
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    SearchBarAutocompleteModule,
+    SearchBarModule,
     MatInputModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ]
 })
-export class EstoqueModule { }
+export class EstoqueModule {
+}

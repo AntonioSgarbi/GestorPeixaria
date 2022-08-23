@@ -1,34 +1,68 @@
 <div>
-  <form action="submit" [formGroup]="formGroup" class="p-3">
+  <form [formGroup]="formGroup" action="submit" class="p-3">
     <div class="d-flex justify-content-center w-100">
-      <mat-checkbox formControlName="arrivalRegistered" class="p-3">Acabou de chegar</mat-checkbox>
+      <mat-checkbox class="p-3" formControlName="arrivalRegistered">Acabou de chegar</mat-checkbox>
     </div>
 
-    <mat-form-field appearance="{{ appearence }}" class="w-100" *ngIf="!formGroup.get('arrivalRegistered')?.value">
+    <mat-form-field *ngIf="!formGroup.get('arrivalRegistered')?.value" appearance="{{ appearence }}" class="w-100">
       <mat-label>Data de entrada</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="arrivalDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <input [matDatepicker]="picker" formControlName="arrivalDate" matInput>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="{{ appearence }}" class="w-100">
       <mat-label>Data de validade</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="arrivalDate">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <input [matDatepicker]="picker1" formControlName="arrivalDate" matInput placeholder="dd/mm/aaaa">
+      <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
-    <search-bar [model]="product"></search-bar>
+    <search-bar
+      (onSelect)="productSelect($event)"
+      [model]="productModel"
+      [placeholder]="placeholderProduct()"
+      formControlName="product"
+    ></search-bar>
 
     <mat-form-field appearance="{{ appearence }}" class="w-100">
       <mat-label>Quantidade</mat-label>
-      <input autocomplete="off" matInput type="number" formControlName="arrivalQuantity"/>
+      <input [placeholder]="placeholderQuantity()" autocomplete="off" formControlName="arrivalQuantity" matInput
+             type="number"/>
     </mat-form-field>
 
-    <search-bar [model]="supplier"></search-bar>
+    <search-bar
+      (onSelect)="supplierSelect($event)"
+      [model]="supplierModel"
+      [placeholder]="placeholderSupplier()"
+      formControlName="supplier"
+    ></search-bar>
+
+    <div>
+      <table [dataSource]="dataSource" class="table-responsive w-100 mb-5" mat-table>
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell>Produto</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="legalRecordType">
+          <th *matHeaderCellDef mat-header-cell>Quantidade</th>
+          <td *matCellDef="let element" mat-cell> {{element.legalRecordType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th *matHeaderCellDef mat-header-cell>Preço</th>
+          <td *matCellDef="let element" mat-cell>R${{(element.email).toFixed(2)}}</td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr (click)="removeItem(row)" *matRowDef="let row = index; columns: displayedColumns;" class="table-row"
+            mat-row></tr>
+      </table>
+    </div>
+
 
     <div class="d-flex justify-content-center w-100 pt-3">
-    <button mat-raised-button class="btn-outline-success w-25" type="submit">Registrar entrada</button>
+      <button (click)="submit()" class="btn-outline-success w-25" mat-raised-button type="submit">Registrar entrada
+      </button>
     </div>
 
   </form>

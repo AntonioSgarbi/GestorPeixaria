@@ -12,7 +12,8 @@ export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private tokenService: AuthenticationService, private router : Router) { }
+  constructor(private tokenService: AuthenticationService, private router: Router) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let authReq = req;
@@ -60,7 +61,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     return request.clone(
-      { headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+      {headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)});
   }
 
 }

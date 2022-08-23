@@ -23,26 +23,27 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     PessoaPesquisaComponent
 
   ],
-    imports: [
-        BrowserModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDatepickerModule,
-        NgxMaskModule.forRoot({
-            dropSpecialCharacters: false
-        }),
-        MatNativeDateModule,
-        MatCardModule,
-        MatSelectModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSidenavModule,
-    ]
+  imports: [
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDatepickerModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    }),
+    MatNativeDateModule,
+    MatCardModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+  ]
 
 })
-export class PersonModule { }
+export class PersonModule {
+}

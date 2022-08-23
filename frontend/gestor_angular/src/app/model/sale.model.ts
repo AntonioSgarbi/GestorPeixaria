@@ -1,5 +1,5 @@
-import {Customer, Collaborator} from "./person.model";
-import {QuantityType} from "../../product/shared/quantity.type.enum";
+import {Collaborator, Customer} from "./person.model";
+import {QuantityType} from "./quantity.type.enum";
 
 export interface Sale {
   id?: number;

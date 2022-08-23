@@ -17,11 +17,11 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { LoaderComponent } from './components/loader/loader.component';
+import {LoaderComponent} from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LoaderInterceptor} from "./interceptor/loader.interceptor";
 
@@ -69,4 +69,5 @@ import {LoaderInterceptor} from "./interceptor/loader.interceptor";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

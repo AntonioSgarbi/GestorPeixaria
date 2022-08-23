@@ -5,36 +5,43 @@
       <search-bar (onSelect)="selectCustomer($event)" [model]="modelCustomer"></search-bar>
 
       <div class="d-flex justify-content-between">
-        <search-bar [model]="modelProduct" class="w-50 pe-1"></search-bar>
+        <search-bar #productbar (onSelect)="productSelect($event)" [model]="modelProduct"
+                    class="w-50 pe-1"></search-bar>
         <mat-form-field appearance="{{ appearence }}" class="w-50 ps-1">
           <mat-label>Quantidade</mat-label>
-          <input autocomplete="off" matInput type="number"/>
+          <input
+            (keydown.enter)="keyEnterPressed($event)"
+            [(ngModel)]="quantity"
+            [ngModelOptions]="{standalone: true}"
+            autocomplete="off"
+            matInput
+            type="number"/>
         </mat-form-field>
       </div>
     </div>
 
     <div>
-      <table mat-table [dataSource]="dataSource" class="table-responsive w-100 mb-5">
+      <table [dataSource]="dataSource" class="table-responsive w-100 mb-5" mat-table>
         <ng-container matColumnDef="product">
-          <th mat-header-cell *matHeaderCellDef>Produto</th>
-          <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
+          <th *matHeaderCellDef mat-header-cell>Produto</th>
+          <td *matCellDef="let element" mat-cell> {{element.product.name}} </td>
         </ng-container>
         <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td mat-cell *matCellDef="let element"> {{element.quantity.toFixed(3)}} </td>
+          <th *matHeaderCellDef mat-header-cell>Quantidade</th>
+          <td *matCellDef="let element" mat-cell> {{element.quantity.toFixed(3)}} </td>
         </ng-container>
         <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Preço</th>
-          <td mat-cell *matCellDef="let element">R${{(element.product.price).toFixed(2)}}</td>
+          <th *matHeaderCellDef mat-header-cell>Preço</th>
+          <td *matCellDef="let element" mat-cell>R${{(element.product.price).toFixed(2)}}</td>
         </ng-container>
         <ng-container matColumnDef="value">
-          <th mat-header-cell *matHeaderCellDef>Valor</th>
-          <td mat-cell *matCellDef="let element">R${{(element.product.price * element.quantity).toFixed(2)}}</td>
+          <th *matHeaderCellDef mat-header-cell>Valor</th>
+          <td *matCellDef="let element" mat-cell>R${{(element.product.price * element.quantity).toFixed(2)}}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row = index; columns: displayedColumns;" (click)="removeItem(row)"
-            class="table-row"></tr>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr (click)="removeItem(row)" *matRowDef="let row = index; columns: displayedColumns;" class="table-row"
+            mat-row></tr>
       </table>
 
       <p>Total: {{ totalValue() }}</p>
@@ -49,7 +56,7 @@
       </mat-form-field>
     </div>
     <div class="d-flex justify-content-center">
-      <button mat-raised-button class="btn-outline-dark mb-4 w-50" (click)="submit()">Lançar Venda</button>
+      <button (click)="submit()" class="btn-outline-dark mb-4 w-50" mat-raised-button>Lançar Venda</button>
     </div>
   </form>
 

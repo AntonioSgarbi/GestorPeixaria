@@ -1,0 +1,34 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="{{ appearance }}" class="w-100">
+    <mat-label>{{ model }}</mat-label>
+    <div class="d-flex justify-content-around">
+      <input (keydown.arrowDown)="keyArrowDownPressed($event)"
+             (keydown.arrowLeft)="keyArrowLeftPressed($event)"
+             (keydown.arrowRight)="keyArrowRightPressed($event)"
+             (keydown.arrowUp)="keyArrowUpPressed($event)"
+             (keydown.backspace)="keyBackspacePressed($event)"
+             (keydown.enter)="keyEnterPressed($event)"
+             (ngModelChange)="textChange($event)"
+             [matAutocomplete]="auto"
+             [style]="getValueSelected ? 'color: forestgreen' : 'color: black'"
+             [value]="valueFromInput()"
+             formControlName="name"
+             matInput
+             placeholder="{{ placeholder }}"
+             style="font-weight: bold">
+      <mat-icon (click)="dropSelectedValue()" *ngIf="isObjectNotNull()">close</mat-icon>
+    </div>
+    <input [formControlName]="getKeyFromEnum()" type="hidden">
+  </mat-form-field>
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+  >
+    <mat-option
+      (onSelectionChange)="optionSelect(item)"
+      *ngFor="let item of loadList; let i = index"
+    >
+      <span>{{ item.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</form>

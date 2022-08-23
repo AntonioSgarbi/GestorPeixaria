@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="true">
+<mat-drawer-container [hasBackdrop]="true" class="example-container">
   <mat-drawer #drawer mode="side">
     <form [formGroup]="form" action="filter" class="p-3 d-flex flex-column">
       <mat-form-field>
@@ -11,7 +11,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Tipo</mat-label>
-        <mat-select value="customer" formControlName="legalRecordType">
+        <mat-select formControlName="legalRecordType" value="customer">
           <mat-option *ngFor="let type of legalRecordType | keyvalue" [value]="type.key">
             {{ type.value }}
           </mat-option>
@@ -19,52 +19,52 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nome</mat-label>
-        <input matInput autocomplete="off" formControlName="name" placeholder="Nome" type="text">
+        <input autocomplete="off" formControlName="name" matInput placeholder="Nome" type="text">
       </mat-form-field>
       <mat-form-field>
         <mat-label>Documento</mat-label>
-        <input matInput autocomplete="off" formControlName="document" placeholder="Documento" type="text">
+        <input autocomplete="off" formControlName="document" matInput placeholder="Documento" type="text">
       </mat-form-field>
-      <button mat-raised-button (click)="filter()">Aplicar filtro</button>
+      <button (click)="filter()" mat-raised-button>Aplicar filtro</button>
     </form>
   </mat-drawer>
   <mat-drawer-content>
     <div class="d-flex justify-content-center w-100">
-      <button mat-raised-button class="btn-outline-dark mt-2" (click)="drawer.toggle()">
+      <button (click)="drawer.toggle()" class="btn-outline-dark mt-2" mat-raised-button>
         <mat-icon>filter_alt</mat-icon>
       </button>
     </div>
     <div class="wrapper w-100 pt-3">
       <div class="w-100">
-        <table mat-table [dataSource]="dataSource" class="table-responsive w-100">
+        <table [dataSource]="dataSource" class="table-responsive w-100" mat-table>
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Nome</th>
-            <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+            <th *matHeaderCellDef mat-header-cell>Nome</th>
+            <td *matCellDef="let element" mat-cell> {{ element.name }} </td>
           </ng-container>
           <ng-container matColumnDef="document">
-            <th mat-header-cell *matHeaderCellDef>Documento</th>
-            <td mat-cell *matCellDef="let element"> {{ element.document }} </td>
+            <th *matHeaderCellDef mat-header-cell>Documento</th>
+            <td *matCellDef="let element" mat-cell> {{ element.document }} </td>
           </ng-container>
           <ng-container matColumnDef="legalRecordType">
-            <th mat-header-cell *matHeaderCellDef>Tipo de registro</th>
-            <td mat-cell *matCellDef="let element">{{ element.legalRecordType }}</td>
+            <th *matHeaderCellDef mat-header-cell>Tipo de registro</th>
+            <td *matCellDef="let element" mat-cell>{{ element.legalRecordType }}</td>
           </ng-container>
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>E-mail</th>
-            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            <th *matHeaderCellDef mat-header-cell>E-mail</th>
+            <td *matCellDef="let element" mat-cell>{{ element.email }}</td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row = index; columns: displayedColumns;" class="table-row"
-              (click)="personClicked(row)"></tr>
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr (click)="personClicked(row)" *matRowDef="let row = index; columns: displayedColumns;" class="table-row"
+              mat-row></tr>
         </table>
       </div>
       <div class="w-100">
         <mat-paginator #paginator
-                       showFirstLastButtons
-                       [pageSize]="10"
                        (page)="setPage($event)"
                        [pageSizeOptions]="[10, 50, 100]"
+                       [pageSize]="10"
+                       showFirstLastButtons
         ></mat-paginator>
       </div>
 
