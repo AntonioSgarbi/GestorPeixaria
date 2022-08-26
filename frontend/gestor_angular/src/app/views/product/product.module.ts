@@ -10,6 +10,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {SearchProductView} from './search-product/search-product.view';
 import {SearchBarModule} from "../../components/search-bar/search-bar.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -27,7 +32,12 @@ import {SearchBarModule} from "../../components/search-bar/search-bar.module";
     MatCardModule,
     MatSelectModule,
     MatButtonModule,
-    SearchBarModule
+    SearchBarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatExpansionModule
   ]
 })
 export class ProductModule {

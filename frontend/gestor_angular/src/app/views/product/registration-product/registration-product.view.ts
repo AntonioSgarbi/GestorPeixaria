@@ -10,10 +10,8 @@ import {ProductService} from "../product.service";
   styleUrls: ['./registration-product.view.css']
 })
 export class RegistrationProductView implements OnInit {
-  @ViewChild('supplierSearch') supplierSearchBar: any;
   formGroup: FormGroup = new FormGroup({});
   appearence: string = 'outline';
-  modelSearch: any = ModelSelectedEnum.supplier;
 
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
@@ -32,17 +30,16 @@ export class RegistrationProductView implements OnInit {
     });
   }
 
-  limparFormulario() {
+  reset() {
     this.formGroup.reset();
-    this.supplierSearchBar.dropSelectedValue();
   }
 
-  cadastrar(): void {
+  submit(): void {
     let product: Product = this.formGroup.getRawValue();
     this.productService.register(product).subscribe({
       next: (id: number) => {
         console.log(id);
-        this.limparFormulario();
+        this.reset();
       }
     });
   }

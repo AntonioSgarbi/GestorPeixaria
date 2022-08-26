@@ -16,7 +16,7 @@ import {MatDrawer} from "@angular/material/sidenav";
 export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('drawer') drawer!: MatDrawer;
-  dataSource: MatTableDataSource<SaleItem> = new MatTableDataSource<SaleItem>([]);
+  dataSource: MatTableDataSource<Person> = new MatTableDataSource<Person>([]);
   legalRecordType: any = LegalRecordType;
   displayedColumns: string[] = ['name', 'document', 'legalRecordType', 'email'];
   personType: string = 'customer';
