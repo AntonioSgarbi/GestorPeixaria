@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {Person} from "../../../model/person.model";
+import {Person} from "../../../model/person.type";
 import {RegistrationType} from "../../../model/registration.type.enum";
 
 @Injectable({

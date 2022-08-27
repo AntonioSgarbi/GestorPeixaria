@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Person} from "../../../model/person.model";
+import {Person} from "../../../model/person.type";
 import {environment} from "../../../../environments/environment";
-import {Page} from "../../../model/page";
+import {Page} from "../../../model/page.type";
 import {Router} from "@angular/router";
 
 @Injectable({

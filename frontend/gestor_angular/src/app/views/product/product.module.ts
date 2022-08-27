@@ -15,6 +15,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -22,23 +23,24 @@ import {MatExpansionModule} from "@angular/material/expansion";
     RegistrationProductView,
     SearchProductView
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatSelectModule,
-    MatButtonModule,
-    SearchBarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatExpansionModule
-  ]
+    imports: [
+        BrowserModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatSelectModule,
+        MatButtonModule,
+        SearchBarModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatExpansionModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class ProductModule {
 }

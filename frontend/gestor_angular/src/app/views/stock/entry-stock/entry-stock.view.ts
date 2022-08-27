@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ModelSelectedEnum} from "../../../model/model.selected.enum";
 import {environment} from "../../../../environments/environment";
 import {MatTableDataSource} from "@angular/material/table";
-import {Supplier} from "../../../model/person.model";
+import {Supplier} from "../../../model/person.type";
 
 @Component({
   selector: 'app-entry-stock',

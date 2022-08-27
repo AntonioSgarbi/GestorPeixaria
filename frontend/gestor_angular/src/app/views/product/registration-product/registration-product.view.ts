@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModelSelectedEnum} from "../../../model/model.selected.enum";
-import {Product} from "../../../model/sale.model";
+import {Product} from "../../../model/sale.type";
 import {ProductService} from "../product.service";
 
 @Component({

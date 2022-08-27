@@ -1,5 +1,6 @@
-import {Collaborator, Customer} from "./person.model";
+import {Collaborator, Customer, Supplier} from "./person.type";
 import {QuantityType} from "./quantity.type.enum";
+import {Time} from "@angular/common";
 
 export interface Sale {
   id?: number;
@@ -25,8 +26,22 @@ export interface Product {
   availableQuantity?: number;
 }
 
+export interface ExpirationLot {
+  id?: number;
+  product?: Product;
+  arrivalDate?: Date;
+  expirationDate?: Date;
+  availableQuantity?: number;
+  optionalPrice?: number;
+  arrivalRegisterd?: boolean;
+  registeredMoment?: Time;
+  supplier?: Supplier;
+  receivedBy?: Collaborator;
+
+}
+
 export interface SaleItem {
   id?: number;
   quantity?: number;
-  product?: Product;
+  product?: ExpirationLot;
 }

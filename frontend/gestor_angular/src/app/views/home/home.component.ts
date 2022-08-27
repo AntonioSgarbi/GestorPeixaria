@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {PaymentType, Product, SaleItem} from "../../model/sale.model";
+import {ExpirationLot, PaymentType, Product, SaleItem} from "../../model/sale.type";
 import {MatTableDataSource} from '@angular/material/table';
 import {ModelSelectedEnum} from "../../model/model.selected.enum";
 import {environment} from "../../../environments/environment";
@@ -36,22 +36,6 @@ export class HomeComponent implements OnInit {
       customer: [''],
       listItems: this.fb.array([])
     });
-    // let array = this.form.get('listItems') as FormArray;
-    // this.myDataArray.forEach(x => {
-    //   array.push(this.fb.group(x))
-    // });
-    //
-    // this.dataSource.data = this.myDataArray;
-  }
-
-  addSaleItem(): void {
-    this.myDataArray.push({id: this.myDataArray.length + 1, product: {name: '', price: 0}, quantity: 0});
-
-    let array = this.form.get('listItems') as FormArray;
-    array.push(this.fb.group({
-      item: [''],
-      quantity: [''],
-    }));
   }
 
   removeItem(i: number) {
@@ -79,9 +63,13 @@ export class HomeComponent implements OnInit {
   totalValue() {
     let total = 0;
     this.myDataArray.forEach(x => {
-      x.product?.price ? total += x.product.price * x.quantity! : total += 0;
+      total += this.getSaleItemPrice(x) * x.quantity!;
     });
     return total.toFixed(2);
+  }
+
+  getSaleItemPrice(item: ExpirationLot): number {
+    return item.optionalPrice ?? item.product!.price!;
   }
 
   keyEnterPressed($event: any) {

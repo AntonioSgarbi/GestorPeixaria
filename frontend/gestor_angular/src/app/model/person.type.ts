@@ -1,5 +1,5 @@
 import {LegalRecordType} from "./legal.record.type.enum";
-import {Sale} from "./sale.model";
+import {Sale} from "./sale.type";
 
 export interface Person {
   id?: number;

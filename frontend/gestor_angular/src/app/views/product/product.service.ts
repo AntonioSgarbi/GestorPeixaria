@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Product} from "../../model/sale.model";
+import {ExpirationLot, Product} from "../../model/sale.type";
 import {Observable} from "rxjs";
-import {Page} from "../../model/page";
-import {Person} from "../../model/person.model";
+import {Page} from "../../model/page.type";
+import {Person} from "../../model/person.type";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -35,6 +35,11 @@ export class ProductService {
   findAllFiltered(page: number, size: number, filter: any): Observable<Page<Product>> {
     return this.http
       .put<Page<Product>>(`${environment.apiUrl}/product/query?page=${page}&size=${size}`, filter);
+  }
+
+  findAllExpirationLot(page: number, size: number, product: Product): Observable<Array<ExpirationLot>> {
+    return this.http
+      .put<Array<ExpirationLot>>(`${environment.apiUrl}/stock/lots?page=${page}&size=${size}`, product);
   }
 
 }

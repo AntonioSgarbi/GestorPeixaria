@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {SaleItem} from "../../../model/sale.model";
+import {SaleItem} from "../../../model/sale.type";
 import {SearchPersonService} from "./search-person.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {Person} from "../../../model/person.model";
+import {Person} from "../../../model/person.type";
 import {LegalRecordType} from "../../../model/legal.record.type.enum";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDrawer} from "@angular/material/sidenav";
