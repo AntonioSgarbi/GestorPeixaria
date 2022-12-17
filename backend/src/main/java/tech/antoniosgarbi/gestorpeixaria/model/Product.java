@@ -8,7 +8,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.model.ProductDTO;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter

@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO update(CustomerDTO customerDTO) {
         Customer model = this.findModel(customerDTO.getId());
-        Util.myCopyProperties(customerDTO, model);
+        Util.copyPropertiesIgnoreNull(customerDTO, model);
         this.customerRepository.save(model);
         return customerDTO;
     }

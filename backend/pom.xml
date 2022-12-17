@@ -17,7 +17,6 @@
         <sonar.organization>antoniosgarbi</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <java.version>17</java.version>
-        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <spring-boot.build-image.imageName>antoniosk/fish-stock-native</spring-boot.build-image.imageName>
     </properties>
     <dependencies>
@@ -69,7 +68,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <version>1.9.0</version>
+            <version>1.8.2</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

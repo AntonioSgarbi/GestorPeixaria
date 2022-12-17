@@ -35,7 +35,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
     @Override
     public CollaboratorDTO update(CollaboratorDTO collaboratorDTO) {
         Collaborator model = this.findModel(collaboratorDTO.getId());
-        Util.myCopyProperties(collaboratorDTO, model);
+        Util.copyPropertiesIgnoreNull(collaboratorDTO, model);
         this.collaboratorRepository.save(model);
         return collaboratorDTO;
     }

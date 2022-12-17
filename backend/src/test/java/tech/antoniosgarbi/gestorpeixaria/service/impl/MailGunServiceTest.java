@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.RestClientService;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.MailGunServiceImpl;
 
 import static org.mockito.Mockito.verify;
 

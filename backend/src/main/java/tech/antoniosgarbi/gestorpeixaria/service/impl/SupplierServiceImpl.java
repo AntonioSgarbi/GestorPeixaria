@@ -35,7 +35,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO update(SupplierDTO supplierDTO) {
         Supplier supplier = this.findModel(supplierDTO.getId());
-        Util.myCopyProperties(supplierDTO, supplier);
+        Util.copyPropertiesIgnoreNull(supplierDTO, supplier);
         this.supplierRepository.save(supplier);
         return supplierDTO;
     }

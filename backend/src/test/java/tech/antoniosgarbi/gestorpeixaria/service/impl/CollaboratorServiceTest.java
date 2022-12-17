@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.specification.CollaboratorSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.repository.CollaboratorRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.CollaboratorServiceImpl;
 import tech.antoniosgarbi.gestorpeixaria.specification.CollaboratorSpecification;
 
 import java.util.List;

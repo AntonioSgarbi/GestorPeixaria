@@ -1,6 +1,8 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
+    url: ${DATABASE_URL}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   sendgrid:
     api-key: ${SENDGRID_API_KEY}
 

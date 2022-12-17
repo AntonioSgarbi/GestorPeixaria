@@ -84,11 +84,11 @@ public class TokenServiceImpl implements TokenService {
     return false;
   }
 
-//  @Bean()
-//  public void geradorDeSenha() {
-//    Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
-//    String encripted = argon.encode(this.passwordToEncript);
-//    logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", passwordToEncript, encripted));
-//  }
+  @Bean()
+  public void geradorDeSenha() {
+    Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
+    String encripted = argon.encode(this.passwordToEncript);
+    logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", passwordToEncript, encripted));
+  }
 
 }

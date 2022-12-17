@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO update(ProductDTO productDTO) {
         Product model = this.findModel(productDTO.getId());
-        Util.myCopyProperties(productDTO, model);
+        Util.copyPropertiesIgnoreNull(productDTO, model);
         this.productRepository.save(model);
         return productDTO;
     }

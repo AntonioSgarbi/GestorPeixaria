@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.StockEntries;
+import tech.antoniosgarbi.gestorpeixaria.dto.stock.AvailableLotResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.StockService;
@@ -19,8 +20,13 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> productEntry(@RequestBody ProductEntryRequest request, @RequestHeader("userId") Long userId) {
-        return ResponseEntity.ok(stockService.productEntry(request, userId));
+    public ResponseEntity<Long> productEntry(@RequestBody ProductEntryRequest request) {
+        return ResponseEntity.ok(stockService.productEntry(request));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Page<AvailableLotResponse>> findByPruduct(@PathVariable Long id, Pageable pageable) {
+        return ResponseEntity.ok(this.stockService.findAllAvailableLotsByProductId(id, pageable));
     }
 
     @PutMapping("/query")

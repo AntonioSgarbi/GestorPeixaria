@@ -1,8 +1,11 @@
 package tech.antoniosgarbi.gestorpeixaria;
 
 import tech.antoniosgarbi.gestorpeixaria.dto.model.*;
+import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
 import tech.antoniosgarbi.gestorpeixaria.model.*;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
+
+import java.time.LocalDate;
 
 public interface Builder {
 
@@ -115,6 +118,39 @@ public interface Builder {
         dto.setCustomer(customerDTO1());
         dto.setCollaborator(collaboratorDTO1());
         return dto;
+    }
+
+    static ProductEntryRequest productEntryRequest1() {
+        ProductEntryRequest productEntryRequest = new ProductEntryRequest();
+
+        productEntryRequest.setProduct(productUnityDTO1());
+        productEntryRequest.setSupplier(supllierDTO1());
+        productEntryRequest.setArrivalDate(LocalDate.now());
+        productEntryRequest.setArrivalQuantity(20.0);
+
+        return productEntryRequest;
+    }
+
+    static ExpirationLot expirationLot1() {
+        ExpirationLot expected = new ExpirationLot();
+
+        expected.setId(1L);
+        expected.setAvailableQuantity(10.0);
+        expected.setProduct(Builder.productUnity1());
+        expected.setSupplier(Builder.supllier1());
+
+        return expected;
+    }
+
+    static ExpirationLot expirationLot2() {
+        ExpirationLot expected = new ExpirationLot();
+
+        expected.setId(2L);
+        expected.setAvailableQuantity(10.0);
+        expected.setProduct(Builder.productWeight1());
+        expected.setSupplier(Builder.supllier1());
+
+        return expected;
     }
 
 }

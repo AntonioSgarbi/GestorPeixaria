@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,10 +22,9 @@ import tech.antoniosgarbi.gestorpeixaria.dto.auth.LoginResponse;
 import tech.antoniosgarbi.gestorpeixaria.dto.auth.RefreshResponse;
 import tech.antoniosgarbi.gestorpeixaria.model.Collaborator;
 import tech.antoniosgarbi.gestorpeixaria.model.User;
+import tech.antoniosgarbi.gestorpeixaria.service.Util;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.MailServiceStrategy;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.TokenService;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.AuthenticationServiceImpl;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.UserDetailsServiceImpl;
 
 import java.util.List;
 import java.util.stream.Stream;

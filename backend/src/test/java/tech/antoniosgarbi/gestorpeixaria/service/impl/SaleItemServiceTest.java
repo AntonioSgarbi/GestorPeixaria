@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,6 @@ import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SaleItemDTO;
 import tech.antoniosgarbi.gestorpeixaria.model.SaleItem;
 import tech.antoniosgarbi.gestorpeixaria.repository.SaleItemRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.SaleItemServiceImpl;
 
 import java.util.List;
 

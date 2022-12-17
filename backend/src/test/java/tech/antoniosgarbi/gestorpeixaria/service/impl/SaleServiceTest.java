@@ -1,7 +1,5 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +7,6 @@ import tech.antoniosgarbi.gestorpeixaria.Builder;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SaleDTO;
 import tech.antoniosgarbi.gestorpeixaria.model.Sale;
 import tech.antoniosgarbi.gestorpeixaria.repository.SaleRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.SaleServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

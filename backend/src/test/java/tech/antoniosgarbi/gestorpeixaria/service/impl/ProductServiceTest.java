@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.specification.ProductSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.ProductException;
 import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.repository.ProductRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.ProductServiceImpl;
 import tech.antoniosgarbi.gestorpeixaria.specification.ProductSpecification;
 
 import java.util.List;

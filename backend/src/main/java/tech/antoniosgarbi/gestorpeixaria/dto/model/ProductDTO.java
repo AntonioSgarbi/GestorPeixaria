@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 import tech.antoniosgarbi.gestorpeixaria.model.Product;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class ProductDTO {
+public class ProductDTO implements Serializable {
     private Long id;
     private String name;
     private QuantityType quantityType;

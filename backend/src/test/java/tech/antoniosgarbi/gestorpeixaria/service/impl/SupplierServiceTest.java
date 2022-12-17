@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.specification.SupplierSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Supplier;
 import tech.antoniosgarbi.gestorpeixaria.repository.SupplierRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.SupplierServiceImpl;
 import tech.antoniosgarbi.gestorpeixaria.specification.SupplierSpecification;
 
 import java.util.List;

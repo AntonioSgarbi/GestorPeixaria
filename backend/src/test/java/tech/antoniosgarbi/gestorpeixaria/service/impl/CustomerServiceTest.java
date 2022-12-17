@@ -1,4 +1,4 @@
-package tech.antoniosgarbi.gestorpeixaria.service;
+package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,6 @@ import tech.antoniosgarbi.gestorpeixaria.dto.specification.CustomerSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.exception.PersonException;
 import tech.antoniosgarbi.gestorpeixaria.model.Customer;
 import tech.antoniosgarbi.gestorpeixaria.repository.CustomerRepository;
-import tech.antoniosgarbi.gestorpeixaria.service.impl.CustomerServiceImpl;
 import tech.antoniosgarbi.gestorpeixaria.specification.CustomerSpecification;
 
 import java.util.List;
@@ -151,6 +150,7 @@ class CustomerServiceTest {
     @DisplayName("Should update Customer with excluded true when receives id that exists")
     void delete1() {
         CustomerDTO expected = Builder.customerDTO1();
+
         when(clienteRepository.findById(anyLong())).thenReturn(Optional.of(new Customer(expected)));
 
         Assertions.assertThatCode(() -> underTest.delete(1L))

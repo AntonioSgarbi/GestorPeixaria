@@ -25,7 +25,7 @@ public class Util {
         return emptyNames.toArray(result);
     }
 
-    public static void myCopyProperties(Object src, Object target) {
+    public static void copyPropertiesIgnoreNull(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
 
