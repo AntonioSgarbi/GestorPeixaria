@@ -13,7 +13,7 @@
 
     <mat-form-field appearance="{{ appearence }}" class="w-100">
       <mat-label>Data de validade</mat-label>
-      <input [matDatepicker]="picker1" formControlName="arrivalDate" matInput placeholder="dd/mm/aaaa">
+      <input [matDatepicker]="picker1" formControlName="expirationDate" matInput placeholder="dd/mm/aaaa">
       <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
@@ -38,26 +38,7 @@
       formControlName="supplier"
     ></search-bar>
 
-    <div>
-      <table [dataSource]="dataSource" class="table-responsive w-100 mb-5" mat-table>
-        <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell>Produto</th>
-          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="legalRecordType">
-          <th *matHeaderCellDef mat-header-cell>Quantidade</th>
-          <td *matCellDef="let element" mat-cell> {{element.legalRecordType}} </td>
-        </ng-container>
-        <ng-container matColumnDef="email">
-          <th *matHeaderCellDef mat-header-cell>Preço</th>
-          <td *matCellDef="let element" mat-cell>R${{(element.email).toFixed(2)}}</td>
-        </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr (click)="removeItem(row)" *matRowDef="let row = index; columns: displayedColumns;" class="table-row"
-            mat-row></tr>
-      </table>
-    </div>
 
 
     <div class="d-flex justify-content-center w-100 pt-3">

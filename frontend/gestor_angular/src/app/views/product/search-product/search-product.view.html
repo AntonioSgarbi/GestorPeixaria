@@ -8,15 +8,28 @@
       </button>
     </div>
 
-    <div>
+    <div class="p-3">
       <table mat-table
              [dataSource]="productDataSource" multiTemplateDataRows
              class="mat-elevation-z8">
 
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of productDisplayedColumns">
-          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
         </ng-container>
+        <ng-container matColumnDef="quantityType">
+          <th mat-header-cell *matHeaderCellDef> Tipo de quantidade </th>
+          <td mat-cell *matCellDef="let element"> {{ formatQuantityType(element.quantityType) }} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Preço </th>
+          <td mat-cell *matCellDef="let element"> {{ formatPrice(element.price) }} </td>
+        </ng-container>
+
+
+
+
+
         <ng-container matColumnDef="expand">
           <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
           <td mat-cell *matCellDef="let element">
@@ -30,24 +43,39 @@
                  [@detailExpand]="element == expandedElement ? 'expanded1' : 'collapsed'">
               <div class="d-flex flex-column justify-content-center w-100" style="border: solid black 2px">
 
-                <div class="w-50 p-1">
-                <mat-spinner *ngIf="isLoadingRow" class=""></mat-spinner>
+                <div class="w-75 p-1">
+                  <mat-spinner *ngIf="isLoadingRow" class=""></mat-spinner>
                   <h3 class="text-center">Lotes disponíveis</h3>
                   <table mat-table
                          *ngIf="!isLoadingRow"
-                         [dataSource]="productDataSource"
+                         [dataSource]="expirationLotDataSource"
                          multiTemplateDataRows
                          class="w-100" style="height: 20vh; border: solid blue 2px;"
                   >
-                    <ng-container matColumnDef="{{column}}" *ngFor="let column of productDisplayedColumns">
-                      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-                      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+
+                    <ng-container matColumnDef="supplier">
+                      <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+                      <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="['/person/registration-person', 'supplier', element.supplier.id]"> {{ element.supplier.name }} </a>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="arrivalDate">
+                      <th mat-header-cell *matHeaderCellDef> Entrada </th>
+                      <td mat-cell *matCellDef="let element"> {{ element.arrivalDate }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="expirationDate">
+                      <th mat-header-cell *matHeaderCellDef>Validade</th>
+                      <td mat-cell *matCellDef="let element">{{ element.expirationDate }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="optionalPrice">
+                      <th mat-header-cell *matHeaderCellDef>Preço alternativo</th>
+                      <td mat-cell *matCellDef="let element">{{ element.optionalPrice ?? '--' }}</td>
                     </ng-container>
 
-                    <tr *matHeaderRowDef="productDisplayedColumns" mat-header-row></tr>
+                    <tr *matHeaderRowDef="expirationLotDisplayedColumns" mat-header-row></tr>
                     <tr
                       (click)="expirationLotClicked(row)"
-                      *matRowDef="let row = index; columns: productDisplayedColumns;"
+                      *matRowDef="let row = index; columns: expirationLotDisplayedColumns;"
                       class="table-row"
                       mat-row
                     ></tr>
@@ -66,7 +94,7 @@
         </tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
       </table>
-      <div class="w-100">
+      <div class="w-100 mat-elevation-z8">
         <mat-paginator #paginator
                        (page)="setPage($event)"
                        [pageSizeOptions]="[10, 50, 100]"

@@ -32,6 +32,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'person/registration-person/:personType/:id',
+        component: RegistrationPersonView,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'person/search-person',
         component: PessoaPesquisaComponent,
         canActivate: [AuthGuard],

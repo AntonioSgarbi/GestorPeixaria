@@ -37,9 +37,9 @@ export class ProductService {
       .put<Page<Product>>(`${environment.apiUrl}/product/query?page=${page}&size=${size}`, filter);
   }
 
-  findAllExpirationLot(page: number, size: number, product: Product): Observable<Array<ExpirationLot>> {
+  findAllExpirationLot(page: number, size: number, productId: Number): Observable<any> {
     return this.http
-      .put<Array<ExpirationLot>>(`${environment.apiUrl}/stock/lots?page=${page}&size=${size}`, product);
+      .get<any>(`${environment.apiUrl}/stock/${productId}?page=${page}&size=${size}`);
   }
 
 }

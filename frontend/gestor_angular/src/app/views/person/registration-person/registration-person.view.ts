@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LegalRecordType} from "../../../model/legal.record.type.enum";
-import {RegistrationPersonService} from "./registration-person.service";
+import {PersonService} from "../person.service";
 import {AppService} from "../../../app.service";
 import {RegistrationType} from "../../../model/registration.type.enum";
+import {ActivatedRoute} from "@angular/router";
+import {Person} from "../../../model/person.type";
 
 @Component({
   selector: 'app-registration-person',
@@ -16,11 +18,13 @@ export class RegistrationPersonView implements OnInit {
   appearance: string = 'outline';
   registrationType: any = RegistrationType;
   legalRecordType: any = LegalRecordType;
+  isEdit: boolean | undefined;
 
   constructor(
     private fb: FormBuilder,
     private appService: AppService,
-    private cadastroService: RegistrationPersonService
+    private personService: PersonService,
+    private activeRouter: ActivatedRoute
   ) {
   }
 
@@ -31,7 +35,29 @@ export class RegistrationPersonView implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.fillFormOnEdit();
   }
+
+  private fillFormOnEdit() {
+    if (this.activeRouter.snapshot.paramMap.get('id')) {
+      this.isEdit = true;
+      let personType = this.activeRouter.snapshot.paramMap.get('personType')!;
+
+      this.form.get('registrationType')?.setValue(personType);
+
+      let id = Number.parseInt(this.activeRouter.snapshot.paramMap.get('id')!);
+
+      this.personService.findById(id, personType).subscribe({
+        next: (res: Person) => {
+          this.form.patchValue(res);
+        },
+        error: (ex) => {
+          console.log(ex);
+        },
+      });
+    }
+  }
+
 
   initForm(): void {
     this.form = this.fb.group({
@@ -69,7 +95,7 @@ export class RegistrationPersonView implements OnInit {
       console.error(type);
       console.info(this.form);
 
-      this.cadastroService.registerPerson(this.form.value, type).subscribe({
+      this.personService.registerPerson(this.form.value, type).subscribe({
         next: (id: number) => {
           this.successSubmit();
         },

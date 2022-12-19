@@ -7,6 +7,7 @@ import {Person} from "../../../model/person.type";
 import {LegalRecordType} from "../../../model/legal.record.type.enum";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDrawer} from "@angular/material/sidenav";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-stock-search-person',
@@ -22,7 +23,7 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
   personType: string = 'customer';
   private readonly formGroup: FormGroup;
 
-  constructor(private searchService: SearchPersonService, private fb: FormBuilder) {
+  constructor(private searchService: SearchPersonService, private fb: FormBuilder, private router: Router) {
     this.formGroup = this.fb.group({
       legalRecordType: [null],
       name: [null],
@@ -47,17 +48,10 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  setPage(page: PageEvent) {
-    this.searchService.findAll(this.personType, page.pageIndex, page.pageSize).subscribe({
-      next: (data) => {
-        this.dataSource.data = data.content;
-      }
-    });
-  }
-
   personClicked(index: number) {
     let person: Person = this.dataSource.data[index];
 
+    this.router.navigate(['/person/registration-person', this.personType, person.id]);
   }
 
   filter() {
@@ -69,4 +63,13 @@ export class PessoaPesquisaComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  setPage(page: PageEvent) {
+    this.searchService.findAll(this.personType, page.pageIndex, page.pageSize).subscribe({
+      next: (data) => {
+        this.dataSource.data = data.content;
+      }
+    });
+  }
+
 }

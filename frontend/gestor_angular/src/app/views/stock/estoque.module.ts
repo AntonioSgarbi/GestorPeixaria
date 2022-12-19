@@ -11,6 +11,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import {MatTableModule} from "@angular/material/table";
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ]
 })
 export class EstoqueModule {
