@@ -1,6 +1,7 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
 import io.jsonwebtoken.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,17 +43,13 @@ class TokenServiceTest {
     @BeforeAll
     static void setUp() {
         jwts = mockStatic(Jwts.class);
-
     }
 
-//    @Value("${personal.security.jwtSecret}")
-//    private String jwtSecret;
-//    @Value("${personal.security.jwtExpirationMs}")
-//    private int jwtExpirationMs;
-//    @Value("${personal.security.jwtRefreshExpirationMs}")
-//    private Long refreshTokenDurationMs;
-//    @Value("${personal.security.passwordGenerate}")
-//    private String passwordToEncript;
+    @AfterAll
+    static void tearDown() {
+        jwts.close();
+    }
+
 
     @Test
     void generateAccessTokenFromUserDetails() {
