@@ -26,8 +26,7 @@ public class RestClientServiceImpl implements RestClientService {
 
     @Override
     public Object postWithBasicAuth(String resourceUrl, MultiValueMap<String, String> request, String username, String password) {
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(request,
-                createHeadersWithBasicAuth(username, password));
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(request, createHeadersWithBasicAuth(username, password));
         ResponseEntity<String> response = this.restTemplate.exchange(resourceUrl, HttpMethod.POST, requestEntity, String.class);
 
         return response.getBody();

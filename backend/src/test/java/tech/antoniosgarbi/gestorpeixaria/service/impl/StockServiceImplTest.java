@@ -9,9 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import tech.antoniosgarbi.gestorpeixaria.Builder;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.StockEntries;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.AvailableLotResponse;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.model.ExpirationLot;
 import tech.antoniosgarbi.gestorpeixaria.repository.ExpirationLotRepository;
+import tech.antoniosgarbi.gestorpeixaria.specification.ExpirationLotSpecification;
 
 import java.util.List;
 
@@ -55,6 +58,18 @@ class StockServiceImplTest {
 
     @Test
     void query() {
+        ExpirationLot expected = new ExpirationLot();
+        expected.setId(1L);
+        expected.setProduct(Builder.productUnity1());
+        expected.setSupplier(Builder.supllier1());
+
+        Page<ExpirationLot> expectedPage = new PageImpl<>(List.of(expected));
+
+        when(this.expirationLotRepository.findAll(any(ExpirationLotSpecification.class), any(Pageable.class))).thenReturn(expectedPage);
+
+        Page<StockEntries> result = this.underTest.query(new ExpirationLotSpecBody(), Pageable.unpaged());
+
+        assertEquals(expected.getId(), result.getContent().get(0).getId());
     }
 
     @Test

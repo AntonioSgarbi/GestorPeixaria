@@ -9,6 +9,9 @@ import java.util.Random;
 import java.util.Set;
 
 public class Util {
+
+    private final static Random random = new Random();
+
     private Util() { }
 
     public static String[] getNullPropertyNames (Object source) {
@@ -30,8 +33,7 @@ public class Util {
     }
 
     public static int getRandomNumberInRange(int min, int max) {
-        Random r = new Random();
-        return r.nextInt(min,max);
+        return random.nextInt(min,max);
     }
 
     public static String getPayloadFromToken(String token) {

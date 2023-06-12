@@ -30,8 +30,4 @@ public class MailSpringServiceImpl implements MailServiceStrategy {
         emailSender.send(message);
     }
 
-    @Override
-    public void sendHTML(String to, String subject, String body) {
-        // sem necessidade ainda
-    }
 }

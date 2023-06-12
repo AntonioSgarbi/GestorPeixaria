@@ -7,8 +7,6 @@ public interface TokenService {
 
     String generateAccessToken(String username);
 
-    String generateTokenFromUsername(String username);
-
     String generateRefreshTokenFromUsername(String username);
 
     String getUserNameFromJwtToken(String token);

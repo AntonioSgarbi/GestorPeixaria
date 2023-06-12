@@ -1,39 +1,50 @@
 package tech.antoniosgarbi.gestorpeixaria.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.model.SaleDTO;
+import tech.antoniosgarbi.gestorpeixaria.exception.SaleException;
+import tech.antoniosgarbi.gestorpeixaria.model.Sale;
 import tech.antoniosgarbi.gestorpeixaria.repository.SaleRepository;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.SaleItemService;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.SaleService;
 
-@Service
-public class SaleServiceImpl implements SaleService {
-    private final SaleRepository saleRepository;
-    private SaleItemService saleItemService;
+import java.util.Optional;
 
-    public SaleServiceImpl(SaleRepository vendaRepository) {
-        this.saleRepository = vendaRepository;
-    }
+@Service
+@RequiredArgsConstructor
+public class SaleServiceImpl implements SaleService {
+
+    private final SaleRepository saleRepository;
+    private final SaleItemService saleItemService;
 
     @Override
-    public Long register(SaleDTO vendaDTO) {
-        return null;
+    public Long register(SaleDTO saleDTO) {
+        this.saleItemService.saveAll(saleDTO.getSaleItems());
+        Sale sale = this.saleRepository.save(new Sale(saleDTO));
+        return sale.getId();
     }
 
     @Override
     public Page<SaleDTO> findAll(Pageable pageable) {
-        return saleRepository.findAll(pageable).map(SaleDTO::new);
+        return this.saleRepository.findAll(pageable).map(SaleDTO::new);
     }
 
     @Override
     public SaleDTO findById(Long id) {
-        return null;
+        Optional<Sale> optional = this.saleRepository.findById(id);
+
+        if(optional.isEmpty()) {
+            throw new SaleException("Cadastro não encontrado");
+        }
+        return new SaleDTO(optional.get());
     }
 
     @Override
     public void delete(Long id) {
-        saleRepository.deleteById(id);
+        this.saleRepository.deleteById(id);
     }
+
 }

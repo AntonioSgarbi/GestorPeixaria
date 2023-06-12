@@ -14,6 +14,7 @@ import tech.antoniosgarbi.gestorpeixaria.service.contract.AuthenticationService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -45,5 +46,12 @@ class LoginControllerTest {
 
     @Test
     void resetPassword() {
+        String expectedBody = "expected";
+        when(this.authenticationService.resetPassword(anyString())).thenReturn(expectedBody);
+
+        ResponseEntity<String> result = this.underTest.resetPassword("any");
+
+        assertEquals(expectedBody, result.getBody());
+        assertEquals(202, result.getStatusCode().value());
     }
 }

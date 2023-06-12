@@ -23,7 +23,7 @@ public class TokenServiceImpl implements TokenService {
   private int jwtExpirationMs;
 
   @Value("${personal.security.jwtRefreshExpirationMs}")
-  private Long refreshTokenDurationMs;
+  private int refreshTokenDurationMs;
 
   @Value("${personal.security.passwordGenerate}")
   private String passwordToEncript;
@@ -35,13 +35,6 @@ public class TokenServiceImpl implements TokenService {
   @Override
   public String generateAccessToken(String username) {
     return generateTokenFromUsername(username);
-  }
-
-  @Override
-  public String generateTokenFromUsername(String username) {
-    return Jwts.builder().setSubject(username).setIssuedAt(new Date())
-            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
-            .compact();
   }
 
   @Override
@@ -89,6 +82,12 @@ public class TokenServiceImpl implements TokenService {
     Argon2PasswordEncoder argon = new Argon2PasswordEncoder();
     String encripted = argon.encode(this.passwordToEncript);
     logger.info(String.format("Nova Senha gerada! %n%nfonte: %s%ngerado: %s%n", passwordToEncript, encripted));
+  }
+
+  private String generateTokenFromUsername(String username) {
+    return Jwts.builder().setSubject(username).setIssuedAt(new Date())
+            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
+            .compact();
   }
 
 }

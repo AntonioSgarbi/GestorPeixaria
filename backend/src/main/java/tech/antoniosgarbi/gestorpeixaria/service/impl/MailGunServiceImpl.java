@@ -36,12 +36,6 @@ public class MailGunServiceImpl implements MailServiceStrategy {
 
     }
 
-    @Override
-    public void sendHTML(String to, String subject, String body) {
-        MultiValueMap<String, String> map = this.getPostRequestObject(from, to, subject);
-        map.add("html", body);
-        sendEmail(map);
-    }
 
     protected void sendEmail(MultiValueMap<String, String> map) {
         this.restClient.postWithBasicAuth(this.messagesUrl, map, this.username, this.password);

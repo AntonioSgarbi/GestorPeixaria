@@ -37,14 +37,9 @@ public class MailSendGridImpl implements MailServiceStrategy {
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
             Response response = sendGridAPI.api(request);
-            System.out.println(response.getBody());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    @Override
-    public void sendHTML(String to, String subject, String body) {
-
-    }
 }

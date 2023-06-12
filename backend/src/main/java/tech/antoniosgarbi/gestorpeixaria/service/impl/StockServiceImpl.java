@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.StockEntries;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.AvailableLotResponse;
-import tech.antoniosgarbi.gestorpeixaria.dto.stock.ExpirationLotSpecBody;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
 import tech.antoniosgarbi.gestorpeixaria.model.ExpirationLot;
 import tech.antoniosgarbi.gestorpeixaria.repository.ExpirationLotRepository;

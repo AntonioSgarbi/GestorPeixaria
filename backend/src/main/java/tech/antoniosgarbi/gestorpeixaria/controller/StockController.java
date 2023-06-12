@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.antoniosgarbi.gestorpeixaria.dto.specification.StockEntries;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.AvailableLotResponse;
-import tech.antoniosgarbi.gestorpeixaria.dto.stock.ExpirationLotSpecBody;
+import tech.antoniosgarbi.gestorpeixaria.dto.specification.ExpirationLotSpecBody;
 import tech.antoniosgarbi.gestorpeixaria.dto.stock.ProductEntryRequest;
 import tech.antoniosgarbi.gestorpeixaria.service.contract.StockService;
 

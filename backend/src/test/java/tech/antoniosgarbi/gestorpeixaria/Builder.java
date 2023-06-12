@@ -6,6 +6,7 @@ import tech.antoniosgarbi.gestorpeixaria.model.*;
 import tech.antoniosgarbi.gestorpeixaria.model.enums.QuantityType;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface Builder {
 
@@ -106,7 +107,7 @@ public interface Builder {
     }
 
     static SaleItemDTO saleItemDTO2() {
-        SaleItemDTO dto = new SaleItemDTO();
+        SaleItemDTO dto = new SaleItemDTO(saleItem2());
         dto.setId(2L);
         dto.setQuantity(250.0);
         dto.setProduct(productWeightDTO1());
@@ -117,6 +118,7 @@ public interface Builder {
         SaleDTO dto = new SaleDTO();
         dto.setCustomer(customerDTO1());
         dto.setCollaborator(collaboratorDTO1());
+        dto.setSaleItems(new ArrayList<>());
         return dto;
     }
 
