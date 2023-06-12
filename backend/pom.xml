@@ -31,22 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-websocket</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat.experimental</groupId>
-            <artifactId>tomcat-embed-programmatic</artifactId>
-            <version>9.0.48</version>
         </dependency>
 
         <dependency>
@@ -126,11 +110,6 @@
             <version>7.6.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-native</artifactId>
-            <version>0.12.0</version>
-        </dependency>
 
     </dependencies>
 
@@ -162,23 +141,9 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <image>
-                        <builder>paketobuildpacks/builder:tiny</builder>
-                        <env>
-                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                -DURL_CORS=localhost:400
-                            </BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                        </env>
-                    </image>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.springframework.experimental</groupId>
-                <artifactId>spring-aot-maven-plugin</artifactId>
-                <version>0.12.0</version>
-            </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
